@@ -17,7 +17,7 @@ class ModeleListProjet extends Connexion{
         $request->bindParam(':mdp', $_GET['pass']);
         $request->execute();
 
-        $projet= $request->fetchAll();
+        $projet= $request->fetchAll(PDO::FETCH_ASSOC);
         return $projet;
     }
 }

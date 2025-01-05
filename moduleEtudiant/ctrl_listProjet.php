@@ -1,5 +1,5 @@
 <?php
-    include_once 'modele_lisProjet.php';
+    include_once 'modele_listProjet.php';
     include_once 'vue_listProjet.php';
 
    class CtrlListProjet{
@@ -14,7 +14,6 @@
         }
 
         private function start(){
-
             $projet = $this->modele->getProjets();
             $this->vue->afficherListProjet($projet);
         }
