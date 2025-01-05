@@ -8,5 +8,3 @@ Connexion::connect();
 new CtrlListProjet(new VueListProjet(), new ModeleListProjet());
 
 ?>
-
-<h1>test</h1>
