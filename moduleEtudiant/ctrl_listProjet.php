@@ -19,7 +19,6 @@
         private function start(){
 
             if($this->action =='descrProjet'){
-
                 $idProjet = $_GET['id'];
                 $this->vue->afficherDetailProjet($this->modele->getProjet($idProjet));
                 $this->vue->affciherProfs($this->modele->getProfProjet($idProjet));
