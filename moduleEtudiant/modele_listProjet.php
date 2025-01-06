@@ -44,6 +44,25 @@ class ModeleListProjet extends Connexion{
         $utilisateur = $request->fetch(PDO::FETCH_ASSOC);
         return $utilisateur['idUtilisateur'];
     }
+
+    public function getProfProjet($idProjet){
+        $request = connexion::$database->prepare("SELECT *
+                                                FROM utilisateur
+                                                JOIN estResponsableDe ON utilisateur.idUtilisateur = estResponsableDe.idUtilisateur
+                                                WHERE estResponsableDe.idProjet = :idProjet AND utilisateur.role = 'responsable'
+                                                UNION
+                                                SELECT *
+                                                FROM utilisateur
+                                                JOIN intervientDans ON utilisateur.idUtilisateur = intervientDans.idUtilisateur
+                                                WHERE intervientDans.idProjet = :idProjet AND utilisateur.role = 'intervenant';
+                                                ");
+        
+        $request->bindParam(':idProjet', $idProjet);
+        $request->execute();
+        $profs = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $profs;
+    }
+    
 }
 
 ?>
