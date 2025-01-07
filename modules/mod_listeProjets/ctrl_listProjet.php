@@ -13,12 +13,11 @@
             $this->modele = new ModeleListProjet();
             if(isset($_GET['action']))
                 $this->action = $_GET['action'];
-            $this->start();
         }
 
-        private function start(){
+        public function exec(){
 
-            if($this->action =='descrProjet'){
+               if($this->action =='descrProjet'){
                 $idProjet = $_GET['id'];
                 $this->vue->afficherDetailProjet($this->modele->getProjet($idProjet));
                 $this->vue->affciherProfs($this->modele->getProfProjet($idProjet));

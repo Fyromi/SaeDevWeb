@@ -52,14 +52,14 @@ class ControleurConnexion {
 
 		$login = isset ($_POST['login']) ? $_POST['login'] : die ("paramètre manquant");
 		$mdp = isset ($_POST['mdp']) ? $_POST['mdp'] : die ("paramètre manquant");
-		$util = $this->modele->get_utilisateur ($login);
+		$util = $this->modele->get_utilisateur($login);
 		if ($util === false) {
 			$this->vue->utilisateur_inconnu($login);
 			return;
 		}
-		if (password_verify($mdp, $util["mdp"])) {
+		if ($mdp == $util["mdp"]){
 			$_SESSION['login'] = $login;
-			$this->vue->confirm_connexion($login);
+			$this->modele->connecte();
 		}
 		else {
 			$this->vue->echec_connexion($login);

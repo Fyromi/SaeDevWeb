@@ -10,7 +10,7 @@ class VueConnexion extends VueGenerique{
 ?>		<div class="connexion">
         <h1>Connexion</h1>
 		<form id="field_login" action="index.php?module=connexion&action=verif_connexion" method="POST">
-			   login :
+			   login :	
             <br>
             <input id="text_login" type="text" name="login"></input>
             <br>
