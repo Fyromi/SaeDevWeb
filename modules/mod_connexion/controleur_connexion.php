@@ -57,7 +57,8 @@ class ControleurConnexion {
 			$this->vue->utilisateur_inconnu($login);
 			return;
 		}
-		if ($mdp == $util["mdp"]){
+			
+		if (password_verify($mdp, $util["mdp"])){
 			$_SESSION['login'] = $login;
 			$this->modele->connecte();
 		}
