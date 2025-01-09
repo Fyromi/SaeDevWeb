@@ -6,6 +6,10 @@ class Connexion {
 		self::$bdd = new PDO('mysql:host=localhost;dbname=sae', 'root', '');
 	}
 
+	public static function getBdd(){
+		return self::$bdd;
+	}
+
 
 
 }

@@ -9,10 +9,10 @@ class ModeleListProjet extends Connexion{
         $this->queries = include 'modules/mod_listeProjets/requete.php';
     }
 
-    private function executeQuery($sql, $params = []) {
+    private function executeQuery($sql, $params) {
         $request = connexion::$bdd->prepare($sql);
         foreach ($params as $key => $value) {
-            $request->bindParam($key, $value);
+            $request->bindValue($key, $value);
         }
         $request->execute();
         return $request;
@@ -42,4 +42,15 @@ class ModeleListProjet extends Connexion{
         $request = $this->executeQuery($sql, [':idProjet' => $idProjet]);
         return $request->fetchAll(PDO::FETCH_ASSOC);
     }
+
+        public function getMemebreGrp($idProjet){
+            $sql = $this->queries['getGrpEtudiant'];
+            $params = [
+                ':idProjet' => (int) $idProjet,
+                ':idUtilisateur' => (int) $this->getIDUtilisateur()['idUtilisateur']
+            ];
+    
+            $request = $this->executeQuery($sql, $params);
+            return $request->fetchAll(PDO::FETCH_ASSOC);
+        }
 }

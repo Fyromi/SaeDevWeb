@@ -37,5 +37,16 @@ class VueListProjet{
 			<?php
 		}
 	}
+
+	public function affciherMembreGrp($grp){
+		?>
+		<h4>Membre du Groupe</h4>
+		<?php
+		foreach ($grp as $etudiant) {
+		?>
+			<?=$etudiant['login']?>  
+			<?php
+		}
+	}
 } 
 ?>

@@ -31,6 +31,14 @@ class VueConnexion extends VueGenerique{
 		<form action="index.php?module=connexion&action=inscription" method="POST">
 			login : <input type="text" name="login"></input>
 			mot de passe : <input type="password" name="mdp"></input>
+			<label for="choix">Choisissez votre rôle :</label>
+
+            <select id="choix" name="role">
+                <option value="etudiant">Etudiant</option>
+                <option value="intervenant">Intervenant</option>
+				<option value="responsable">Responsable</option>
+
+            </select><br><br>
 			<input type="submit"/>
 		</form>
         </div>

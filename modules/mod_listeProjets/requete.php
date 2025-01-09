@@ -23,6 +23,21 @@ return [
                         SELECT *
                         FROM utilisateur
                         JOIN intervientDans ON utilisateur.idUtilisateur = intervientDans.idUtilisateur
-                        WHERE intervientDans.idProjet = :idProjet AND utilisateur.role = 'intervenant'"
+                        WHERE intervientDans.idProjet = :idProjet AND utilisateur.role = 'intervenant'",
+
+    'getGrpEtudiant' => "SELECT utilisateur.login
+                        FROM utilisateur
+                        JOIN appartientA ON utilisateur.idUtilisateur = appartientA.idUtilisateur
+                        WHERE appartientA.idGroupe = (
+                            SELECT appartientA.idGroupe
+                            FROM associeAProjet
+                            JOIN appartientA ON associeAProjet.idGroupe = appartientA.idGroupe
+                            WHERE appartientA.idUtilisateur = :idUtilisateur
+                            AND associeAProjet.idProjet = :idProjet
+                            LIMIT 1
+                        )
+                        AND utilisateur.idUtilisateur != :idUtilisateur;
+                        "
+    
 ];
 ?>

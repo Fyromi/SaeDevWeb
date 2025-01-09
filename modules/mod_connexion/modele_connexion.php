@@ -8,21 +8,14 @@ class ModeleConnexion extends Connexion {
 		return $req->fetch();
 	}
 
-	public function ajout_utilisateur ($login, $mdp_hash) {
-		$req = self::$bdd->prepare("INSERT INTO utilisateur (login,mdp) VALUES(:login, :mdp)");
-		return $req->execute(["login" => $login, "mdp"=> $mdp_hash]);
-	}
+	public function ajout_utilisateur ($login, $mdp_hash, $role) {
+		$req = self::$bdd->prepare("INSERT INTO utilisateur (login,mdp, role) VALUES(:login, :mdp, :role)");
+		return $req->execute(["login" => $login, "mdp"=> $mdp_hash, "role"=>$role]);
+	}	
 
 	public function verifLogin($login){
 		$req = self::$bdd->prepare("SELECT login from utilisateur WHERE login=?");
 		$req->execute([$login]);
 		return $req->fetch();
-	}
-
-	public function connecte(){
-		$_GET['module'] = 'listeProjets';
-		header("Location: " . $_SERVER['PHP_SELF'] . '?' . http_build_query($_GET));
-	
-
 	}
 }
