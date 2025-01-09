@@ -17,16 +17,20 @@
 
         public function exec(){
 
-               if($this->action =='descrProjet'){
-                $idProjet = $_GET['id'];
-                $this->vue->afficherDetailProjet($this->modele->getProjet($idProjet));
-                $this->vue->affciherProfs($this->modele->getProfProjet($idProjet));
-                $this->vue->affciherMembreGrp($this->modele->getMemebreGrp($idProjet));
-                
-            }
-            else{
-                $projet = $this->modele->getList();
-                $this->vue->afficherListProjet($projet);
+            switch ($this->action) {
+                case 'descrProjet':
+                    $idProjet = $_GET['id'];
+                    $this->vue->afficherDetailProjet($this->modele->getProjet($idProjet));
+                    $this->vue->affciherProfs($this->modele->getProfProjet($idProjet));
+                    break;
+                case 'menu':
+                        $this->vue->afficherMenue();
+                    break;
+
+                default:
+                     $projet = $this->modele->getList();
+                    $this->vue->afficherListProjet($projet);                  
+                    break;
             }
         }
 

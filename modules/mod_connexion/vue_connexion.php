@@ -87,4 +87,7 @@ class VueConnexion extends VueGenerique{
 		<?php
 	}
 
+	public function connecte(){
+		header("location: http://localhost/SaeDevWeb/index.php?module=listeProjets&action=menu");
+	}
 }

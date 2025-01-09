@@ -1,5 +1,6 @@
 <?php
 
+
 class Site {
 
 	private $module_name;

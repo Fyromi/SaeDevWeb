@@ -13,8 +13,6 @@ main{
     height: 90%;
 }
 #text_login{
-
-
     outline: transparent;
     width: 600px;
     height: 50px;
@@ -47,16 +45,6 @@ main{
     border-radius: 20px;
     margin-top: 20px;
     left:60%;
-
-}
-#lienListe{
-    display: flex;
-    justify-content : center;
-
-    border-radius: 5px;
-    padding: 50px;
-    background: #ffffff;
-
 }
 
 
