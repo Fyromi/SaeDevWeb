@@ -22,6 +22,7 @@
                     $idProjet = $_GET['id'];
                     $this->vue->afficherDetailProjet($this->modele->getProjet($idProjet));
                     $this->vue->affciherProfs($this->modele->getProfProjet($idProjet));
+                    $this->vue->affciherMembreGrp($this->modele->getMemebreGrp($idProjet));
                     break;
                 case 'menu':
                         $this->vue->afficherMenue();
