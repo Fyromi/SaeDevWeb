@@ -85,11 +85,6 @@ class VueListProjet{
 		</div>
 		<?php
 	}
-	
-	
-
-	
-	
 
 } 
 ?>
