@@ -63,4 +63,26 @@ class ModeleListProjet extends Connexion{
         $request = $this->executeQuery($sql, $params);
         return $request->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function getProfilPicture($idUtilisateur){
+        $sql = $this->queries['getProfilPicture'];
+        $request = $this->executeQuery($sql, [':idUtilisateur' =>$idUtilisateur]);
+        return $request->fetchColumn();
+    }
+
+    public function getPaireNomImage($utilisateurs) {
+        $tableaudePaire = []; 
+    
+        foreach ($utilisateurs as $utilisateur) {
+            $image = $this->getProfilPicture($utilisateur['idUtilisateur']);
+            
+            $tableaudePaire[] = [
+                'login' => $utilisateur['login'],
+                'image' => $image
+            ];
+        }
+    
+        return $tableaudePaire;
+    }    
+
 }

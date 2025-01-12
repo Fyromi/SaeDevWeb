@@ -25,7 +25,7 @@ return [
                         JOIN intervientDans ON utilisateur.idUtilisateur = intervientDans.idUtilisateur
                         WHERE intervientDans.idProjet = :idProjet AND utilisateur.role = 'intervenant'",
 
-    'getGrpEtudiant' => "SELECT utilisateur.login
+    'getGrpEtudiant' => "SELECT *
                         FROM utilisateur
                         JOIN appartientA ON utilisateur.idUtilisateur = appartientA.idUtilisateur
                         WHERE appartientA.idGroupe = (
@@ -44,8 +44,11 @@ return [
                     AND groupeetudiant.idGroupe = associeaprojet.idGroupe
                     AND associeaprojet.idProjet = projet.idProjet
                     AND utilisateur.idUtilisateur = :idUtilisateur
-                    AND projet.idProjet = :idProjet;"
+                    AND projet.idProjet = :idProjet;",
 
-    
+    'getProfilPicture' => "SELECT profilpicture
+                            FROM  utilisateur
+                            WHERE idUtilisateur = :idUtilisateur;"
 ];
+
 ?>
