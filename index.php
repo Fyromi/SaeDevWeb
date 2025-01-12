@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 
 require_once "connexion.php";
@@ -22,4 +23,5 @@ $footer = new ComposantFooter();
 $module_html_name = $site->get_module_name();
 $module_html = $site->get_module()->get_affichage();
 include_once "template.php";
+ob_end_flush();
 
