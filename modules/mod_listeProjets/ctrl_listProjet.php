@@ -20,16 +20,19 @@
             switch ($this->action) {
                 case 'descrProjet':
                     $idProjet = $_GET['id'];
-                    $this->vue->afficherDetailProjet($this->modele->getProjet($idProjet));
-                    $this->vue->affciherProfs($this->modele->getProfProjet($idProjet));
-                    $this->vue->affciherMembreGrp($this->modele->getMemebreGrp($idProjet));
+                    $projet = $this->modele->getProjet($idProjet);
+                    $profs = $this->modele->getProfProjet($idProjet);
+                    $groupe = [$this->modele->getMemebreGrp($idProjet), $this->modele->getNomGrp($idProjet)];
+
+                    $this->vue->afficherDetailProjet($projet,$profs,$groupe);
+                    
                     break;
                 case 'menu':
                         $this->vue->afficherMenue();
                     break;
 
                 default:
-                     $projet = $this->modele->getList();
+                    $projet = $this->modele->getList();
                     $this->vue->afficherListProjet($projet);                  
                     break;
             }

@@ -3,27 +3,37 @@ class VueListProjet{
 
 	public function __construct(){}
 
-	public function afficherListProjet($list){
-		?>	
-		<h1>Liste Des	 Projet</h1>
+	public function afficherListProjet($list) {
+		?>
+		<div class="container mt-4">
+		<h1 class="text-center mb-4">Projets</h1>
+			<div class="row justify-content-center">
+				<div class="col-md-8 col-lg-6">
+					<div class="d-flex flex-column gap-3">
+						<?php foreach ($list as $data) { ?>
+							<div class="card">
+								<div class="card-body">
+									<a href="index.php?module=listeProjets&action=descrProjet&idProj&id=<?= $data['idProjet'] ?>" 
+									   class="text-dark text-decoration-none">
+										<h5 class="card-card"><?= $data['titre'] ?></h5>
+									</a>
+								</div>
+							</div>
+						<?php } ?>
+					</div>
+				</div>
+			</div>
+		</div>
 		<?php
-		foreach ($list as $data) {
-			?>
-			<ul>
-			<li><a href='index.php?module=listeProjets&action=descrProjet&idProj&id=<?=$data['idProjet']?>'> <?=$data['idProjet']?> / <?=$data['titre']?> </a></li>
-		</ul>
-			<?php
-		}    
 	}
 
-	public function afficherDetailProjet($projet){
+	public function afficherDetailProjet($projet, $prof,$grp){
 		?>
 		
-		<h1>Détail du Projet</h1>
-		<h4>Nom du Projet</h4>
-		<li><?=$projet['titre']?></li>
-		<h4>Description</h4>
-		<li><?=$projet['description']?></li>
+		<h1><?=$projet['titre']?></h1>
+		<li><?=$this->affciherProfs($prof)?></li>
+		<li><?=$this->affciherMembreGrp($grp)?></li>
+		<li><?=$this->afficherObjectif($projet)?></li>
 		<?php
 	}
 
@@ -39,14 +49,22 @@ class VueListProjet{
 	}
 
 	public function affciherMembreGrp($grp){
+		
 		?>
-		<h4>Membre du Groupe</h4>
+		<h4><?php echo $grp[1]['nomGroupe']?></h4>
 		<?php
-		foreach ($grp as $etudiant) {
+		foreach ($grp[0] as $etudiant) {
 		?>
-			<?=$etudiant['login']?>  
+			<a href='https://moodle.iut.univ-paris8.fr/'><?=$etudiant['login']?></a>
 			<?php
 		}
+	}
+
+	public function afficherObjectif($projet){
+		?>
+		<h4>Objectif</h4>
+		<?php
+		echo $projet['description'];
 	}
 
 	public function afficherMenue() {

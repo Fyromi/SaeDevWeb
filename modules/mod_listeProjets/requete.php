@@ -34,10 +34,18 @@ return [
                             JOIN appartientA ON associeAProjet.idGroupe = appartientA.idGroupe
                             WHERE appartientA.idUtilisateur = :idUtilisateur
                             AND associeAProjet.idProjet = :idProjet
-                            LIMIT 1
-                        )
-                        AND utilisateur.idUtilisateur != :idUtilisateur;
-                        "
+                            LIMIT 1)
+                        AND utilisateur.idUtilisateur != :idUtilisateur;",
+
+    'getNomGrp' => "SELECT groupeetudiant.nomGroupe 
+                    FROM utilisateur, appartienta, groupeetudiant, associeaprojet, projet
+                    WHERE utilisateur.idUtilisateur = appartienta.idUtilisateur
+                    AND appartienta.idGroupe = groupeetudiant.idGroupe  
+                    AND groupeetudiant.idGroupe = associeaprojet.idGroupe
+                    AND associeaprojet.idProjet = projet.idProjet
+                    AND utilisateur.idUtilisateur = :idUtilisateur
+                    AND projet.idProjet = :idProjet;"
+
     
 ];
 ?>

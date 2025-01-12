@@ -43,14 +43,24 @@ class ModeleListProjet extends Connexion{
         return $request->fetchAll(PDO::FETCH_ASSOC);
     }
 
-        public function getMemebreGrp($idProjet){
-            $sql = $this->queries['getGrpEtudiant'];
-            $params = [
-                ':idProjet' => (int) $idProjet,
-                ':idUtilisateur' => (int) $this->getIDUtilisateur()['idUtilisateur']
-            ];
-    
-            $request = $this->executeQuery($sql, $params);
-            return $request->fetchAll(PDO::FETCH_ASSOC);
-        }
+    public function getMemebreGrp($idProjet){
+        $sql = $this->queries['getGrpEtudiant'];
+        $params = [
+            ':idProjet' => (int) $idProjet,
+            ':idUtilisateur' => (int) $this->getIDUtilisateur()['idUtilisateur']
+        ];
+
+        $request = $this->executeQuery($sql, $params);
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getNomGrp($idProjet){
+        $sql = $this->queries['getNomGrp'];
+        $params = [
+            ':idProjet' => (int) $idProjet,
+            ':idUtilisateur' => (int) $this->getIDUtilisateur()['idUtilisateur']
+        ];
+        $request = $this->executeQuery($sql, $params);
+        return $request->fetch(PDO::FETCH_ASSOC);
+    }
 }
