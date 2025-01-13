@@ -20,7 +20,11 @@
             switch ($this->action) {
                 case 'menue':
                     $idProjet = $_GET['idProjet'];
-                    echo "test mon reuf";
+
+                    $documents = $this->modele->getRessourcesByType($idProjet, 'documents');
+                    $consigne = $this->modele->getRessourcesByType($idProjet,'consignes');
+
+                    $this->vue->afficherProjet($documents, $consigne);
                     break;
                 default:
                     break;
