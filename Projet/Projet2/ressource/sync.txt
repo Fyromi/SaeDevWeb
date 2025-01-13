@@ -1,0 +1,15 @@
+sync
+
+exec /sbin/halt
+
+mount -o remount,rw /
+passwd pi
+toto
+toto
+mount -o remount, rw /
+
+
+mount -o remount, rw /
+passwd pi
+toto
+toto

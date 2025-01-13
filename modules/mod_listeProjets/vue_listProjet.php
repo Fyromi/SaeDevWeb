@@ -42,7 +42,7 @@ class VueListProjet {
                         <?php $this->afficherObjectif($projet); ?>
                     </div>
                     <div class="text-end mt-4 px-3">
-                        <a href="index.php?module=Ressources" 
+                        <a href="index.php?module=Ressources&action=menue&idProjet=<?=$projet['idProjet']?>" 
                            class="btn btn-dark text-white rounded-pill">
                             Accès aux ressources du projet <?= $projet['titre']; ?> >>>
                         </a>
@@ -103,7 +103,7 @@ class VueListProjet {
 
     public function afficherObjectif($projet) {
         ?>
-        <h4 class="mb-3 fw-semibold">Objectif</h4> <!-- Gras réduit ici -->
+        <h4 class="mb-3 fw-semibold">Objectif</h4>
         <p class="fst-italic">"<?= $projet['description']; ?>"</p>
         <?php
     }
