@@ -23,6 +23,11 @@ class ModeleRessources extends Connexion{
         return $this->executeQuery($sql, [':idProjet' => $idProjet])->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getDepot($idProjet){
+        $sql = $this->queries['getDepots'];
+        return $this->executeQuery($sql, [':idProjet' => $idProjet])->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function getRessourcesByType($idProjet, $type) {
         $ressources = $this->getRessources($idProjet);
     
