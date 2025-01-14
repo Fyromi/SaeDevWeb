@@ -35,11 +35,7 @@ class ModeleConnexion extends Connexion {
 		if($_SESSION['role'] === 'etudiant')
 			header("location: index.php?module=listeProjets&action=menu");
 			
-		elseif($_SESSION['role'] == 'responsable')
-			header("location: index.php?module=listeProjetsResponsable&action=menu");
-		
-		elseif($_SESSION['role'] == 'intervenant')
-			header("location: index.php?module=listeProjetsIntervenant&action=menu");
-		
+		elseif($_SESSION['role'] == 'responsable' || $_SESSION['role'] == 'intervenant')
+			header("location: index.php?module=listeProjetsEnseignant&action=menu");
 	}
 }
