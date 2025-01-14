@@ -19,7 +19,27 @@ class ModeleConnexion extends Connexion {
 		return $req->fetch();
 	}
 
-	public function connecte(){
-		header("location: http://localhost/SaeDevWeb/index.php?module=listeProjets&action=menu");
+	private function setRoleSession($login) {
+		$req = self::$bdd->prepare("SELECT role FROM utilisateur WHERE idUtilisateur=?");
+		$req->bindParam(1, $this->get_utilisateur($login)['idUtilisateur']);
+		$req->execute();
+		$_SESSION['role'] = $req->fetchColumn(); 
+	}
+
+	public function connecte($login){
+		
+		$this->setRoleSession($login);
+
+		var_dump($_SESSION['role']);
+
+		if($_SESSION['role'] === 'etudiant')
+			header("location: index.php?module=listeProjets&action=menu");
+			
+		elseif($_SESSION['role'] == 'responsable')
+			header("location: index.php?module=listeProjetsResponsable&action=menu");
+		
+		elseif($_SESSION['role'] == 'intervenant')
+			header("location: index.php?module=listeProjetsIntervenant&action=menu");
+		
 	}
 }

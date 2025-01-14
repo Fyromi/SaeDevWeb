@@ -60,7 +60,7 @@ class ControleurConnexion {
 			
 		if (password_verify($mdp, $util["mdp"])){
 			$_SESSION['login'] = $login;
-			$this->modele->connecte();
+			$this->modele->connecte($login);
 		}
 		else {
 			$this->vue->echec_connexion($login);
