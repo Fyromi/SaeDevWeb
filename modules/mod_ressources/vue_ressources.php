@@ -43,7 +43,7 @@ class VueRessources {
         // Vérification spécifique pour les consignes
         if ($nameKey == 'nomRessource' && $iconPath == 'icons/Consigne.png') {
             // Lien pour les consignes
-            $link = 'index.php?module=Ressources&action=consignes';
+            $link = 'index.php?module=Ressources&action=consignes&id='.$element['idRessource'];
         } else {
             // Pour les autres ressources
             $link = $isDepot ? 'index.php?module=DepotEtudiant' : ($element[$linkKey] ?? '#');
