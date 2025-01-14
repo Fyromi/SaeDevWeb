@@ -18,4 +18,8 @@ class ModeleConnexion extends Connexion {
 		$req->execute([$login]);
 		return $req->fetch();
 	}
+
+	public function connecte(){
+		header("location: http://localhost/SaeDevWeb/index.php?module=listeProjets&action=menu");
+	}
 }
