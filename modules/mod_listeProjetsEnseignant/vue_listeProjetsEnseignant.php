@@ -14,23 +14,27 @@ class VueListeProjetsEnseignant {
         echo '</div>';
     }
 
-    private function afficherMenueResponsable($projetResponsable, $projetsIntervention) {
+    private function afficherMenueResponsable($projetResponsables, $projetsIntervention) {
         echo '<div class="mb-5">';
         echo '<div style="width: 450px; height:100%">';
-        echo '<h3 class="border-bottom border-secondary pb-3 mb-5">Mon Projet</h3>';
+        echo '<h3 class="border-bottom border-secondary pb-3 mb-5">Mes Projets</h3>';
         echo '</div>';
-        if ($projetResponsable != null) {
+        if ($projetResponsables != null) {
             echo '<div class="row">';
             echo '<div class="col-lg-6 mb-9" height:100%;>';
-            echo "<a href='index.php?module=detailProjet&idProjet=" . $projetResponsable['idProjet'] . "' class='text-decoration-none'>";
-            // Ajusté pour avoir la même hauteur que le bouton Créer projet
-            echo '<div class="card shadow-sm" style="width: 600px; ">';
-                echo '<img src="images/imageGrp.jpg" class="card-img-top" alt="Projet" style="height: 100px; object-fit: cover;">'; // Réduit la hauteur
-                echo '<div class="card-body text-center py-2">'; // Réduit le padding vertical
-                echo '<h5 class="card-title fs-3 mb-0">' . $projetResponsable['titre'] . '</h5>'; // Supprimé la marge du bas
-            echo '</div>';
-            echo '</div>';
-            echo '</a>';
+            foreach ($projetResponsables as $projetResponsable) {
+                
+            
+                echo "<a href='index.php?module=detailProjet&idProjet=" . $projetResponsable['idProjet'] . "' class='text-decoration-none'>";
+                // Ajusté pour avoir la même hauteur que le bouton Créer projet
+                echo '<div class="card shadow-sm" style="width: 600px; ">';
+                    echo '<img src="images/imageGrp.jpg" class="card-img-top" alt="Projet" style="height: 100px; object-fit: cover;">'; // Réduit la hauteur
+                    echo '<div class="card-body text-center py-2">'; // Réduit le padding vertical
+                    echo '<h5 class="card-title fs-3 mb-0">' . $projetResponsable['titre'] . '</h5>'; // Supprimé la marge du bas
+                echo '</div>';
+                echo '</div>';
+                echo '</a>';
+         }
             echo '</div>';
             echo '<div class="col-lg-4 offset-lg-1 d-flex align-items-center">';
             $this->creerSAE();
@@ -69,7 +73,6 @@ class VueListeProjetsEnseignant {
         echo "<a href='index.php?module=ajoutsae' class='text-decoration-none'>";
         echo '<div class="card shadow-sm text-center" style="width: 400px; height: 250px; border-radius: 15px; background-color: #f8f9fa;">'; 
         echo '<div class="card-body d-flex flex-column justify-content-center align-items-center">';
-        // Utilisation de l'image téléchargée
         echo '<img src="icons/plus.png" alt="Créer un projet" style="width: 100px; height: 100px;">';
         echo '<h5 class="card-title mt-3 fs-4" style="color: #000;">Créer un projet</h5>';
         echo '</div>';

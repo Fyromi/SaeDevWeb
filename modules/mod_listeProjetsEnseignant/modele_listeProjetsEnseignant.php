@@ -23,7 +23,7 @@ class ModeleListeProjetsEnseignant extends Connexion{
 
         $sql = $this->queries['getProjetResponsable'];
         $request = $this->executeQuery($sql, [':login' => $_SESSION['login']]);
-        return $request->fetch(PDO::FETCH_ASSOC);
+        return $request->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getInterventionProjet(){
