@@ -50,7 +50,7 @@ class ModeleDetailProjet extends Connexion{
 
     public function addGroupe($idProjet){
 
-        
+
         $sql = $this->queries['addGroupe'];
         
         $this->executeQuery($sql, [':nomGroupe' => $_POST['texte']]);
@@ -84,5 +84,23 @@ class ModeleDetailProjet extends Connexion{
         }
     }
 
+    public function importFile($idProjet) {
+        
+        $repertoire =dirname(__DIR__, 2)."/Projet/Projet" . $idProjet . "/ressource";
+        $nom = $_POST['texte'];
+        $fichierTmp = $_FILES['fichier']['tmp_name'];
+        $nomFichier = basename($_FILES['fichier']['name']);
+        $cheminFinal = $repertoire . "/" . $nomFichier;
+        $cheminForbdd = "Projet/Projet" . $idProjet . "/ressource"."/". $nomFichier;
+        move_uploaded_file($fichierTmp, $cheminFinal);
+        $this->insertLinkToBdd($nom,$cheminForbdd, $idProjet);
+    }
 
+    private function insertLinkToBdd($nom, $lien, $idProjet){
+        $sql = $this->queries['insertLinkBdd'];
+        $this->executeQuery($sql, [':nom' => $nom, ':lien' => $lien]);
+        $sq2 = $this->queries['projetRessource'];
+        $this->executeQuery($sq2, [':idProjet' => $idProjet, ':idRessource' => self::$bdd->lastInsertId()]);
+
+    }
 }

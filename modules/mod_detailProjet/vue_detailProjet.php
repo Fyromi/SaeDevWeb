@@ -5,6 +5,7 @@ class VueDetailProjet {
     public function vueDetailProjet($etudiants, $projet, $intervenant){
         $this->sectionGroupe($etudiants, $projet);
         $this->sectionIntervenant($intervenant, $projet);
+        $this->sectionUpload($projet);
 
     }
 
@@ -56,5 +57,21 @@ class VueDetailProjet {
         
     }
 
+    private function sectionUpload($projet) {
+        ?>
+        <form action="index.php?module=detailProjet&idProjet=<?= $projet['idProjet'] ?>&action=depDocu" 
+              method="POST" 
+              enctype="multipart/form-data">
+            
+        <?php
+            echo "<label for='texte'>Titre de la Ressource".$projet['titre']."</label><br>";
+        ?>
+            <input type="text" id="NomRessource" name="texte" required><br>
+            <label for="file">Ajouter un Document :</label></br>
+            <input type="file" name="fichier" id="file" required></br>
+            <button type="submit">Déposer</button>
+        </form>
+        <?php
+    }
 }   
 ?>

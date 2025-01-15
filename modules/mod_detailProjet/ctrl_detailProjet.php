@@ -16,26 +16,26 @@
         }
 
         public function exec(){
-            switch ($this->action) {
-                case 'creerGrp':
-                    $this->modele->ajoutGroupeBD($_GET['idProjet']);
-                    break;
-                case 'ajtInter';
-                    $this->modele->ajoutIntervenantBD($_GET['idProjet']);
-                    break;
-                default:
-                    break;
-            }
 
             $etudiantSansGrp = $this->modele->getEtudiantSansGrp($_GET['idProjet']);
             $projet = $this->modele->getProjet($_GET['idProjet']);
             $intervenant = $this->modele->getIntervenant($_GET['idProjet']);
             $this->vue->vueDetailProjet($etudiantSansGrp,$projet, $intervenant);
-
             
-            
+            switch ($this->action) {
+                case 'creerGrp':
+                    $this->modele->ajoutGroupeBD($_GET['idProjet']);
+                    break;
+                case 'ajtInter':
+                    $this->modele->ajoutIntervenantBD($_GET['idProjet']);
+                    break;
+                case 'depDocu' :
+                    $this->modele->importFile($_GET['idProjet']);
+                    break;
+                default:
+                    break;
+            }
         }
-
     }
     
 ?>
