@@ -22,7 +22,7 @@ class VueListeProjetsEnseignant {
         if ($projetResponsable != null) {
             echo '<div class="row">';
             echo '<div class="col-lg-6 mb-9" height:100%;>';
-            echo "<a href='index.php?module=detailProjet&idProj&id=" . $projetResponsable['idProjet'] . "' class='text-decoration-none'>";
+            echo "<a href='index.php?module=detailProjet&idProjet=" . $projetResponsable['idProjet'] . "' class='text-decoration-none'>";
             // Ajusté pour avoir la même hauteur que le bouton Créer projet
             echo '<div class="card shadow-sm" style="width: 600px; ">';
                 echo '<img src="images/imageGrp.jpg" class="card-img-top" alt="Projet" style="height: 100px; object-fit: cover;">'; // Réduit la hauteur
@@ -51,7 +51,7 @@ class VueListeProjetsEnseignant {
             echo '<div>';
             foreach ($projetsIntervention as $projetIntervention) {
                 echo '<div class="mb-4" style="width: 600px;">'; // Doublé la largeur et augmenté margin
-                echo "<a href='index.php?module=detailProjet&idProj&id=" . $projetIntervention['idProjet'] . "' class='text-decoration-none'>";
+                echo "<a href='index.php?module=detailProjet&idProjet=".$projetIntervention['idProjet'] . "' class='text-decoration-none'>";
                 echo '<div class="card shadow-sm">';
                 echo '<div class="card-body text-center py-4">'; // Augmenté le padding
                 echo '<h5 class="card-title fs-3">' . $projetIntervention['titre'] . '</h5>'; // Augmenté la taille de police

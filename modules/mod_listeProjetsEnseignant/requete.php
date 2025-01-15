@@ -9,8 +9,7 @@ return [ 'getProjetResponsable' =>  "SELECT projet.*
                                     FROM projet
                                     JOIN intervientDans ON projet.idProjet = intervientDans.idProjet
                                     JOIN utilisateur ON intervientDans.idUtilisateur = utilisateur.idUtilisateur
-                                    WHERE utilisateur.login = :login;"
-                                
+                                    WHERE utilisateur.login = :login;"           
 ];
 
 ?>
