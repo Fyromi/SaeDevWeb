@@ -41,8 +41,11 @@ class ModeleDetailProjet extends Connexion{
                 $listeEtudiant[] = $key;
             }
         }
-
-        $this->addGroupe($idProjet);
+        $idGrp = $this->addGroupe($idProjet);
+        foreach ($listeEtudiant as $etudiant) {
+            $sql = $this->queries['addEtudiantGrp'];
+            $this->executeQuery($sql, [':idGroupe' => $idGrp, ':idEtudiant' => $etudiant]);
+        }
     }
 
     public function addGroupe($idProjet){
@@ -50,7 +53,10 @@ class ModeleDetailProjet extends Connexion{
         
         $this->executeQuery($sql, [':nomGroupe' => $_POST['texte']]);
 
+        $idGrp = self::$bdd->lastInsertId();
+
         $sql2 = $this->queries['associeProjet'];
-        $this->executeQuery($sql2, [':idGrp' => self::$bdd->lastInsertId(), ':idProjet' => $idProjet ]);
+        $this->executeQuery($sql2, [':idGrp' => $idGrp, ':idProjet' => $idProjet ]);
+        return $idGrp;
     }
 }

@@ -11,7 +11,7 @@ return [ 'getEtudiantSansGrp' => "SELECT DISTINCT u.*
                                     );", 
 
 
-        'getProjet' =>              'SELECT DISTINCT *
+        'getProjet'     =>          'SELECT DISTINCT *
                                     FROM projet
                                     WHERE idProjet = :id',
 
@@ -20,7 +20,10 @@ return [ 'getEtudiantSansGrp' => "SELECT DISTINCT u.*
                                          VALUES (:nomGroupe,NULL);",
 
         "associeProjet" =>           "INSERT INTO `associeaprojet`(`idGroupe`, `idProjet`)
-                                        VALUES (:idGrp,:idProjet)"
+                                        VALUES (:idGrp,:idProjet)",
+
+        'addEtudiantGrp'    =>      "INSERT INTO appartientA (idUtilisateur, idGroupe)
+                                    VALUES (:idEtudiant, :idGroupe);"
 ];
 
 ?>
