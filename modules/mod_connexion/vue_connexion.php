@@ -28,10 +28,10 @@ class VueConnexion extends VueGenerique{
 	public function form_inscription() {
 ?>      <div class="connexion">
 		<h1>Inscription</h1>
-		<form action="index.php?module=connexion&action=inscription" method="POST">
-			login : <input type="text" name="login"></input>
-			mot de passe : <input type="password" name="mdp"></input>
-			<input type="submit"/>
+		<form id="field_login" action="index.php?module=connexion&action=inscription" method="POST">
+			login : <input id="text_login" type="text" name="login"></input>
+			mot de passe : <input id="text_login" type="password" name="mdp"></input>
+			<input id="bouton_co" type="submit"/>
 		</form>
         </div>
 <?php
@@ -39,9 +39,11 @@ class VueConnexion extends VueGenerique{
 	}
 
 	public function menu() {
-		?><a href="index.php?module=connexion&action=form_connexion">Connexion</a>
+		if(isset($_SESSION['login']) == false){
+		?>
 		<a href="index.php?module=connexion&action=form_inscription">Inscription</a>
 		<?php
+		}
 	}
 
 	public function confirm_inscription($login) {
@@ -54,6 +56,11 @@ class VueConnexion extends VueGenerique{
 	Echec de l'inscription de <?=$login?>
 <?php
 	}
+	public function inscription_existant($login) {
+		?>
+			Echec de l'inscription, <?=$login?> est déja un utilisateur !
+		<?php
+			}
 
 	public function confirm_connexion ($login) {
 ?>

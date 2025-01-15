@@ -55,10 +55,11 @@ class ControleurConnexion {
 		$util = $this->modele->get_utilisateur ($login);
 		if ($util === false) {
 			$this->vue->utilisateur_inconnu($login);
+			$this->vue->form_connexion();
 			return;
 		}
 		if (password_verify($mdp, $util["mdp"])) {
-			$_SESSION['login'] = $login;
+			$_SESSION['login'] = $login;	
 			$this->vue->confirm_connexion($login);
 		}
 		else {
@@ -71,11 +72,15 @@ class ControleurConnexion {
 		$login = isset ($_POST['login']) ? $_POST['login'] : die("paramètre manquant");
 		$mdp = isset ($_POST['mdp']) ? $_POST['mdp'] : die ("paramètre manquant");
 		$mdp_hash = password_hash($mdp, PASSWORD_BCRYPT);
-		if ($this->modele->verifLogin($login)==false &&$this->modele->ajout_utilisateur($login, $mdp_hash)) {
+		if ($this->modele->verifLogin($login)==false && $this->modele->ajout_utilisateur($login, $mdp_hash)) {
 			$this->vue->confirm_inscription($login);
 		}
 		else {
-			$this->vue->erreur_inscription($login);
+			if ($this->modele->verifLogin($login)==true)
+				$this->vue->inscription_existant($login);
+			else
+				$this->vue->erreur_inscription($login);
+				$this->vue->form_inscription();
 		}
 	}
 
