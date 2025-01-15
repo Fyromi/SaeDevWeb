@@ -52,7 +52,5 @@ class ModeleDetailProjet extends Connexion{
 
         $sql2 = $this->queries['associeProjet'];
         $this->executeQuery($sql2, [':idGrp' => self::$bdd->lastInsertId(), ':idProjet' => $idProjet ]);
-        echo 'Coucou';
-
     }
 }
