@@ -15,15 +15,17 @@ return [
                            FROM utilisateur
                            WHERE utilisateur.login = :logi',
 
-    'getProfProjet' => "SELECT *
+    'getProfProjet' => "SELECT DISTINCT utilisateur.*
                         FROM utilisateur
-                        JOIN estResponsableDe ON utilisateur.idUtilisateur = estResponsableDe.idUtilisateur
-                        WHERE estResponsableDe.idProjet = :idProjet AND utilisateur.role = 'responsable'
-                        UNION
-                        SELECT *
-                        FROM utilisateur
-                        JOIN intervientDans ON utilisateur.idUtilisateur = intervientDans.idUtilisateur
-                        WHERE intervientDans.idProjet = :idProjet AND utilisateur.role = 'intervenant'",
+                        LEFT JOIN estResponsableDe 
+                            ON utilisateur.idUtilisateur = estResponsableDe.idUtilisateur 
+                            AND estResponsableDe.idProjet = :idProjet
+                        LEFT JOIN intervientDans 
+                            ON utilisateur.idUtilisateur = intervientDans.idUtilisateur 
+                            AND intervientDans.idProjet = :idProjet
+                        WHERE (estResponsableDe.idUtilisateur IS NOT NULL AND utilisateur.role = 'responsable')
+                        OR (estResponsableDe.idUtilisateur IS NULL AND intervientDans.idUtilisateur IS NOT NULL 
+                            AND (utilisateur.role = 'intervenant' OR utilisateur.role = 'responsable'))",
 
     'getGrpEtudiant' => "SELECT *
                         FROM utilisateur
