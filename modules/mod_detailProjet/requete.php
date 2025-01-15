@@ -23,7 +23,25 @@ return [ 'getEtudiantSansGrp' => "SELECT DISTINCT u.*
                                         VALUES (:idGrp,:idProjet)",
 
         'addEtudiantGrp'    =>      "INSERT INTO appartientA (idUtilisateur, idGroupe)
-                                    VALUES (:idEtudiant, :idGroupe);"
+                                    VALUES (:idEtudiant, :idGroupe);", 
+
+        'getIntervenant'    =>      "SELECT u.*
+                                    FROM utilisateur u
+                                    WHERE u.role IN ('responsable', 'intervenant')
+                                    AND u.idUtilisateur NOT IN (
+                                        SELECT idUtilisateur
+                                        FROM intervientDans
+                                        WHERE idProjet = :idProjet
+                                    )
+                                    AND u.idUtilisateur NOT IN (
+                                        SELECT idUtilisateur
+                                        FROM estResponsableDe
+                                        WHERE idProjet = :idProjet
+                                    );",
+
+        'addIntervenantProjet' => "INSERT INTO intervientDans (idUtilisateur, idProjet)
+                                    VALUES (:idIntervenant, :idProjet);"
+                    
 ];
 
 ?>

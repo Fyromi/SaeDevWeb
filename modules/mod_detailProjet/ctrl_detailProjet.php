@@ -17,15 +17,21 @@
 
         public function exec(){
             switch ($this->action) {
-                case 'creer':
+                case 'creerGrp':
                     $this->modele->ajoutGroupeBD($_GET['idProjet']);
-                
+                    break;
+                case 'ajtInter';
+                    $this->modele->ajoutIntervenantBD($_GET['idProjet']);
+                    break;
                 default:
-                    $etudiantSansGrp = $this->modele->getEtudiantSansGrp($_GET['idProjet']);
-                    $projet = $this->modele->getProjet($_GET['idProjet']);
-                    $this->vue->vueDetailProjet($etudiantSansGrp,$projet);
                     break;
             }
+
+            $etudiantSansGrp = $this->modele->getEtudiantSansGrp($_GET['idProjet']);
+            $projet = $this->modele->getProjet($_GET['idProjet']);
+            $intervenant = $this->modele->getIntervenant($_GET['idProjet']);
+            $this->vue->vueDetailProjet($etudiantSansGrp,$projet, $intervenant);
+
             
             
         }

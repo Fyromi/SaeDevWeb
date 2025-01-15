@@ -49,6 +49,8 @@ class ModeleDetailProjet extends Connexion{
     }
 
     public function addGroupe($idProjet){
+
+        
         $sql = $this->queries['addGroupe'];
         
         $this->executeQuery($sql, [':nomGroupe' => $_POST['texte']]);
@@ -59,4 +61,28 @@ class ModeleDetailProjet extends Connexion{
         $this->executeQuery($sql2, [':idGrp' => $idGrp, ':idProjet' => $idProjet ]);
         return $idGrp;
     }
+
+    public function getIntervenant($idProjet){
+        $sql = $this->queries['getIntervenant'];
+        $request = $this->executeQuery($sql, [':idProjet' => $idProjet]);
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function ajoutIntervenantBD($idProjet){
+
+
+        $listeIntervenant = [];
+
+        foreach ($_POST as $key => $value) {
+            if ($key !== 'texte') {
+                $listeIntervenant[] = $key;
+            }
+        }
+        foreach ($listeIntervenant as $intervenant) {
+            $sql = $this->queries['addIntervenantProjet'];
+            $this->executeQuery($sql, [':idProjet' => $_GET['idProjet'], ':idIntervenant' => $intervenant]);
+        }
+    }
+
+
 }
