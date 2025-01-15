@@ -5,7 +5,7 @@ return [ 'getProjetResponsable' =>  "SELECT projet.*
                                     JOIN utilisateur ON estResponsableDe.idUtilisateur = utilisateur.idUtilisateur
                                     WHERE utilisateur.login = :login;", 
 
-        'getInterventionProjet' =>  "SELECT projet.titre
+        'getInterventionProjet' =>  "SELECT projet.*
                                     FROM projet
                                     JOIN intervientDans ON projet.idProjet = intervientDans.idProjet
                                     JOIN utilisateur ON intervientDans.idUtilisateur = utilisateur.idUtilisateur
