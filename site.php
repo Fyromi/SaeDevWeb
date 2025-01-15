@@ -22,6 +22,9 @@ class Site {
 			case "listeProjetsEnseignant" :
 				require_once "modules/mod_".$this->module_name."/module_".$this->module_name.".php";
 				break;
+			case "ajoutsae" :
+				require_once "modules/mod_".$this->module_name."/module_".$this->module_name.".php";
+				break;
 			default :
 				die ("Module inexistant");
 		}

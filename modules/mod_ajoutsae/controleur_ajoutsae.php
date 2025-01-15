@@ -15,12 +15,10 @@ Class ControleurAjoutSae {
 	}
 
 	public function exec() {
-		$this->action = isset($_GET["action"]) ? $_GET["action"] : "Accueil";
+		$this->action = isset($_GET["action"]) ? $_GET["action"] : "form_ajoutsae";
 
 		switch ($this->action) {
-			case "accueil" :
-				$this->accueil();
-				break;
+		
 			case "form_ajoutsae" :
 				$this->form_ajoutsae();
 				break;
@@ -31,11 +29,6 @@ Class ControleurAjoutSae {
 				die ("Action inexistante");
 		}
 	}
-
-    public function accueil(){
-        $this->vue->accueil();
-    }
-
 
     public function form_ajoutsae(){
         $this->vue->form_ajoutsae();

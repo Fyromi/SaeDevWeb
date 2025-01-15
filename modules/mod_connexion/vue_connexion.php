@@ -2,7 +2,6 @@
 class VueConnexion extends VueGenerique{
 	public function __construct () {
 		parent::__construct();
-
 	}
 
 	public function form_connexion() {
