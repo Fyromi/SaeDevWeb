@@ -1,5 +1,5 @@
 <?php
-class ModeleConnexion extends Connexion {
+class ModeleCONNEXION extends Connexion {
 
 	public function get_utilisateur($login) {
 		$req = self::$bdd->prepare("SELECT * from utilisateur WHERE login=?");

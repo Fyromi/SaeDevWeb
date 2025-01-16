@@ -1,5 +1,5 @@
 <?php
-class VueConnexion extends VueGenerique{
+class VueCONNEXION extends VueGenerique{
 	public function __construct () {
 		parent::__construct();
 	}
@@ -20,7 +20,6 @@ class VueConnexion extends VueGenerique{
 		<?php
 		}
 		
-
 		public function form_inscription() {
 			?>
 			<div class="connexion d-flex flex-column justify-content-center position-fixed" style="top: 30%; left: 30%;">

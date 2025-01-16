@@ -1,16 +1,16 @@
 <?php
-require_once "modules/mod_connexion/vue_connexion.php";
-require_once "modules/mod_connexion/modele_connexion.php";
+require_once "modules/mod_CONNEXION/vue_CONNEXION.php";
+require_once "modules/mod_CONNEXION/modele_CONNEXION.php";
 
-class ControleurConnexion {
+class ControleurCONNEXION {
 
 	private $modele;
 	private $vue;
 	private $action;
 
 	public function __construct() {
-		$this->modele = new ModeleConnexion();
-		$this->vue = new VueConnexion();
+		$this->modele = new ModeleCONNEXION();
+		$this->vue = new VueCONNEXION();
 	}
 
 	public function exec() {

@@ -1,5 +1,5 @@
 <?php
-require_once "modules/mod_connexion/controleur_connexion.php";
+require_once "modules/mod_CONNEXION/controleur_CONNEXION.php";
 
 class ModConnexion extends ModuleGenerique{
 
