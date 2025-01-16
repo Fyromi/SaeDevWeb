@@ -25,7 +25,7 @@ return [ 'getEtudiantSansGrp' => "SELECT DISTINCT u.*
         'addEtudiantGrp'    =>      "INSERT INTO appartientA (idUtilisateur, idGroupe)
                                     VALUES (:idEtudiant, :idGroupe);", 
 
-        'getIntervenant'    =>      "SELECT u.*
+        'getIntervenantLibre'   => "SELECT u.*
                                     FROM utilisateur u
                                     WHERE u.role IN ('responsable', 'intervenant')
                                     AND u.idUtilisateur NOT IN (
@@ -53,7 +53,16 @@ return [ 'getEtudiantSansGrp' => "SELECT DISTINCT u.*
 
         'CreerRendu'            => "INSERT INTO `rendu`(`nomRendu`, `date_limite`) VALUES (:nomRendu,:date);",
 
-        'AssocierRenduProjet'   => "INSERT INTO `renduprojet`(`idProjet`, `idRendu`) VALUES (:idProjet,:idRendu);"
+        'AssocierRenduProjet'   => "INSERT INTO `renduprojet`(`idProjet`, `idRendu`) VALUES (:idProjet,:idRendu);",
+
+        'deleteIntervenant'     => "DELETE FROM intervientDans
+                                    WHERE idUtilisateur = :idUtilisateur AND idProjet = :idProjet;",
+
+        'getIntervenantPris'    =>   "SELECT  utilisateur.*
+                                        FROM utilisateur
+                                        JOIN intervientDans ON utilisateur.idUtilisateur = intervientDans.idUtilisateur
+                                        WHERE intervientDans.idProjet = :idProjet;"
+                                        
 ];
 
 ?>

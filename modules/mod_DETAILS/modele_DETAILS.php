@@ -19,19 +19,19 @@ class ModeleDETAILS extends Connexion{
         return $request;
     }
 
-    public function getEtudiantSansGrp($idProjet){
+    public function getEtudiantSansGrp(){
         $sql = $this->queries['getEtudiantSansGrp'];
-        $request = $this->executeQuery($sql, [':idProjet' => $idProjet]);
+        $request = $this->executeQuery($sql, [':idProjet' => $_GET['idProjet']]);
         return $request->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getProjet($id){
+    public function getProjet(){
         $sql = $this->queries['getProjet'];
-        $request = $this->executeQuery($sql, [':id' => $id]);
+        $request = $this->executeQuery($sql, [':id' => $_GET['idProjet']]);
         return $request->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function ajoutGroupeBD($idProjet){
+    public function ajoutGroupeBD(){
 
 
         $listeEtudiant = [];
@@ -41,14 +41,14 @@ class ModeleDETAILS extends Connexion{
                 $listeEtudiant[] = $key;
             }
         }
-        $idGrp = $this->addGroupe($idProjet);
+        $idGrp = $this->addGroupe($_GET['idProjet']);
         foreach ($listeEtudiant as $etudiant) {
             $sql = $this->queries['addEtudiantGrp'];
             $this->executeQuery($sql, [':idGroupe' => $idGrp, ':idEtudiant' => $etudiant]);
         }
     }
 
-    public function addGroupe($idProjet){
+    public function addGroupe(){
 
 
         $sql = $this->queries['addGroupe'];
@@ -58,62 +58,81 @@ class ModeleDETAILS extends Connexion{
         $idGrp = self::$bdd->lastInsertId();
 
         $sql2 = $this->queries['associeProjet'];
-        $this->executeQuery($sql2, [':idGrp' => $idGrp, ':idProjet' => $idProjet ]);
+        $this->executeQuery($sql2, [':idGrp' => $idGrp, ':idProjet' => $_GET['idProjet'] ]);
         return $idGrp;
     }
 
-    public function getIntervenant($idProjet){
-        $sql = $this->queries['getIntervenant'];
-        $request = $this->executeQuery($sql, [':idProjet' => $idProjet]);
+    public function getIntervenantLibre(){
+        $sql = $this->queries['getIntervenantLibre'];
+        $request = $this->executeQuery($sql, [':idProjet' => $_GET['idProjet']]);
         return $request->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function ajoutIntervenantBD($idProjet){
+    public function ajoutIntervenantBD(){
 
 
         $listeIntervenant = [];
 
         foreach ($_POST as $key => $value) {
             if ($key !== 'texte') {
-                $listeIntervenant[] = $key;
+                foreach ($value as $idIntervenant) {
+                    $listeIntervenant[] = $idIntervenant;
+                }
             }
         }
         foreach ($listeIntervenant as $intervenant) {
             $sql = $this->queries['addIntervenantProjet'];
             $this->executeQuery($sql, [':idProjet' => $_GET['idProjet'], ':idIntervenant' => $intervenant]);
         }
+        header("location: index.php?module=DETAILS&idProjet=". $_GET['idProjet']);
+        
+        print_r($listeIntervenant);
     }
 
-    public function importFile($idProjet) {
+    public function importFile() {
         
-        $repertoire =dirname(__DIR__, 2)."/Projet/Projet" . $idProjet . "/ressource";
+        $repertoire =dirname(__DIR__, 2)."/Projet/Projet" . $_GET['idProjet'] . "/ressource";
         $nom = $_POST['texte'];
         $fichierTmp = $_FILES['fichier']['tmp_name'];
         $nomFichier = basename($_FILES['fichier']['name']);
         $cheminFinal = $repertoire . "/" . $nomFichier;
-        $cheminForbdd = "Projet/Projet" . $idProjet . "/ressource"."/". $nomFichier;
+        $cheminForbdd = "Projet/Projet" . $_GET['idProjet'] . "/ressource"."/". $nomFichier;
         move_uploaded_file($fichierTmp, $cheminFinal);
-        $this->insertLinkToBdd($nom,$cheminForbdd, $idProjet);
+        $this->insertLinkToBdd($nom,$cheminForbdd, $_GET['idProjet']);
     }
 
-    private function insertLinkToBdd($nom, $lien, $idProjet){
+    private function insertLinkToBdd($nom, $lien){
         $sql = $this->queries['insertLinkBdd'];
         $this->executeQuery($sql, [':nom' => $nom, ':lien' => $lien]);
         $sq2 = $this->queries['projetRessource'];
-        $this->executeQuery($sq2, [':idProjet' => $idProjet, ':idRessource' => self::$bdd->lastInsertId()]);
+        $this->executeQuery($sq2, [':idProjet' => $_GET['idProjet'], ':idRessource' => self::$bdd->lastInsertId()]);
     }
 
-    public function estResponsableDe($idProjet){
+    public function estResponsableDe(){
             $sql = $this->queries['estResponsableDe'];
-            $request = $this->executeQuery($sql, [':idProjet' => $idProjet, ':login' => $_SESSION['login']]);
+            $request = $this->executeQuery($sql, [':idProjet' => $_GET['idProjet'], ':login' => $_SESSION['login']]);
             return $request->fetchColumn();
     }
 
-    public function creerDepot($idProjet){
+    public function creerDepot(){
         $sql = $this->queries['CreerRendu'];
         $this->executeQuery($sql, [':nomRendu' => $_POST['nomDepot'], ':date' => $_POST['dateDepot']]);
         $sql2 = $this->queries['AssocierRenduProjet'];
-        $this->executeQuery($sql2, ['idProjet' => $idProjet, 'idRendu' =>self::$bdd->lastInsertId()]);
+        $this->executeQuery($sql2, ['idProjet' => $_GET['idProjet'], 'idRendu' =>self::$bdd->lastInsertId()]);
+    }
+
+    public function deleteIntervenant(){
+        var_dump($_POST);
+        $sql = $this->queries['deleteIntervenant'];
+        $this->executeQuery($sql, [':idUtilisateur' => $_POST['idUtilisateur'], ':idProjet' => $_GET['idProjet']]);
+        header("location: index.php?module=DETAILS&idProjet=". $_GET['idProjet']);
+
+    }
+
+    public function getIntervenantPris(){
+        $sql = $this->queries['getIntervenantPris'];
+        $request = $this->executeQuery($sql, [':idProjet' => $_GET['idProjet']]);
+        return $request->fetchAll(PDO::FETCH_ASSOC);
     }
 
 }

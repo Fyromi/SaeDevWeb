@@ -17,28 +17,32 @@
 
         public function exec(){
 
-            $etudiantSansGrp = $this->modele->getEtudiantSansGrp($_GET['idProjet']);
-            $projet = $this->modele->getProjet($_GET['idProjet']);
-            $intervenant = $this->modele->getIntervenant($_GET['idProjet']);
-            $estResponsableDe = $this->modele->estResponsableDe($_GET['idProjet']);
-            $this->vue->vueDetailProjet($etudiantSansGrp,$projet, $intervenant, $estResponsableDe);
+            $etudiantSansGrp = $this->modele->getEtudiantSansGrp();
+            $projet = $this->modele->getProjet();
+            $intervenantLibre = $this->modele->getIntervenantLibre();
+            $estResponsableDe = $this->modele->estResponsableDe();
+            $intervenantPris = $this->modele->getIntervenantPris();
             
             switch ($this->action) {
                 case 'creerGrp':
-                    $this->modele->ajoutGroupeBD($_GET['idProjet']);
+                    $this->modele->ajoutGroupeBD();
                     break;
                 case 'ajtInter':
-                    $this->modele->ajoutIntervenantBD($_GET['idProjet']);
+                    $this->modele->ajoutIntervenantBD();
                     break;
                 case 'depDocu' :
-                    $this->modele->importFile($_GET['idProjet']);
+                    $this->modele->importFile();
                     break;
                 case 'creerDepot' : 
-                    $this->modele->creerDepot($_GET['idProjet']);
+                    $this->modele->creerDepot();
+                    break;
+                case 'delete' :
+                    $this->modele->deleteIntervenant();
                     break;
                 default:
                     break;
             }
+            $this->vue->vueDetailProjet($etudiantSansGrp,$projet, $intervenantLibre, $estResponsableDe,$intervenantPris);
         }
     }
     

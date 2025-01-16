@@ -2,7 +2,7 @@
 class VueDETAILS {
     public function __construct() {}
 
-    public function vueDetailProjet($etudiants, $projet, $intervenants, $estResponsableDe){
+    public function vueDetailProjet($etudiants, $projet, $intervenantsLibre, $estResponsableDe, $intervenantPris){
         ?>
         <div class="container py-4">
             <!-- Style général pour les titres de section -->
@@ -53,6 +53,19 @@ class VueDETAILS {
                     background-color: #333;
                     color: #fff;
                 }
+
+                .btn-danger {
+                    background-color: #dc3545;
+                    color: #fff;
+                    border: none;
+                    padding: 5px 10px;
+                    border-radius: 6px;
+                }
+
+                .btn-danger:hover {
+                    background-color: #b02a37;
+                    color: #fff;
+                }
             </style>
 
             <h3 class="section-title">Gestion des Accès Utilisateur</h3>
@@ -91,7 +104,9 @@ class VueDETAILS {
                             <form action="index.php?module=DETAILS&idProjet=<?= $projet['idProjet'] ?>&action=ajtInter" method="POST">
                                 <div class="mb-3">
                                     <label class="form-label">Choisissez les intervenants à ajouter :</label>
-                                    <?php foreach ($intervenants as $intervenant) { ?>
+                                    <?php foreach ($intervenantsLibre as $intervenant) {
+                                        //var_dump($intervenant['idUtilisateur']);
+                                        ?>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="intervenant_<?= $intervenant['idUtilisateur'] ?>" name="intervenants[]" value="<?= $intervenant['idUtilisateur'] ?>">
                                             <label class="form-check-label" for="intervenant_<?= $intervenant['idUtilisateur'] ?>">
@@ -137,11 +152,34 @@ class VueDETAILS {
                     </div>
                 </div>
             </div>
+
+            <h3 class="section-title mt-5">Vue sur le Projet</h3>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="custom-card">
+                        <div class="custom-card-body">
+                            <h4 class="mb-4">Liste des Intervenants</h4>
+                            <ul class="list-group">
+                                <?php foreach ($intervenantPris as $intervenant) { 
+                                    ?>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <?=
+                                        $intervenant['login'] ?>
+                                        <form action="index.php?module=DETAILS&idProjet=<?= $projet['idProjet'] ?>&action=delete" method="POST" class="m-0">
+                                            <input type="hidden" name="idUtilisateur" value="<?= $intervenant['idUtilisateur'] ?>">
+                                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                                        </form>
+                                    </li>
+                                <?php } ?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <?php
     }
 
-    
     public function creerDepot($projet) {
         ?>
         <div class="container py-4">
