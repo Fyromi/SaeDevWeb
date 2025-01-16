@@ -39,11 +39,12 @@ echo '</div>';
             }
             echo '</div>';
             echo '<div class="col-lg-4 offset-lg-1 d-flex align-items-center">';
-            $this->creerSAE();
+            
             echo '</div>';
             echo '</div>';
         }
         echo '</div>';
+        $this->creerSAE();
         $this->afficherMenueIntervenant($projetsIntervention);
     }
     
