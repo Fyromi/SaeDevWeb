@@ -1,18 +1,17 @@
 <?php
-class VueListProjet {
+class VuePROJETS {
     public function __construct() {}
 
     public function afficherListProjet($list) {
         ?>
         <div class="container mt-4">
-            <h1 class="text-center mb-4">Projets</h1>
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-6">
                     <div class="d-flex flex-column gap-3">
                         <?php foreach ($list as $data) { ?>
                             <div class="card">
                                 <div class="card-body">
-                                    <a href="index.php?module=listeProjets&action=descrProjet&idProj&id=<?= $data['idProjet'] ?>" 
+                                    <a href="index.php?module=PROJETS&action=descrProjet&idProj&id=<?= $data['idProjet'] ?>" 
                                        class="text-dark text-decoration-none">
                                         <h5 class="card-title"><?= $data['titre'] ?></h5>
                                     </a>
@@ -42,7 +41,7 @@ class VueListProjet {
                         <?php $this->afficherObjectif($projet); ?>
                     </div>
                     <div class="text-end mt-4 px-3">
-                        <a href="index.php?module=Ressources&action=menue&idProjet=<?=$projet['idProjet']?>" 
+                        <a href="index.php?module=RESSOURCES&action=menue&idProjet=<?=$projet['idProjet']?>" 
                            class="btn btn-dark text-white rounded-pill">
                             Accès aux ressources du projet <?= $projet['titre']; ?> >>>
                         </a>
@@ -58,7 +57,7 @@ class VueListProjet {
         <h4 class="mb-3 px-3 fw-semibold">Enseignants</h4>
         <div class="d-flex gap-3" style="overflow-x: auto; padding: 0 1rem 1rem 1rem;"> <!-- Changé gap-5 en gap-3 -->
             <?php foreach ($profs as $prof): ?>
-                <a href="index.php?module=Profile&id=<?= $prof['login']; ?>" class="text-dark text-decoration-none">
+                <a href="index.php?module=PROFIL&id=<?= $prof['login']; ?>" class="text-dark text-decoration-none">
                     <div class="d-flex flex-column align-items-center">
                         <?php
                         $image = base64_encode($prof["image"]);
@@ -86,10 +85,11 @@ class VueListProjet {
 		<h4 class="mb-3 fw-semibold"><?= $groupe[0]['nomGroupe']; ?></h4>
 		<div class="d-flex flex-wrap gap-4 justify-content-start">
 			<?php foreach ($groupe[1] as $etudiant): ?>
-				<a href="index.php?module=Profile&id=<?= $etudiant['login']; ?>" class="text-dark text-decoration-none">
+				<a href="index.php?module=PROFIL&id=<?= $etudiant['login']; ?>" class="text-dark text-decoration-none">
 					<div class="d-flex flex-column align-items-center">
 						<?php
 						$image = base64_encode($etudiant["image"]);
+                        
 						echo "<img src='data:image/png;base64,$image' alt='Image de profil' class='rounded-circle mb-2' width='50' height='50' style='display: block;' />";
 						echo "<span class='text-center'>" . $etudiant['login'] . "</span>"; // Le texte est centré avec la classe text-center
 						?>
@@ -111,7 +111,7 @@ class VueListProjet {
     public function afficherMenue() {
         ?>
         <div class="menu-container" style="height: 100vh; display: flex; align-items: center; justify-content: center;">
-            <a href="index.php?module=listeProjets" 
+            <a href="index.php?module=PROJETS" 
                class="btn btn-primary btn-lg d-flex flex-column align-items-start justify-content-center position-relative bg-white text-dark border-0 w-50" 
                style="font-size: 3em; padding: 30px 0 0 0; border-radius: 15px;">
                 <span class="ms-3">Projets</span>

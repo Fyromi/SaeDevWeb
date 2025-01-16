@@ -1,5 +1,5 @@
 <?php
-class VueRessources {
+class VueRESSOURCES {
     public function __construct() {}
    
     public function afficherProjet($documents, $consignes, $depots) {

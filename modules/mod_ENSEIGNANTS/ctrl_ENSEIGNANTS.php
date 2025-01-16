@@ -1,16 +1,16 @@
 <?php
-    include_once 'modele_listeProjetsEnseignant.php';
-    include_once 'vue_listeProjetsEnseignant.php';
+    include_once 'modele_ENSEIGNANTS.php';
+    include_once 'vue_ENSEIGNANTS.php';
 
-   class CtrlListeProjetsEnseignant{
+   class CtrlENSEIGNANTS{
 
         private $vue;
         private $modele;
         private $action;
 
         public function __construct($vue, $modele) {
-            $this->vue = new VueListeProjetsEnseignant();
-            $this->modele = new ModeleListeProjetsEnseignant();
+            $this->vue = new VueENSEIGNANTS();
+            $this->modele = new ModeleENSEIGNANTS();
             if(isset($_GET['action']))
                 $this->action = $_GET['action'];
         }

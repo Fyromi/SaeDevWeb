@@ -1,5 +1,5 @@
 <?php
-Class VueAjoutSae {
+Class VueCREATION {
 
     public function accueil(){
         ?><div class="accueil_ajoutsae">
@@ -12,18 +12,18 @@ Class VueAjoutSae {
     public function form_ajoutsae(){
         ?>		<div class="ajout_sae">
         <h1>Ajouter un Projets</h1>
-		<form  action="index.php?module=ajoutsae&action=verif_ajout" method="POST">
+		<form  action="index.php?module=CREATION&action=verif_ajout" method="POST">
              Titre de la SAE
-            <input type="text" name="titre"></input>
+            <input type="text" name="titre" required></input>
             <br>
 			Description
-            <input type="text" name="desc"></input>
+            <input type="text" name="desc" required></input>
             <br>
             Année Universitaire
-            <input type="number" name="annee"></input>
+            <input type="number" name="annee" required></input>
             <br>
             Semestre
-            <input type="number" name="sem"></input>
+            <input type="number" name="sem" required></input>
             <br>
 			<input  type="submit"/>
 		</form>

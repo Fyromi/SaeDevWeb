@@ -1,5 +1,5 @@
 <?php
-class VueDetailProjet {
+class VueDETAILS {
     public function __construct() {}
 
     public function vueDetailProjet($etudiants, $projet, $intervenant){

@@ -1,16 +1,16 @@
 <?php
-    include_once 'modele_ressources.php';
-    include_once 'vue_ressources.php';
+    include_once 'modele_RESSOURCES.php';
+    include_once 'vue_RESSOURCES.php';
 
-   class CtrlRessources{
+   class CtrlRESSOURCES{
 
         private $vue;
         private $modele;
         private $action;
 
         public function __construct($vue, $modele) {
-            $this->vue = new VueRessources();
-            $this->modele = new ModeleRessources();
+            $this->vue = new VueRESSOURCES();
+            $this->modele = new ModeleRESSOURCES();
             if(isset($_GET['action']))
                 $this->action = $_GET['action'];
         }

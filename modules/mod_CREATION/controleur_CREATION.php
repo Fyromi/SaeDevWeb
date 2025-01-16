@@ -1,17 +1,17 @@
 <?php
-require_once "modules/mod_ajoutsae/vue_ajoutsae.php";
-require_once "modules/mod_ajoutsae/modele_ajout.php";
+require_once "modules/mod_CREATION/vue_CREATION.php";
+require_once "modules/mod_CREATION/modele_CREATION.php";
 
 
-Class ControleurAjoutSae {
+Class ControleurCREATION {
 
     private $modele;
 	private $vue;
 	private $action;
 
     public function __construct() {
-		$this->modele = new ModeleAjoutSae();
-		$this->vue = new VueAjoutSae();
+		$this->modele = new ModeleCREATION();
+		$this->vue = new VueCREATION();
 	}
 
 	public function exec() {

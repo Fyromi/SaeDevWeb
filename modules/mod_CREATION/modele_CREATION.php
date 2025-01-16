@@ -1,5 +1,5 @@
 <?php
-Class ModeleAjoutSae extends Connexion{
+Class ModeleCREATION extends Connexion{
 
 
     public function ajout_ajoutsae($titre, $desc,$annee,$sem) {

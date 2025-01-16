@@ -1,12 +1,12 @@
 <?php
 require_once "modules/mod_connexion/controleur_connexion.php";
 
-class ModeleListProjet extends Connexion{
+class ModelePROJETS extends Connexion{
 
     private $queries;
 
     public function __construct(){
-        $this->queries = include 'modules/mod_listeProjets/requete.php';
+        $this->queries = include 'modules/mod_PROJETS/requete.php';
     }
 
     private function executeQuery($sql, $params) {

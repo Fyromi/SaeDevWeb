@@ -17,18 +17,25 @@ class ControleurConnexion {
 		$this->action = isset($_GET["action"]) ? $_GET["action"] : "form_connexion";
 
 		switch ($this->action) {
-			case "form_connexion" :
-				$this->form_connexion();
-				break;
+
 			case "verif_connexion" :
 				$this->verif_connexion();
+
+			case "form_connexion" :
+
+				if(!isset($_SESSION['login']))
+					$this->form_connexion();
+				else $this->modele->connecte($_SESSION['login']);
+				 
 				break;
+			
+			case "inscription" :
+				$this->inscription();
+			
 			case "form_inscription" :
 				$this->form_inscription();
 				break;
-			case "inscription" :
-				$this->inscription();
-				break;
+			
 			case "deconnexion" :
 				$this->deconnexion();
 				break;
@@ -38,24 +45,19 @@ class ControleurConnexion {
 	}
 
 	private function form_connexion () {
-		$this->vue->menu();
 		$this->vue->form_connexion();
 	}
 
 	private function form_inscription () {
-		$this->vue->menu();
 		$this->vue->form_inscription();
 	}
 
 	private function verif_connexion () {
-		$this->vue->menu();
-
 		$login = isset ($_POST['login']) ? $_POST['login'] : die ("paramètre manquant");
 		$mdp = isset ($_POST['mdp']) ? $_POST['mdp'] : die ("paramètre manquant");
 		$util = $this->modele->get_utilisateur($login);
 		if ($util === false) {
 			$this->vue->utilisateur_inconnu($login);
-			return;
 		}
 			
 		if (password_verify($mdp, $util["mdp"])){
@@ -64,12 +66,12 @@ class ControleurConnexion {
 		}
 		else {
 			$this->vue->echec_connexion($login);
-			
+			$_GET['action'] = 'form_connexion';
+
 		}
 	}
 
 	private function inscription () {
-		$this->vue->menu();
 		$login = isset ($_POST['login']) ? $_POST['login'] : die("paramètre manquant");
 		$mdp = isset ($_POST['mdp']) ? $_POST['mdp'] : die ("paramètre manquant");
 		$role = isset ($_POST['role']) ? $_POST['role'] : die ("paramètre manquant");
@@ -84,7 +86,7 @@ class ControleurConnexion {
 
         public function deconnexion () {
 		unset($_SESSION['login']);
-		$this->vue->confirm_deconnexion();
+		$this->vue->form_connexion();
 	}
 
 }

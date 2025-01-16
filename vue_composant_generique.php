@@ -1,6 +1,6 @@
 <?php
 
-class VueCompGenerique {
+class VueCompGenerique extends Connexion{
 
 	protected $affichage;
 

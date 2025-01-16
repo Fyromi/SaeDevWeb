@@ -1,6 +1,6 @@
 <?php
 
-class ComposantGenerique {
+class ComposantGenerique{
 
 	protected $controleur;
 

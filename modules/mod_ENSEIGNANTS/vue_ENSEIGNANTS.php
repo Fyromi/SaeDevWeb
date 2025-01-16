@@ -1,5 +1,5 @@
 <?php
-class VueListeProjetsEnseignant {
+class VueENSEIGNANTS {
     public function __construct() {}
 
     public function afficherMenue($projetResponsable, $projetIntervention) {
@@ -25,7 +25,7 @@ class VueListeProjetsEnseignant {
             foreach ($projetResponsables as $projetResponsable) {
                 
             
-                echo "<a href='index.php?module=detailProjet&idProjet=" . $projetResponsable['idProjet'] . "' class='text-decoration-none'>";
+                echo "<a href='index.php?module=DETAILS&idProjet=" . $projetResponsable['idProjet'] . "' class='text-decoration-none'>";
                 // Ajusté pour avoir la même hauteur que le bouton Créer projet
                 echo '<div class="card shadow-sm" style="width: 600px; ">';
                     echo '<img src="images/imageGrp.jpg" class="card-img-top" alt="Projet" style="height: 100px; object-fit: cover;">'; // Réduit la hauteur
@@ -55,7 +55,7 @@ class VueListeProjetsEnseignant {
             echo '<div>';
             foreach ($projetsIntervention as $projetIntervention) {
                 echo '<div class="mb-4" style="width: 600px;">'; // Doublé la largeur et augmenté margin
-                echo "<a href='index.php?module=detailProjet&idProjet=".$projetIntervention['idProjet'] . "' class='text-decoration-none'>";
+                echo "<a href='index.php?module=DETAILS&idProjet=".$projetIntervention['idProjet'] . "' class='text-decoration-none'>";
                 echo '<div class="card shadow-sm">';
                 echo '<div class="card-body text-center py-4">'; // Augmenté le padding
                 echo '<h5 class="card-title fs-3">' . $projetIntervention['titre'] . '</h5>'; // Augmenté la taille de police
@@ -70,7 +70,7 @@ class VueListeProjetsEnseignant {
     }
     
     private function creerSAE() {
-        echo "<a href='index.php?module=ajoutsae' class='text-decoration-none'>";
+        echo "<a href='index.php?module=CREATION' class='text-decoration-none'>";
         echo '<div class="card shadow-sm text-center" style="width: 400px; height: 250px; border-radius: 15px; background-color: #f8f9fa;">'; 
         echo '<div class="card-body d-flex flex-column justify-content-center align-items-center">';
         echo '<img src="icons/plus.png" alt="Créer un projet" style="width: 100px; height: 100px;">';

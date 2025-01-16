@@ -1,16 +1,16 @@
 <?php
-    include_once 'modele_listProjet.php';
-    include_once 'vue_listProjet.php';
+    include_once 'modele_PROJETS.php';
+    include_once 'vue_PROJETS.php';
 
-   class CtrlListProjet{
+   class CtrlPROJETS{
 
         private $vue;
         private $modele;
         private $action;
 
         public function __construct($vue, $modele) {
-            $this->vue = new VueListProjet();
-            $this->modele = new ModeleListProjet();
+            $this->vue = new VuePROJETS();
+            $this->modele = new ModelePROJETS();
             if(isset($_GET['action']))
                 $this->action = $_GET['action'];
         }

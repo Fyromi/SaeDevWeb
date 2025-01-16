@@ -8,24 +8,24 @@ class Site {
 	
 	
 	public function __construct() {
-		$this->module_name = isset($_GET['module']) ? $_GET['module'] : "connexion";
+		$this->module_name = isset($_GET['module']) ? $_GET['module'] : "CONNEXION";
 		switch ($this->module_name) {
-			case "connexion" :
+			case "CONNEXION" :
 				require_once "modules/mod_".$this->module_name."/module_".$this->module_name.".php";
 				break;
-			case "listeProjets" :
+			case "PROJETS" :
 				require_once "modules/mod_".$this->module_name."/module_".$this->module_name.".php";
 				break;
-			case "Ressources" :
+			case "RESSOURCES" :
 				require_once "modules/mod_".$this->module_name."/module_".$this->module_name.".php";
 				break;
-			case "listeProjetsEnseignant" :
+			case "ENSEIGNANTS" :
 				require_once "modules/mod_".$this->module_name."/module_".$this->module_name.".php";
 				break;
-			case "ajoutsae" :
+			case "CREATION" :
 				require_once "modules/mod_".$this->module_name."/module_".$this->module_name.".php";
 				break;
-			case "detailProjet" : 
+			case "DETAILS" : 
 				require_once "modules/mod_".$this->module_name."/module_".$this->module_name.".php";
 				break;
 			default :
