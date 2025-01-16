@@ -20,7 +20,8 @@
             $etudiantSansGrp = $this->modele->getEtudiantSansGrp($_GET['idProjet']);
             $projet = $this->modele->getProjet($_GET['idProjet']);
             $intervenant = $this->modele->getIntervenant($_GET['idProjet']);
-            $this->vue->vueDetailProjet($etudiantSansGrp,$projet, $intervenant);
+            $estResponsableDe = $this->modele->estResponsableDe($_GET['idProjet']);
+            $this->vue->vueDetailProjet($etudiantSansGrp,$projet, $intervenant, $estResponsableDe);
             
             switch ($this->action) {
                 case 'creerGrp':

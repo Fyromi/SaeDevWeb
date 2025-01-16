@@ -101,6 +101,12 @@ class ModeleDETAILS extends Connexion{
         $this->executeQuery($sql, [':nom' => $nom, ':lien' => $lien]);
         $sq2 = $this->queries['projetRessource'];
         $this->executeQuery($sq2, [':idProjet' => $idProjet, ':idRessource' => self::$bdd->lastInsertId()]);
-
     }
+
+    public function estResponsableDe($idProjet){
+            $sql = $this->queries['estResponsableDe'];
+            $request = $this->executeQuery($sql, [':idProjet' => $idProjet, ':login' => $_SESSION['login']]);
+            return $request->fetchColumn();
+    }
+
 }

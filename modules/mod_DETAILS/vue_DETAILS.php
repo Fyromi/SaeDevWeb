@@ -2,24 +2,29 @@
 class VueDETAILS {
     public function __construct() {}
 
-    public function vueDetailProjet($etudiants, $projet, $intervenant){
+    public function vueDetailProjet($etudiants, $projet, $intervenant, $estResponsableDe){
         ?>
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-6">
                     <?php $this->sectionGroupe($etudiants, $projet); ?>
                 </div>
-                <div class="col-md-6">
-                    <?php $this->sectionIntervenant($intervenant, $projet); ?>
-                </div>
+
+                <?php 
+                    if($estResponsableDe == 1){
+                    echo "<div class='col-md-6'>";
+                        $this->sectionIntervenant($intervenant,$projet);
+                    echo "</div>";
+                } ?>
+
             </div>
             <div class="row mt-4">
                 <div class="col-md-6">
                     <?php $this->sectionUpload($projet); ?>
                 </div>
-                <div class="col-md-6">
-                    <?php $this->sectionAjoutDepot($projet); ?>
-                </div>
+                    <div class='col-md-6'>
+                        <?php $this->sectionAjoutDepot($projet);?>
+                    </div>
             </div>
         </div>
         <?php

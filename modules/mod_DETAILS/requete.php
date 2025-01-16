@@ -44,7 +44,12 @@ return [ 'getEtudiantSansGrp' => "SELECT DISTINCT u.*
         
         'insertLinkBdd'            => "INSERT INTO `ressource`(`nomRessource`, `lienRessource`) VALUES (:nom, :lien);",
 
-        'projetRessource'       => "INSERT INTO `projetressource`(`idProjet`, `idRessource`) VALUES (:idProjet, :idRessource);"
+        'projetRessource'       => "INSERT INTO `projetressource`(`idProjet`, `idRessource`) VALUES (:idProjet, :idRessource);",
+
+        'estResponsableDe'      => "SELECT COUNT(*) > 0 AS estResponsable
+                                    FROM estResponsableDe 
+                                    WHERE idProjet = :idProjet
+                                    AND idUtilisateur = (SELECT idUtilisateur FROM utilisateur WHERE login = :login);"
                     
 ];
 
