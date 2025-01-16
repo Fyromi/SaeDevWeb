@@ -1,6 +1,10 @@
 <?php
-class VueCompMenu extends VueCompGenerique {
+class VueCompHeader extends VueCompGenerique {
     public function __construct() {
+        $this->setHeader();
+    }
+
+    private function setHeader() {
         if(isset($_SESSION['login'])){
             $req = self::$bdd->prepare("SELECT profilpicture FROM utilisateur WHERE login=?");
             $req->bindParam(1, $_SESSION['login']);

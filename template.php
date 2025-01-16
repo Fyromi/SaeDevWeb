@@ -29,7 +29,7 @@
 </head>
 <body>
     <header class="d-flex align-items-center justify-content-center">
-        <?php echo $menu->getAffichage(); ?>
+        <?php echo $header->getAffichage(); ?>
     </header>
 
     <main class="container my-4">

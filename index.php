@@ -9,14 +9,14 @@ require_once "module_generique.php";
 require_once "composant_generique.php";
 require_once "vue_composant_generique.php";
 
-require_once "composants/menu/composant_menu.php";
+require_once "composants/header/composant_header.php";
 require_once "composants/footer/composant_footer.php";
 
 Connexion::init_connexion();
 $site = new Site();
 $site->exec_module();
 
-$menu = new ComposantMenu();
+$header = new ComposantHeader();
 $footer = new ComposantFooter();
 
 
