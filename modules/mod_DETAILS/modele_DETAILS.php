@@ -109,4 +109,11 @@ class ModeleDETAILS extends Connexion{
             return $request->fetchColumn();
     }
 
+    public function creerDepot($idProjet){
+        $sql = $this->queries['CreerRendu'];
+        $this->executeQuery($sql, [':nomRendu' => $_POST['nomDepot'], ':date' => $_POST['dateDepot']]);
+        $sql2 = $this->queries['AssocierRenduProjet'];
+        $this->executeQuery($sql2, ['idProjet' => $idProjet, 'idRendu' =>self::$bdd->lastInsertId()]);
+    }
+
 }

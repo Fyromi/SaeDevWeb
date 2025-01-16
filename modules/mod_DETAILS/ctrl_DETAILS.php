@@ -33,6 +33,9 @@
                 case 'depDocu' :
                     $this->modele->importFile($_GET['idProjet']);
                     break;
+                case 'creerDepot' : 
+                    $this->modele->creerDepot($_GET['idProjet']);
+                    break;
                 default:
                     break;
             }

@@ -49,8 +49,11 @@ return [ 'getEtudiantSansGrp' => "SELECT DISTINCT u.*
         'estResponsableDe'      => "SELECT COUNT(*) > 0 AS estResponsable
                                     FROM estResponsableDe 
                                     WHERE idProjet = :idProjet
-                                    AND idUtilisateur = (SELECT idUtilisateur FROM utilisateur WHERE login = :login);"
-                    
+                                    AND idUtilisateur = (SELECT idUtilisateur FROM utilisateur WHERE login = :login);",
+
+        'CreerRendu'            => "INSERT INTO `rendu`(`nomRendu`, `date_limite`) VALUES (:nomRendu,:date);",
+
+        'AssocierRenduProjet'   => "INSERT INTO `renduprojet`(`idProjet`, `idRendu`) VALUES (:idProjet,:idRendu);"
 ];
 
 ?>

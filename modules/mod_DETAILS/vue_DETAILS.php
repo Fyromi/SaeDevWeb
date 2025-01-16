@@ -61,7 +61,7 @@ class VueDETAILS {
                     <div class="custom-card">
                         <div class="custom-card-body">
                             <h4 class="mb-4">Ajouter un Groupe</h4>
-                            <form action="index.php?module=detailProjet&idProjet=<?= $projet['idProjet'] ?>&action=creerGrp" method="POST">
+                            <form action="index.php?module=DETAILS&idProjet=<?= $projet['idProjet'] ?>&action=creerGrp" method="POST">
                                 <div class="mb-3">
                                     <label for="texte" class="form-label">Nom du groupe pour le projet <?= $projet['titre'] ?></label>
                                     <input type="text" id="NomProjet" name="texte" class="form-control" required>
@@ -88,7 +88,7 @@ class VueDETAILS {
                     <div class="custom-card">
                         <div class="custom-card-body">
                             <h4 class="mb-4">Ajouter des Intervenants</h4>
-                            <form action="index.php?module=detailProjet&idProjet=<?= $projet['idProjet'] ?>&action=ajtInter" method="POST">
+                            <form action="index.php?module=DETAILS&idProjet=<?= $projet['idProjet'] ?>&action=ajtInter" method="POST">
                                 <div class="mb-3">
                                     <label class="form-label">Choisissez les intervenants à ajouter :</label>
                                     <?php foreach ($intervenants as $intervenant) { ?>
@@ -114,7 +114,7 @@ class VueDETAILS {
                     <div class="custom-card">
                         <div class="custom-card-body">
                             <h4 class="mb-4">Déposer un Document</h4>
-                            <form action="index.php?module=detailProjet&idProjet=<?= $projet['idProjet'] ?>&action=depDocu" method="POST" enctype="multipart/form-data">
+                            <form action="index.php?module=DETAILS&idProjet=<?= $projet['idProjet'] ?>&action=depDocu" method="POST" enctype="multipart/form-data">
                                 <div class="mb-3">
                                     <label for="NomRessource" class="form-label">Titre de la Ressource</label>
                                     <input type="text" id="NomRessource" name="texte" class="form-control" required>
@@ -132,10 +132,33 @@ class VueDETAILS {
                 <div class="col-md-6">
                     <div class="custom-card">
                         <div class="custom-card-body">
-                            <h4 class="mb-4">Section à Compléter</h4>
-                            <p>Section à compléter selon les besoins futurs.</p>
+                            <?php $this->creerDepot($projet);?>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <?php
+    }
+
+    
+    public function creerDepot($projet) {
+        ?>
+        <div class="container py-4">
+            <div class="custom-card">
+                <div class="custom-card-body">
+                    <h4 class="mb-4">Créer un Dépôt</h4>
+                    <form action="index.php?module=DETAILS&idProjet=<?=$projet['idProjet']?>&action=creerDepot" method="POST">
+                        <div class="mb-3">
+                            <label for="nomDepot" class="form-label">Nom du Dépôt</label>
+                            <input type="text" id="nomDepot" name="nomDepot" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="dateDepot" class="form-label">Date du Dépôt</label>
+                            <input type="date" id="dateDepot" name="dateDepot" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-custom">Créer</button>
+                    </form>
                 </div>
             </div>
         </div>
