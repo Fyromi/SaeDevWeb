@@ -5,20 +5,19 @@ class VuePROJETS {
     public function afficherListProjet($list) {
         ?>
         <div class="row pb-5">
-            <div class="col-sm-10">
+            <div class="col-sm-10 col-xs-6 col-9">
                 <h3 class="border-bottom border-secondary pb-3">Liste de projets</h3>
             </div>
-            <div class="col-sm-1"></div>
-            <div class="col-sm-1">
+            <div class="col-sm-1 col-xs-1 col-1 text-end">
                 <a href="index.php?module=PROJETS&action=menu" class="btn">
                     <div class="card shadow-sm text-center p-1">
                         <img class="card-img m-0" src="icons/retour.png" alt="Retour">
                         <span class="card-title h6">Retour</span>
                     </div>
                 </a>
-            </div>
+                </div>
             <?php foreach ($list as $data) { ?>
-                <div class="col-sm-6 mb-4">
+                <div class="col-6 mb-4">
                     <a href="index.php?module=PROJETS&action=descrProjet&idProj&id=<?= $data['idProjet'] ?>" 
                         class="text-dark text-decoration-none">
                         <div class="card shadow-sm">
@@ -36,11 +35,10 @@ class VuePROJETS {
     public function afficherDetailProjet($projet, $profs, $grp) {
         ?>
         <div class="row">
-            <div class="col-sm-10">
+            <div class="col-sm-10 col-xs-6 col-9">
                 <h3 class="border-bottom border-secondary pb-3"><?= $projet['titre'] ?></h3>
             </div>
-            <div class="col-sm-1"></div>
-            <div class="col-sm-1">
+            <div class="col-sm-1 col-xs-1 col-1 text-end">
                 <a href="index.php?module=PROJETS" class="btn">
                     <div class="card shadow-sm text-center p-1">
                         <img class="card-img m-0" src="icons/retour.png" alt="Retour">
@@ -67,7 +65,7 @@ class VuePROJETS {
         <div class="card-body">
             <div class="row">
             <?php foreach ($profs as $prof): ?>
-                <div class="col-sm-4">
+                <div class="col-4">
                     <a href="index.php?module=PROFIL&id=<?= $prof['login']; ?>" class="m-1 text-dark text-decoration-none">
                         <div class="d-flex flex-column align-items-center">
                             <?php
@@ -89,7 +87,7 @@ class VuePROJETS {
         <div class="card-body">
             <div class="row">
             <?php foreach ($groupe[1] as $etudiant): ?>
-                <div class="col-sm-4">
+                <div class="col-4">
                     <a href="index.php?module=PROFIL&id=<?= $etudiant['login']; ?>" class="text-dark text-decoration-none">
                         <div class="d-flex flex-column align-items-center">
                             <?php                        

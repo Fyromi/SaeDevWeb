@@ -24,7 +24,7 @@ class VueCompHeader extends VueCompGenerique {
         <!-- En-tête fixe contenant tous les éléments -->
         <div class="row pb-3">
             <!-- Bouton menu à gauche -->
-            <div class="col-sm-4" >
+            <div class="col-4" >
                 <nav class="navbar navbar-expand-lg">
                     <div class="container-fluid">
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,7 +46,7 @@ class VueCompHeader extends VueCompGenerique {
                 </nav>
             </div>
             <!-- Titre centré -->
-            <div class="col-sm-4 text-center">
+            <div class="col-4 text-center">
                 <h1>
                     ' . $titre . '
                 </h1>
@@ -54,7 +54,7 @@ class VueCompHeader extends VueCompGenerique {
         if(isset($image) && !empty($image)) {
             $this->affichage .= '
             <!-- Image de profil à droite -->
-            <div class="col-sm-4 text-end" >
+            <div class="col-4 text-end" >
                 <a href="index.php?module=Profile&id=' . htmlspecialchars($_SESSION['login'] ?? '') . '">
                     <img src="' . $image . '" alt="Profile" style="width: 70px; height: 70px; border-radius: 50%;">
                 </a>

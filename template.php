@@ -25,6 +25,10 @@
         footer {
             flex: 0 0 auto;
         }
+        .scrollable-section {
+            max-height: 200px; /* Définir la hauteur maximale */
+            overflow-y: auto; /* Activer le défilement vertical */
+        }
     </style>
 </head>
 <body>
