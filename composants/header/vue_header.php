@@ -22,7 +22,7 @@ class VueCompHeader extends VueCompGenerique {
             $titre = htmlspecialchars($_GET['module']);
         $this->affichage = '
         <!-- En-tête fixe contenant tous les éléments -->
-        <div class="row">
+        <div class="row pb-3">
             <!-- Bouton menu à gauche -->
             <div class="col-sm-4" >
                 <nav class="navbar navbar-expand-lg">

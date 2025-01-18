@@ -153,7 +153,8 @@ class ModeleDETAILS extends Connexion{
 
         $groupeProjet = $this->getGroupeProjet();
         foreach($groupeProjet as $groupe) {
-            $listeEtudiant = [];
+            
+            var_dump($listeEtudiant);
 
             $sql = $this->queries['getMembreGroupe'];
             $request = $this->executeQuery($sql, [':idGroupe' => $groupe['idGroupe']]);
@@ -161,8 +162,9 @@ class ModeleDETAILS extends Connexion{
 
             foreach ($etudiantsGroupe as $etudiant) {
                 $listeEtudiant = $etudiant['login'];
-            }
+            
             $groupeAndEtudiant[$groupe['idGroupe']] = $listeEtudiant;
+            }
         }   
         var_dump($groupeAndEtudiant);
         return $groupeAndEtudiant;

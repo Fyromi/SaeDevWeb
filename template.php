@@ -28,7 +28,7 @@
     </style>
 </head>
 <body>
-    <header class="align-items-center">
+    <header class="container my-4 align-items-center">
         <?php echo $header->getAffichage(); ?>
     </header>
 
@@ -36,7 +36,7 @@
         <?= $module_html ?>
     </main>
 
-    <footer class="text-center py-3">
+    <footer class="container my-4 text-center">
         <?php echo $footer->getAffichage(); ?>
     </footer>
 </body>

@@ -220,7 +220,7 @@ class VueDETAILS {
                     
                     <div class='d-flex justify-content-between align-items-center'>
                    
-                        <h4 class='mb-0'>$idGroupe</h4>
+                        <h4 class='mb-0'>id du grp: $idGroupe</h4>
                         <form action='index.php?module=DETAILS&idProjet=$idProjet&action=deleteGroupe' method='POST'>
                             <input type='hidden' name='idGroupe' value='$idGroupe'>
                             <button type='submit' class='btn btn-danger btn-sm'>Supprimer Groupe</button>
@@ -228,16 +228,16 @@ class VueDETAILS {
                     </div>";
         
                 echo "<ul class='list-group mt-2'>";
-                foreach ($idGroupe as $login) {
+                //foreach ($groupeAndEtudiant as $login) {
                     echo "
                     <li class='list-group-item d-flex justify-content-between align-items-center'>
-                        $login
+                        $etudiants
                         <form action='index.php?module=DETAILS&idProjet=$idProjet&action=deleteUserGroupe' method='POST'>
-                            <input type='hidden' name='login' value='$login'>
+                            <input type='hidden' name='login' value='$etudiants'>
                             <button type='submit' class='btn btn-danger btn-sm'>Supprimer Utilisateur</button>
                         </form>
                     </li>";
-                }
+               //}
                 echo "</ul></div>";
             }
         }
