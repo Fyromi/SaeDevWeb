@@ -73,25 +73,23 @@ class ControleurCONNEXION {
 
     private function inscription () {
         $isValid = true;
-        $msgError = " ";
+     
 
         if (isset ($_POST['login']) && !empty($_POST['login']))
             $login = $_POST['login'];
         else
             $isValid = false;
-            $msgError = $msgError."Indentifiant manquant ";
+			$login = empty(" ");
 
         if (isset ($_POST['mdp']) && !empty($_POST['mdp']))
             $mdp = $_POST['mdp'];
         else
-            $isValid = false;
-            $msgError = $msgError."Mot de passe manquante ";
+            $isValid = false;  
 
-        if (isset ($_POST['role']) && !empty($_POST['role']))
+        if (isset ($_POST['role']) && !empty($_POST['role']) && ($_POST['role'] == 'etudiant' || $_POST['role'] == 'intervenant' || $_POST['role'] == 'responsable'))
             $role = $_POST['role'];
         else
-            $isValid = false;
-            $msgError = $msgError."Rôle manquante ";
+        	$isValid = false;
 
         if($isValid) {
             $mdp_hash = password_hash($mdp, PASSWORD_BCRYPT);

@@ -163,8 +163,8 @@ class ModeleDETAILS extends Connexion{
                 $listeEtudiant = $etudiant['login'];
             }
             $groupeAndEtudiant[$groupe['idGroupe']] = $listeEtudiant;
-        }
-
+        }   
+        var_dump($groupeAndEtudiant);
         return $groupeAndEtudiant;
     }
 
