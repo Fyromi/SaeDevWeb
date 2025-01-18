@@ -22,7 +22,8 @@
             $intervenantLibre = $this->modele->getIntervenantLibre();
             $estResponsableDe = $this->modele->estResponsableDe();
             $intervenantPris = $this->modele->getIntervenantPris();
-            
+            $groupeAndEtudiant = $this->modele->groupeAndEtudiant();
+
             switch ($this->action) {
                 case 'creerGrp':
                     $this->modele->ajoutGroupeBD();
@@ -39,10 +40,16 @@
                 case 'delete' :
                     $this->modele->deleteIntervenant();
                     break;
+                case 'deleteGroupe' :
+                    $this->modele->deleteGroupe();
+                    break;
+                case 'deleteUserGroupe' :
+                    $this->modele->deleteUserGroupe();
+                    break;
                 default:
                     break;
             }
-            $this->vue->vueDetailProjet($etudiantSansGrp,$projet, $intervenantLibre, $estResponsableDe,$intervenantPris);
+            $this->vue->vueDetailProjet($etudiantSansGrp,$projet, $intervenantLibre, $estResponsableDe,$intervenantPris, $groupeAndEtudiant);
         }
     }
     

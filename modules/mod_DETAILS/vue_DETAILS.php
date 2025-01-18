@@ -2,7 +2,7 @@
 class VueDETAILS {
     public function __construct() {}
 
-    public function vueDetailProjet($etudiants, $projet, $intervenantsLibre, $estResponsableDe, $intervenantPris){
+    public function vueDetailProjet($etudiants, $projet, $intervenantsLibre, $estResponsableDe, $intervenantPris, $groupeAndEtudiant){
         ?>
         <div class="container py-4">
             <!-- Style général pour les titres de section -->
@@ -105,7 +105,6 @@ class VueDETAILS {
                                 <div class="mb-3">
                                     <label class="form-label">Choisissez les intervenants à ajouter :</label>
                                     <?php foreach ($intervenantsLibre as $intervenant) {
-                                        //var_dump($intervenant['idUtilisateur']);
                                         ?>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="intervenant_<?= $intervenant['idUtilisateur'] ?>" name="intervenants[]" value="<?= $intervenant['idUtilisateur'] ?>">
@@ -154,6 +153,14 @@ class VueDETAILS {
             </div>
 
             <h3 class="section-title mt-5">Vue sur le Projet</h3>
+            <div class="col-md-6">
+                    <div class="custom-card">
+                        <div class="custom-card-body">
+                            <?php $this->afficherGroupe($groupeAndEtudiant, $projet['idProjet']);?>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="custom-card">
@@ -201,6 +208,46 @@ class VueDETAILS {
             </div>
         </div>
         <?php
+        echo '<pres>';
+        print_r($groupeAndEtudiant);
+        echo '</pres>';
     }
+    public function afficherGroupe($groupeAndEtudiant,$idProjet) {
+        var_dump($groupeAndEtudiant);
+        if(isset($groupeAndEtudiant)){
+            foreach ($groupeAndEtudiant as $nomGroupe => $etudiants) {
+                echo "
+                <div class='mb-4'>
+                    
+                    <div class='d-flex justify-content-between align-items-center'>
+                    <h4>Créer un Dépôt</h4>
+                        <h4 class='mb-0'>$nomGroupe</h4>
+                        <form action='index.php?module=DETAILS&idProjet=$idProjet&action=deleteGroupe' method='POST'>
+                            <input type='hidden' name='idGroupe' value='$nomGroupe'>
+                            <button type='submit' class='btn btn-danger btn-sm'>Supprimer Groupe</button>
+                        </form>
+                    </div>";
+        
+                echo "<ul class='list-group mt-2'>";
+                foreach ($etudiants as $login) {
+                    echo "
+                    <li class='list-group-item d-flex justify-content-between align-items-center'>
+                        $login
+                        <form action='index.php?module=DETAILS&idProjet=$idProjet&action=deleteUserGroupe' method='POST'>
+                            <input type='hidden' name='login' value='$login'>
+                            <button type='submit' class='btn btn-danger btn-sm'>Supprimer Utilisateur</button>
+                        </form>
+                    </li>";
+                }
+                echo "</ul></div>";
+            }
+        }
+        
+    
+    }
+    
+    
+    
+      
 }
 ?>

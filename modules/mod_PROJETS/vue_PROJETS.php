@@ -60,8 +60,7 @@ class VuePROJETS {
                 <a href="index.php?module=PROFIL&id=<?= $prof['login']; ?>" class="text-dark text-decoration-none">
                     <div class="d-flex flex-column align-items-center">
                         <?php
-                        $image = base64_encode($prof["image"]);
-                        echo "<img src='data:image/png;base64,$image' alt='Image de profil' class='rounded-circle mb-2' width='50' height='50'/>";
+                        echo "<img src=".$prof['image']." alt='Image de profil' class='rounded-circle mb-2' width='50' height='50'/>";
                         echo "<div>" . $prof['login'] . "</div>";
                         ?>
                     </div>
@@ -87,10 +86,8 @@ class VuePROJETS {
 			<?php foreach ($groupe[1] as $etudiant): ?>
 				<a href="index.php?module=PROFIL&id=<?= $etudiant['login']; ?>" class="text-dark text-decoration-none">
 					<div class="d-flex flex-column align-items-center">
-						<?php
-						$image = base64_encode($etudiant["image"]);
-                        
-						echo "<img src='data:image/png;base64,$image' alt='Image de profil' class='rounded-circle mb-2' width='50' height='50' style='display: block;' />";
+						<?php                        
+                        echo "<img src=".$etudiant['image']." alt='Image de profil' class='rounded-circle mb-2' width='50' height='50'/>";
 						echo "<span class='text-center'>" . $etudiant['login'] . "</span>"; // Le texte est centré avec la classe text-center
 						?>
 					</div>

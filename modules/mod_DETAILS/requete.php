@@ -61,7 +61,24 @@ return [ 'getEtudiantSansGrp' => "SELECT DISTINCT u.*
         'getIntervenantPris'    =>   "SELECT  utilisateur.*
                                         FROM utilisateur
                                         JOIN intervientDans ON utilisateur.idUtilisateur = intervientDans.idUtilisateur
-                                        WHERE intervientDans.idProjet = :idProjet;"
+                                        WHERE intervientDans.idProjet = :idProjet;", 
+          
+          'getGroupeProjet'   =>      "SELECT groupeetudiant.*
+                                        FROM projet
+                                        INNER JOIN associeaprojet on projet.idProjet = associeAprojet.idProjet
+                                        INNER JOIN groupeetudiant on associeAprojet.idGroupe = groupeetudiant.idGroupe
+                                        WHERE associeAprojet.idProjet = :idProjet;",
+
+            'getMembreGroupe'   =>      "SELECT utilisateur.*
+                                        FROM utilisateur
+                                        JOIN appartientA  ON utilisateur.idUtilisateur = appartientA.idUtilisateur
+                                        WHERE appartientA.idGroupe =:idGroupe;",
+
+            'deleteGroupe'     => "DELETE groupeEtudiant, associeAProjet, appartientA
+                                    FROM groupeEtudiant
+                                    LEFT JOIN associeAProjet ON groupeEtudiant.idGroupe = associeAProjet.idGroupe
+                                    LEFT JOIN appartientA ON groupeEtudiant.idGroupe = appartientA.idGroupe
+                                    WHERE groupeEtudiant.idGroupe = :idGroupe AND associeAProjet.idProjet = :idProjet;"
                                         
 ];
 

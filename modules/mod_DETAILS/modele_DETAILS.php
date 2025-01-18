@@ -46,6 +46,8 @@ class ModeleDETAILS extends Connexion{
             $sql = $this->queries['addEtudiantGrp'];
             $this->executeQuery($sql, [':idGroupe' => $idGrp, ':idEtudiant' => $etudiant]);
         }
+        header("location: index.php?module=DETAILS&idProjet=". $_GET['idProjet']);
+
     }
 
     public function addGroupe(){
@@ -126,13 +128,54 @@ class ModeleDETAILS extends Connexion{
         $sql = $this->queries['deleteIntervenant'];
         $this->executeQuery($sql, [':idUtilisateur' => $_POST['idUtilisateur'], ':idProjet' => $_GET['idProjet']]);
         header("location: index.php?module=DETAILS&idProjet=". $_GET['idProjet']);
-
     }
 
     public function getIntervenantPris(){
         $sql = $this->queries['getIntervenantPris'];
         $request = $this->executeQuery($sql, [':idProjet' => $_GET['idProjet']]);
         return $request->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    private function getGroupeProjet(){
+        $sql = $this->queries['getGroupeProjet'];
+        $request = $this->executeQuery($sql, [':idProjet' => $_GET['idProjet']]);
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function groupeAndEtudiant(){
+
+        $groupeAndEtudiant = [];
+
+        $groupeProjet = $this->getGroupeProjet();
+        foreach($groupeProjet as $groupe) {
+            $listeEtudiant = [];
+            $sql = $this->queries['getMembreGroupe'];
+            $request = $this->executeQuery($sql, [':idGroupe' => $groupe['idGroupe']]);
+            $etudiantsGroupe = $request->fetchAll(PDO::FETCH_ASSOC);
+            
+            foreach ($etudiantsGroupe as $etudiant) {
+                $listeEtudiant[] = $etudiant['login'];
+            }
+            $groupeEtEtudiant[$groupe['idGroupe']] = $listeEtudiant;
+        }
+
+        var_dump($groupeAndEtudiant);
+        return $groupeAndEtudiant;
+    }
+
+    public function deleteGroupe(){
+        var_dump($_POST);
+        $sql = $this->queries['deleteGroupe'];
+        $this->executeQuery($sql, [':idGroupe' => $_POST['idGroupe'], ':idProjet' => $_GET['idProjet']]);
+        header("location: index.php?module=DETAILS&idProjet=". $_GET['idProjet']);
+    }
+
+    public function deleteUserGroupe(){
+        var_dump($_POST);
+        //$sql = $this->queries['deleteIntervenant'];
+        //$this->executeQuery($sql, [':idUtilisateur' => $_POST['idUtilisateur'], ':idProjet' => $_GET['idProjet']]);
+        header("location: index.php?module=DETAILS&idProjet=". $_GET['idProjet']);
+
     }
 
 }

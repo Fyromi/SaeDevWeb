@@ -11,7 +11,7 @@ class VueCompHeader extends VueCompGenerique {
             $req->execute();
             $pPictur = $req->fetch();
            
-            $image = base64_encode($pPictur['profilpicture']);
+            $image = $pPictur['profilpicture'];
         }
         if($_GET['module'] == 'CONNEXION') 
             $titre ='CONNEXION/INSCRIPTION';
@@ -50,7 +50,7 @@ class VueCompHeader extends VueCompGenerique {
             <!-- Image de profil à droite -->
             <div style="position: absolute; top:30px; right: 20px;">
                 <a href="index.php?module=Profile&id=' . htmlspecialchars($_SESSION['login'] ?? '') . '">
-                    <img src="data:image/png;base64,' . $image . '" alt="Profile" style="width: 70px; height: 70px; border-radius: 50%;">
+                    <img src="' . $image . '" alt="Profile" style="width: 70px; height: 70px; border-radius: 50%;">
                 </a>
             </div>';
         }
