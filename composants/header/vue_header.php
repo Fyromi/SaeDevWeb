@@ -22,7 +22,7 @@ class VueCompHeader extends VueCompGenerique {
             $titre = htmlspecialchars($_GET['module']);
         $this->affichage = '
         <!-- En-tête fixe contenant tous les éléments -->
-        <div class="row page-header">
+        <div class="row">
             <!-- Bouton menu à gauche -->
             <div class="col-sm-4" >
                 <nav class="navbar navbar-expand-lg">
@@ -33,11 +33,11 @@ class VueCompHeader extends VueCompGenerique {
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">';
                 if (isset($_SESSION['login'])) {
-                    $this->affichage .= '<li><a class="dropdown-item" href="index.php?module=CONNEXION&action=deconnexion">Déconnexion</a></li>';
+                    $this->affichage .= '<li><a class="btn btn-dark" href="index.php?module=CONNEXION&action=deconnexion">Déconnexion</a></li>';
                 } else if (isset($_GET['action']) && ($_GET['action'] == 'form_inscription' || $_GET['action'] == 'inscription')) {
-                    $this->affichage .= '<li><a class="dropdown-item" href="index.php?module=CONNEXION&action=form_connexion">Connexion</a></li>';
+                    $this->affichage .= '<li><a class="btn btn-dark" href="index.php?module=CONNEXION&action=form_connexion">Connexion</a></li>';
                 } else {
-                    $this->affichage .= '<li><a class="dropdown-item" href="index.php?module=CONNEXION&action=form_inscription">Inscription</a></li>';
+                    $this->affichage .= '<li><a class="btn btn-dark" href="index.php?module=CONNEXION&action=form_inscription">Inscription</a></li>';
                 }
                 $this->affichage .='
                             </ul>
@@ -46,7 +46,7 @@ class VueCompHeader extends VueCompGenerique {
                 </nav>
             </div>
             <!-- Titre centré -->
-            <div class="col-sm-7" >
+            <div class="col-sm-4 text-center">
                 <h1>
                     ' . $titre . '
                 </h1>
@@ -54,7 +54,7 @@ class VueCompHeader extends VueCompGenerique {
         if(isset($image) && !empty($image)) {
             $this->affichage .= '
             <!-- Image de profil à droite -->
-            <div class="col-sm-1" >
+            <div class="col-sm-4 text-end" >
                 <a href="index.php?module=Profile&id=' . htmlspecialchars($_SESSION['login'] ?? '') . '">
                     <img src="' . $image . '" alt="Profile" style="width: 70px; height: 70px; border-radius: 50%;">
                 </a>

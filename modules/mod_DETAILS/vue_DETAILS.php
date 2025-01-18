@@ -208,28 +208,27 @@ class VueDETAILS {
             </div>
         </div>
         <?php
-        echo '<pres>';
-        print_r($groupeAndEtudiant);
-        echo '</pres>';
     }
+
     public function afficherGroupe($groupeAndEtudiant,$idProjet) {
-        var_dump($groupeAndEtudiant);
         if(isset($groupeAndEtudiant)){
-            foreach ($groupeAndEtudiant as $nomGroupe => $etudiants) {
+             echo "<h4>Groupe d'étudiant</h4>";
+            foreach ($groupeAndEtudiant as $idGroupe => $etudiants) {
+                var_dump($groupeAndEtudiant);
                 echo "
                 <div class='mb-4'>
                     
                     <div class='d-flex justify-content-between align-items-center'>
-                    <h4>Créer un Dépôt</h4>
-                        <h4 class='mb-0'>$nomGroupe</h4>
+                   
+                        <h4 class='mb-0'>$idGroupe</h4>
                         <form action='index.php?module=DETAILS&idProjet=$idProjet&action=deleteGroupe' method='POST'>
-                            <input type='hidden' name='idGroupe' value='$nomGroupe'>
+                            <input type='hidden' name='idGroupe' value='$idGroupe'>
                             <button type='submit' class='btn btn-danger btn-sm'>Supprimer Groupe</button>
                         </form>
                     </div>";
         
                 echo "<ul class='list-group mt-2'>";
-                foreach ($etudiants as $login) {
+                foreach ($idGroupe as $login) {
                     echo "
                     <li class='list-group-item d-flex justify-content-between align-items-center'>
                         $login

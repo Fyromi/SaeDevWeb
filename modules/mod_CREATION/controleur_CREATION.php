@@ -38,13 +38,13 @@ Class ControleurCREATION {
         $isValid = true;
         $msgError = " ";
 
-        if (isset ($_POST['titre']))
+        if (isset ($_POST['titre']) && !empty($_POST['titre']))
             $titre = $_POST['titre'];
         else
             $isValid = false;
             $msgError = $msgError."titre manquant ";
             
-        if (isset ($_POST['desc']))
+        if (isset ($_POST['desc']) && !empty($_POST['titre']))
             $desc = $_POST['desc'];
         else
             $isValid = false;
@@ -56,7 +56,7 @@ Class ControleurCREATION {
             $isValid = false;
             $msgError = $msgError."annee devrait etre comprise entre 2000 et 3000 ";
 
-        if (($_POST['sem'] >= 1) && ($_POST['sem'] <= 3000))
+        if (($_POST['sem'] >= 1) && ($_POST['sem'] <= 6))
             $sem = $_POST['sem'];
         else
             $isValid = false;

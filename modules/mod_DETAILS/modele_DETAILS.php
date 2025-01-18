@@ -34,18 +34,19 @@ class ModeleDETAILS extends Connexion{
     public function ajoutGroupeBD(){
 
         //Liste des étudiants a ajouter dans le groupe
-        $listeEtudiant = [];
-        //var_dump($_POST);
+        $listeEtudiant;
 
         //On ajoute les étudiants a la liste 
         foreach ($_POST as $key => $value) {
             if ($key != 'texte') { //Je vérifie que ce qu'il y a dans _POST n'est pas le nom du groupe 
-                var_dump($value);
-                $listeEtudiant[] = $value;//J'ajoute chaque id Etudiants a la liste des étudiants dans le groupe
+                
+                $listeEtudiant= $value;//J'ajoute chaque id Etudiants a la liste des étudiants dans le groupe
             }
         }
+        var_dump($listeEtudiant);
         $idGrp = $this->addGroupe($_GET['idProjet']);
         foreach ($listeEtudiant as $etudiant) {
+            var_dump($etudiant);
             $sql = $this->queries['addEtudiantGrp'];
             $this->executeQuery($sql, [':idGroupe' => $idGrp, ':idEtudiant' => $etudiant]);
         }
@@ -56,13 +57,14 @@ class ModeleDETAILS extends Connexion{
     public function addGroupe(){
 
 
+
+        //Creer un groupe dans la bd
         $sql = $this->queries['addGroupe'];
-        
-        //var_dump($_POST['texte']);
         $this->executeQuery($sql, [':nomGroupe' => $_POST['texte']]);
 
         $idGrp = self::$bdd->lastInsertId();
 
+        //J'associe le groupe fraichement crée au projet 
         $sql2 = $this->queries['associeProjet'];
         $this->executeQuery($sql2, [':idGrp' => $idGrp, ':idProjet' => $_GET['idProjet'] ]);
         return $idGrp;
@@ -128,7 +130,6 @@ class ModeleDETAILS extends Connexion{
     }
 
     public function deleteIntervenant(){
-        var_dump($_POST);
         $sql = $this->queries['deleteIntervenant'];
         $this->executeQuery($sql, [':idUtilisateur' => $_POST['idUtilisateur'], ':idProjet' => $_GET['idProjet']]);
         header("location: index.php?module=DETAILS&idProjet=". $_GET['idProjet']);
@@ -153,31 +154,29 @@ class ModeleDETAILS extends Connexion{
         $groupeProjet = $this->getGroupeProjet();
         foreach($groupeProjet as $groupe) {
             $listeEtudiant = [];
+
             $sql = $this->queries['getMembreGroupe'];
             $request = $this->executeQuery($sql, [':idGroupe' => $groupe['idGroupe']]);
             $etudiantsGroupe = $request->fetchAll(PDO::FETCH_ASSOC);
-            
+
             foreach ($etudiantsGroupe as $etudiant) {
-                $listeEtudiant[] = $etudiant['login'];
+                $listeEtudiant = $etudiant['login'];
             }
-            $groupeEtEtudiant[$groupe['idGroupe']] = $listeEtudiant;
+            $groupeAndEtudiant[$groupe['idGroupe']] = $listeEtudiant;
         }
 
-        var_dump($groupeAndEtudiant);
         return $groupeAndEtudiant;
     }
 
     public function deleteGroupe(){
-        var_dump($_POST);
         $sql = $this->queries['deleteGroupe'];
         $this->executeQuery($sql, [':idGroupe' => $_POST['idGroupe'], ':idProjet' => $_GET['idProjet']]);
         header("location: index.php?module=DETAILS&idProjet=". $_GET['idProjet']);
     }
 
     public function deleteUserGroupe(){
-        var_dump($_POST);
-        //$sql = $this->queries['deleteIntervenant'];
-        //$this->executeQuery($sql, [':idUtilisateur' => $_POST['idUtilisateur'], ':idProjet' => $_GET['idProjet']]);
+        $sql = $this->queries['deleteIntervenant'];
+        $this->executeQuery($sql, [':idUtilisateur' => $_POST['idUtilisateur'], ':idProjet' => $_GET['idProjet']]);
         header("location: index.php?module=DETAILS&idProjet=". $_GET['idProjet']);
 
     }
