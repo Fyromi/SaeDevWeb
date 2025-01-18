@@ -154,18 +154,22 @@ class ModeleDETAILS extends Connexion{
         $groupeProjet = $this->getGroupeProjet();
         foreach($groupeProjet as $groupe) {
             
-            var_dump($listeEtudiant);
+            $listeEtudiant;
 
             $sql = $this->queries['getMembreGroupe'];
             $request = $this->executeQuery($sql, [':idGroupe' => $groupe['idGroupe']]);
             $etudiantsGroupe = $request->fetchAll(PDO::FETCH_ASSOC);
-
+            
+            echo '</br>';
             foreach ($etudiantsGroupe as $etudiant) {
                 $listeEtudiant = $etudiant['login'];
-            
-            $groupeAndEtudiant[$groupe['idGroupe']] = $listeEtudiant;
+                var_dump($listeEtudiant);
             }
+            echo '</br>';
+            $groupeAndEtudiant[$groupe['idGroupe']] = $listeEtudiant;
         }   
+        $groupeAndEtudiant[$groupe['idGroupe']] = $listeEtudiant;
+        echo '</br>'."mes groupes et Etudiants : ";
         var_dump($groupeAndEtudiant);
         return $groupeAndEtudiant;
     }
