@@ -4,83 +4,34 @@ class VueDETAILS {
 
     public function vueDetailProjet($etudiants, $projet, $intervenantsLibre, $estResponsableDe, $intervenantPris, $groupeAndEtudiant){
         ?>
-        <div class="container py-4">
-            <!-- Style général pour les titres de section -->
-            <style>
-                @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
-                
-                * {
-                    font-family: 'Inter', sans-serif;
-                }
-                
-                .section-title {
-                    font-size: 24px;
-                    color: #000;
-                    padding-bottom: 10px;
-                    border-bottom: 2px solid #000;
-                    margin-bottom: 25px;
-                    font-weight: 500;
-                }
-                
-                .custom-card {
-                    background: #fff;
-                    border-radius: 8px;
-                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                    margin-bottom: 30px;
-                    height: 400px;
-                }
-                
-                .custom-card-body {
-                    padding: 20px;
-                    max-height: 360px;
-                    overflow-y: auto;
-                }
-                
-                .form-control {
-                    border: 1px solid #ddd;
-                    border-radius: 6px;
-                }
-                
-                .btn-custom {
-                    background-color: #000;
-                    color: #fff;
-                    border: none;
-                    padding: 8px 20px;
-                    border-radius: 6px;
-                }
-                
-                .btn-custom:hover {
-                    background-color: #333;
-                    color: #fff;
-                }
-
-                .btn-danger {
-                    background-color: #dc3545;
-                    color: #fff;
-                    border: none;
-                    padding: 5px 10px;
-                    border-radius: 6px;
-                }
-
-                .btn-danger:hover {
-                    background-color: #b02a37;
-                    color: #fff;
-                }
-            </style>
-
-            <h3 class="section-title">Gestion des Accès Utilisateur</h3>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="custom-card">
-                        <div class="custom-card-body">
+        <div class="row pb-3">
+            <div class="col-sm-10 col-xs-6 col-9">
+                <a class="text-decoration-none text-dark" data-toggle="collapse" href="#collapseUtilisateur" role="button" aria-expanded="false" aria-controls="collapseUtilisateur">
+                    <h3 class="border-bottom border-secondary pb-3 dropdown-toggle">
+                        Gestion des Accès Utilisateur
+                    </h3>
+                </a>
+            </div>
+            <div class="col-sm-1 col-xs-1 col-1 text-end">
+                <a href="index.php?module=ENSEIGNANTS&action=menu" class="btn">
+                    <div class="card shadow-sm text-center p-1">
+                        <img class="card-img m-0" src="icons/retour.png" alt="Retour">
+                        <span class="card-title h6">Retour</span>
+                    </div>
+                </a>
+            </div>
+            <div class="collapse row" id="collapseUtilisateur">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-body">
                             <h4 class="mb-4">Ajouter un Groupe</h4>
                             <form action="index.php?module=DETAILS&idProjet=<?= $projet['idProjet'] ?>&action=creerGrp" method="POST">
                                 <div class="mb-3">
                                     <label for="texte" class="form-label">Nom du groupe pour le projet <?= $projet['titre'] ?></label>
                                     <input type="text" id="NomProjet" name="texte" class="form-control" required>
                                 </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Choisissez les étudiants à ajouter :</label>
+                                <label class="form-label">Choisissez les étudiants à ajouter</label>
+                                <div class="mb-3 scrollable-section">
                                     <?php foreach ($etudiants as $etudiant) { ?>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="etudiant_<?= $etudiant['idUtilisateur'] ?>" name="etudiants[]" value="<?= $etudiant['idUtilisateur'] ?>">
@@ -90,20 +41,20 @@ class VueDETAILS {
                                         </div>
                                     <?php } ?>
                                 </div>
-                                <button type="submit" class="btn btn-custom">Soumettre</button>
+                                <button type="submit" class="btn btn-dark">Soumettre</button>
                             </form>
                         </div>
                     </div>
                 </div>
 
                 <?php if($estResponsableDe == 1): ?>
-                <div class="col-md-6">
-                    <div class="custom-card">
-                        <div class="custom-card-body">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-body">
                             <h4 class="mb-4">Ajouter des Intervenants</h4>
                             <form action="index.php?module=DETAILS&idProjet=<?= $projet['idProjet'] ?>&action=ajtInter" method="POST">
-                                <div class="mb-3">
-                                    <label class="form-label">Choisissez les intervenants à ajouter :</label>
+                                <label class="form-label">Choisissez les intervenants à ajouter</label>
+                                <div class="mb-3 scrollable-section">
                                     <?php foreach ($intervenantsLibre as $intervenant) {
                                         ?>
                                         <div class="form-check">
@@ -114,19 +65,27 @@ class VueDETAILS {
                                         </div>
                                     <?php } ?>
                                 </div>
-                                <button type="submit" class="btn btn-custom">Soumettre</button>
+                                <button type="submit" class="btn btn-dark">Soumettre</button>
                             </form>
                         </div>
                     </div>
                 </div>
                 <?php endif; ?>
             </div>
+        </div>
 
-            <h3 class="section-title mt-5">Gestion des Documents</h3>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="custom-card">
-                        <div class="custom-card-body">
+        <div class="row pb-5">
+            <div class="col-sm-10 col-xs-6 col-9">
+                <a class="text-decoration-none text-dark" data-toggle="collapse" href="#collapseDocuments" role="button" aria-expanded="false" aria-controls="collapseUtilisateur">
+                    <h3 class="border-bottom border-secondary pb-3 dropdown-toggle">
+                        Gestion des Documents
+                    </h3>
+                </a>
+            </div>
+            <div class="collapse row" id="collapseDocuments">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-body">
                             <h4 class="mb-4">Déposer un Document</h4>
                             <form action="index.php?module=DETAILS&idProjet=<?= $projet['idProjet'] ?>&action=depDocu" method="POST" enctype="multipart/form-data">
                                 <div class="mb-3">
@@ -134,123 +93,124 @@ class VueDETAILS {
                                     <input type="text" id="NomRessource" name="texte" class="form-control" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="file" class="form-label">Ajouter un Document :</label>
+                                    <label for="file" class="form-label">Ajouter un Document</label>
                                     <input type="file" name="fichier" id="file" class="form-control" required>
                                 </div>
-                                <button type="submit" class="btn btn-custom">Déposer</button>
+                                <button type="submit" class="btn btn-dark">Déposer</button>
                             </form>
                         </div>
                     </div>
                 </div>
                 
-                <div class="col-md-6">
-                    <div class="custom-card">
-                        <div class="custom-card-body">
-                            <?php $this->creerDepot($projet);?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-<!-- TODO 
-    A afficher que si $groupeAndEtudiant et $intervenantPris ne sont pas vide
--->
-            <h3 class="section-title mt-5">Vue sur le Projet</h3>
-            <!-- TODO
-                Affiche cette session que si $groupeAndEtudiant est pas vide
-            -->
-            <div class="col-md-6">
-                    <div class="custom-card">
-                        <div class="custom-card-body">
-                            <?php $this->afficherGroupe($groupeAndEtudiant, $projet['idProjet']);?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- TODO
-                Affiche cette session que si $intervenantPris est pas vide
-            -->
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="custom-card">
-                        <div class="custom-card-body">
-                            <h4 class="mb-4">Liste des Intervenants</h4>
-                            <ul class="list-group">
-                                <?php foreach ($intervenantPris as $intervenant) { 
-                                    ?>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <?=
-                                        $intervenant['login'] ?>
-                                        <form action="index.php?module=DETAILS&idProjet=<?= $projet['idProjet'] ?>&action=deleteIntervenant" method="POST" class="m-0">
-                                            <input type="hidden" name="idUtilisateur" value="<?= $intervenant['idUtilisateur'] ?>">
-                                            <button type="submit" class="btn btn-danger">Supprimer</button>
-                                        </form>
-                                    </li>
-                                <?php } ?>
-                            </ul>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="mb-4">Créer un Dépôt</h4>
+                            <form action="index.php?module=DETAILS&idProjet=<?=$projet['idProjet']?>&action=creerDepot" method="POST">
+                                <div class="mb-3">
+                                    <label for="nomDepot" class="form-label">Nom du Dépôt</label>
+                                    <input type="text" id="nomDepot" name="nomDepot" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="dateDepot" class="form-label">Date du Dépôt</label>
+                                    <input type="date" id="dateDepot" name="dateDepot" class="form-control" required>
+                                </div>
+                                <button type="submit" class="btn btn-dark">Créer</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <?php if((count($groupeAndEtudiant) != 0) && (count($intervenantPris) != 0)): ?>
+        <div class="row pb-5">
+            <div class="col-sm-10 col-xs-6 col-9">
+                <a class="text-decoration-none text-dark" data-toggle="collapse" href="#collapseVue" role="button" aria-expanded="false" aria-controls="collapseUtilisateur">
+                    <h3 class="border-bottom border-secondary pb-3 dropdown-toggle">
+                    Vue sur le Projet
+                    </h3>
+                </a>
+            </div>
+
+            <?php if(count($groupeAndEtudiant) != 0): ?>
+            <div class="collapse row" id="collapseVue">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <?php $this->afficherGroupe($groupeAndEtudiant, $projet['idProjet']);?>
+                        </div>
+                    </div>
+                </div>
+
+                <?php if(count($intervenantPris) != 0): ?>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="mb-4">Liste des Intervenants</h4>
+                            <ul class="list-group">
+                                <?php foreach ($intervenantPris as $intervenant) { 
+                                    ?>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <?=
+                                    $intervenant['login'] ?>
+                                    <form action="index.php?module=DETAILS&idProjet=<?= $projet['idProjet'] ?>&action=deleteIntervenant" method="POST" class="m-0">
+                                        <input type="hidden" name="idUtilisateur" value="<?= $intervenant['idUtilisateur'] ?>">
+                                        <button type="submit" class="btn btn-danger">
+                                            <img class='card-img m-0' src='icons/supprimer.png' alt='X'>
+                                        </button>
+                                    </form>
+                                </li>
+                                <?php } ?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <?php endif; ?>
+            </div>
+            <?php endif; ?>
+        </div>
+        <?php endif; ?>
+
 <!--TODO
 Un gros boutton rouge en bas de page 'Supprimer projet' 
 qui mène vers index.php?module=DETAILS&idProjet=<?= $projet['idProjet'] ?>&action=deleteProjet-->
         <?php
     }
 
-    public function creerDepot($projet) {
-        ?>
-        <div class="container py-4">
-            <div class="custom-card">
-                <div class="custom-card-body">
-                    <h4 class="mb-4">Créer un Dépôt</h4>
-                    <form action="index.php?module=DETAILS&idProjet=<?=$projet['idProjet']?>&action=creerDepot" method="POST">
-                        <div class="mb-3">
-                            <label for="nomDepot" class="form-label">Nom du Dépôt</label>
-                            <input type="text" id="nomDepot" name="nomDepot" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="dateDepot" class="form-label">Date du Dépôt</label>
-                            <input type="date" id="dateDepot" name="dateDepot" class="form-control" required>
-                        </div>
-                        <button type="submit" class="btn btn-custom">Créer</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <?php
-    }
-
-    public function afficherGroupe($groupeAndEtudiant,$idProjet) {
+    public function afficherGroupe($groupeAndEtudiant, $idProjet) {
         if(isset($groupeAndEtudiant)){
-             echo "<h4>Groupe d'étudiant</h4></br>";
+            echo "<h4>Groupe d'étudiant</h4>";
+            echo "<ul class='list-group mt-2'>";
             foreach ($groupeAndEtudiant as $idGroupe => $etudiants) {
-                echo "
-                <div class='mb-4'>
-                    
-                    <div class='d-flex justify-content-between align-items-center'>
-                   
-                        <h5 class='mb-0'>Identifiant du groupe : $idGroupe</h5>
-                        <form action='index.php?module=DETAILS&idProjet=$idProjet&action=deleteGroupe' method='POST'>
-                            <input type='hidden' name='idGroupe' value='$idGroupe'>
-                            <button type='submit' class='btn btn-danger btn-sm'>Supprimer Groupe</button>
-                        </form>
-                    </div>";
-                echo "<ul class='list-group mt-2'>";
+                echo "<li class='list-group-item'>";
+                echo "  <div class='row mb-1'>";
+                echo "      <h6 class='col-10 mb-0'>$idGroupe :</h6>";
+                echo "      <form class='col-2  text-end' action='index.php?module=DETAILS&idProjet=$idProjet&echo action=deleteGroupe' method='POST'>";
+                echo "          <input type='hidden' name='idGroupe' value='$idGroupe'>";
+                echo "          <button type='submit' class='btn btn-danger btn-sm'>";
+                echo "              <img class='card-img m-0' src='icons/Supprimer.png' alt='X'>";
+                echo "          </button>";
+                echo "      </form>";
+                echo "  </div>";
                 foreach ($etudiants as $login) {
-                    echo "
-                    <li class='list-group-item d-flex justify-content-between align-items-center'>
-                        $login
-                        <form action='index.php?module=DETAILS&idProjet=$idProjet&action=deleteUserGroupe' method='POST'>
-                            <input type='hidden' name='login' value='$login'>
-                            <input type='hidden' name='idGroupe' value='$idGroupe'>
-                            <button type='submit' class='btn btn-danger btn-sm'>Supprimer Utilisateur</button>
-                        </form>
-                    </li>";
-               }
-                echo "</ul></div>";
+                echo "      <ul class='col-12 mb-1'>";
+                echo "          <li class='d-flex justify-content-between'>";
+                echo "              - $login";
+                echo "              <form action='index.php?module=DETAILS&idProjet=$idProjet&action=deleteUserGroupe' method='POST'>";
+                echo "                  <input type='hidden' name='login' value='$login'>";
+                echo "                  <input type='hidden' name='idGroupe' value='$idGroupe'>";
+                echo "                  <button type='submit' class='btn btn-danger btn-sm'>";
+                echo "                      <img class='card-img m-0' src='icons/Supprimer.png' alt='X'>";
+                echo "                  </button>";
+                echo "              </form>";
+                echo "          </li>";
+                echo "      </ul>";
+                }
+                echo "</li>";
             }
+            echo "</ul>";
         }
-    }     
+    }
 }
 ?>

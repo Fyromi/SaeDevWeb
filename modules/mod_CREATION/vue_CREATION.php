@@ -3,76 +3,86 @@ Class VueCREATION {
 
     public function form_ajoutsae(){
         ?>
-        <div class="row">
-            <div class="ajout_sae col-lg-6 mb-9">
-                <h3 class="border-bottom border-secondary pb-3 mb-5">Ajouter un Projets</h3>
-                <form  action="index.php?module=CREATION&action=verif_ajout" method="POST">
-                    Titre de la SAE
-                    <input type="text" name="titre"></input>
-                    <br>
-                    Description
-                    <input type="text" name="desc"></input>
-                    <br>
-                    Année Universitaire
-                    <input type="number" name="annee"></input>
-                    <br>
-                    Semestre
-                    <input type="number" name="sem"></input>
-                    <br>
-                    <input  type="submit"/>
-                </form>
+        <div class="row pb-5">
+            <div class="col-sm-10 col-xs-6 col-9">
+                <h3 class="border-bottom border-secondary pb-3">Ajouter un Projet</h3>
             </div>
-            <div class="col-lg-6 mb-9">
-                <a href='index.php?module=ENSEIGNANTS&action=menu' class='text-decoration-none'>
-                    <div class="card shadow-sm text-center" style="width: 400px; height: 250px; border-radius: 15px; background-color: #f8f9fa;">
-                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                            <img src="icons/retour.png" alt="Retour Projet" style="width: 100px; height: 100px;">
-                            <h5 class="card-title mt-3 fs-4" style="color: #000;">Retour Projet</h5>
-                        </div>
+            <div class="col-sm-1 col-xs-1 col-1 text-end">
+                <a href="index.php?module=ENSEIGNANTS&action=menu" class="btn">
+                    <div class="card shadow-sm text-center p-1">
+                        <img class="card-img m-0" src="icons/retour.png" alt="Retour">
+                        <span class="card-title h6">Retour</span>
                     </div>
                 </a>
+                </div>
             </div>
         </div>
+            <div class="ajout_sae">
+                <form  action="index.php?module=CREATION&action=verif_ajout" method="POST">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text col-5 col-sm-3 col-lg-2">Titre de la SAE</span>
+                        <input type="text" name="titre" class="form-control" placeholder="Titre de la SAE">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text col-5 col-sm-3 col-lg-2">Description</span>
+                        <input type="text" name="desc" class="form-control" placeholder="Description">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text col-5 col-sm-3 col-lg-2">Année Universitaire</span>
+                        <input type="number" name="annee" class="form-control" placeholder="Année Universitaire">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text col-5 col-sm-3 col-lg-2">Semestre</span>
+                        <input type="number" name="sem" class="form-control" placeholder="Semestre">
+                    </div>
+                    <button type="submit" class="btn btn-dark" id="bouton_co">Ajouter</button>
+                </form>
+            </div>
 <?php
     }
 
     public function confirm_ajout() {
         ?>
-        <div class="row">
-            <div class="col-lg-6 mb-9">
-                <b>Ajout réussie !</b>
+        <div class="row pb-5">
+            <div class="col-sm-10 col-xs-6 col-9">
+                <h3 class="border-bottom border-secondary pb-3">Ajouter un Projet</h3>
             </div>
-            <div class="col-lg-6 mb-9">
-                <a href='index.php?module=ENSEIGNANTS&action=menu' class='text-decoration-none'>
-                    <div class="card shadow-sm text-center" style="width: 400px; height: 250px; border-radius: 15px; background-color: #f8f9fa;">
-                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                            <img src="icons/retour.png" alt="Retour Projet" style="width: 100px; height: 100px;">
-                            <h5 class="card-title mt-3 fs-4" style="color: #000;">Retour Projet</h5>
-                        </div>
+            <div class="col-sm-1 col-xs-1 col-1 text-end">
+                <a href="index.php?module=ENSEIGNANTS&action=menu" class="btn">
+                    <div class="card shadow-sm text-center p-1">
+                        <img class="card-img m-0" src="icons/retour.png" alt="Retour">
+                        <span class="card-title h6">Retour</span>
                     </div>
                 </a>
+                </div>
+            </div>
+        </div>
+        <div class="alert alert-success d-flex align-items-center" role="alert">
+            <div>
+            Ajout réussie !</b>
             </div>
         </div>
         <?php
             }
     public function erreur_ajout($msgError) {
         ?>
-        <div class="row">
-            <div class="col-lg-6 mb-9">
-                <b>Echec de l'ajout:</b>
-        <?php
-        echo $msgError;
-        ?>
+        <div class="row pb-5">
+            <div class="col-sm-10 col-xs-6 col-9">
+                <h3 class="border-bottom border-secondary pb-3">Ajouter un Projet</h3>
             </div>
-            <div class="col-lg-6 mb-9">
-                <a href='index.php?module=ENSEIGNANTS&action=menu' class='text-decoration-none'>
-                    <div class="card shadow-sm text-center" style="width: 400px; height: 250px; border-radius: 15px; background-color: #f8f9fa;">
-                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                            <img src="icons/retour.png" alt="Retour Projet" style="width: 100px; height: 100px;">
-                            <h5 class="card-title mt-3 fs-4" style="color: #000;">Retour Projet</h5>
-                        </div>
+            <div class="col-sm-1 col-xs-1 col-1 text-end">
+                <a href="index.php?module=CREATION" class="btn">
+                    <div class="card shadow-sm text-center p-1">
+                        <img class="card-img m-0" src="icons/retour.png" alt="Retour">
+                        <span class="card-title h6">Retour</span>
                     </div>
                 </a>
+                </div>
+            </div>
+        </div>
+        <div class="alert alert-danger d-flex align-items-center" role="alert">
+            <div>
+            Echec de l'ajout: <b><?=$msgError?> !</b>
             </div>
         </div>
         <?php

@@ -12,13 +12,13 @@ class VueENSEIGNANTS {
 
     private function afficherMenueResponsable($projetResponsables, $projetsIntervention) {
         echo '<div class="row pb-5">';
-        echo '  <div class="col-10">';
+        echo '  <div class="col-sm-10 col-xs-6 col-9">';
         echo '      <h3 class="border-bottom border-secondary pb-3">Mes Projets</h3>';
         echo '  </div>';
         $this->creerSAE();
         if ($projetResponsables != null) {
             foreach ($projetResponsables as $projetResponsable) {
-                echo '<div class="col-6">';
+                echo '<div class="col-6 mb-2">';
                 echo "  <a href='index.php?module=DETAILS&idProjet=" . $projetResponsable['idProjet'] . "' class='text-decoration-none'>";
                 echo '      <div class="card shadow-sm">';
                 echo '          <div class="card-body text-center p-0">'; // Supprime le padding
@@ -46,7 +46,7 @@ class VueENSEIGNANTS {
             echo '      <h3 class="border-bottom border-secondary pb-3">Intervention Projet</h3>';
             echo '  </div>';
             foreach ($projetsIntervention as $projetIntervention) {
-                echo '<div class="col-6">';
+                echo '<div class="col-6 mb-2">';
                 echo "  <a href='index.php?module=DETAILS&idProjet=".$projetIntervention['idProjet'] . "' class='text-decoration-none'>";
                 echo '      <div class="card shadow-sm">';
                 echo '          <div class="card-body text-center py-4">';
@@ -61,7 +61,7 @@ class VueENSEIGNANTS {
     }
 
     private function creerSAE() {
-        echo '<div class="col-2">';
+        echo '<div class="col-sm-2 col-xs-2 col-3 text-end">';
         echo '    <a href="index.php?module=CREATION" class="btn">';
         echo '        <div class="card shadow-sm text-center">';
     echo '                <img class="card-img m-0" src="icons/plus.png" alt="Créer un projet">';

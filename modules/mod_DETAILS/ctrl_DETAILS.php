@@ -39,7 +39,7 @@
                     break;
                 case 'deleteIntervenant' :
                     $this->modele->deleteIntervenant();
-                    break;w
+                    break;
                 case 'deleteGroupe' :
                     $this->modele->deleteGroupe();
                     break;
