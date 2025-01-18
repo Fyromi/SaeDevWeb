@@ -33,6 +33,7 @@ class VueENSEIGNANTS {
                 echo '  </a>';
                 echo '</div>';
             }
+
         }
         echo '</div>';
         $this->afficherMenueIntervenant($projetsIntervention);

@@ -78,7 +78,15 @@ return [ 'getEtudiantSansGrp' => "SELECT DISTINCT u.*
                                     FROM groupeEtudiant
                                     LEFT JOIN associeAProjet ON groupeEtudiant.idGroupe = associeAProjet.idGroupe
                                     LEFT JOIN appartientA ON groupeEtudiant.idGroupe = appartientA.idGroupe
-                                    WHERE groupeEtudiant.idGroupe = :idGroupe AND associeAProjet.idProjet = :idProjet;"
+                                    WHERE groupeEtudiant.idGroupe = :idGroupe AND associeAProjet.idProjet = :idProjet;",
+
+            'deleteUserGroupe'  => "DELETE FROM appartientA
+                                    WHERE idUtilisateur = :idUtilisateur
+                                    AND idGroupe = :idGroupe;", 
+
+            'getIdUtilisateur'  =>  "SELECT idUtilisateur
+                                    FROM utilisateur
+                                    WHERE utilisateur.login = :logi"
                                         
 ];
 
