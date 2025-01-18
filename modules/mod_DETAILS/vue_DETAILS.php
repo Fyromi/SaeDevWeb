@@ -151,8 +151,13 @@ class VueDETAILS {
                     </div>
                 </div>
             </div>
-
+<!-- TODO 
+    A afficher que si $groupeAndEtudiant et $intervenantPris ne sont pas vide
+-->
             <h3 class="section-title mt-5">Vue sur le Projet</h3>
+            <!-- TODO
+                Affiche cette session que si $groupeAndEtudiant est pas vide
+            -->
             <div class="col-md-6">
                     <div class="custom-card">
                         <div class="custom-card-body">
@@ -161,6 +166,9 @@ class VueDETAILS {
                     </div>
                 </div>
             </div>
+            <!-- TODO
+                Affiche cette session que si $intervenantPris est pas vide
+            -->
             <div class="row">
                 <div class="col-md-12">
                     <div class="custom-card">
@@ -225,7 +233,6 @@ class VueDETAILS {
                             <button type='submit' class='btn btn-danger btn-sm'>Supprimer Groupe</button>
                         </form>
                     </div>";
-        
                 echo "<ul class='list-group mt-2'>";
                 foreach ($etudiants as $login) {
                     echo "
@@ -241,12 +248,6 @@ class VueDETAILS {
                 echo "</ul></div>";
             }
         }
-        
-    
-    }
-    
-    
-    
-      
+    }     
 }
 ?>

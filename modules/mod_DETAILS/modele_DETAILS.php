@@ -167,12 +167,8 @@ class ModeleDETAILS extends Connexion{
             // Associer le tableau d'étudiants au groupe
             $groupeAndEtudiant[$groupe['idGroupe']] = $listeEtudiant;
         }
-    
-        echo '</br>' . "mes groupes et Etudiants : ";
-        var_dump($groupeAndEtudiant);
         return $groupeAndEtudiant;
     }
-
 
     public function deleteGroupe(){
         $sql = $this->queries['deleteGroupe'];
@@ -186,13 +182,13 @@ class ModeleDETAILS extends Connexion{
         $idUtilisateur = $this->getIDUtilisateur($_POST['login']);
 
         $this->executeQuery($sql, [':idUtilisateur' => $idUtilisateur, ':idGroupe' => $_POST['idGroupe']]);
-        //header("location: index.php?module=DETAILS&idProjet=". $_GET['idProjet']);
+        header("location: index.php?module=DETAILS&idProjet=". $_GET['idProjet']);
     }
 
     private function getIDUtilisateur($login){
         $sql = $this->queries['getIdUtilisateur'];
         $request = $this->executeQuery($sql, [':logi' => $login]);
-        return $request->fetch(PDO::FETCH_ASSOC);
+        return $request->fetchColumn();
     }
 
 }
