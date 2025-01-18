@@ -28,7 +28,7 @@
     </style>
 </head>
 <body>
-    <header class="d-flex align-items-center justify-content-center">
+    <header class="align-items-center">
         <?php echo $header->getAffichage(); ?>
     </header>
 

@@ -33,12 +33,15 @@ class ModeleDETAILS extends Connexion{
 
     public function ajoutGroupeBD(){
 
-
+        //Liste des étudiants a ajouter dans le groupe
         $listeEtudiant = [];
+        //var_dump($_POST);
 
+        //On ajoute les étudiants a la liste 
         foreach ($_POST as $key => $value) {
-            if ($key !== 'texte') {
-                $listeEtudiant[] = $key;
+            if ($key != 'texte') { //Je vérifie que ce qu'il y a dans _POST n'est pas le nom du groupe 
+                var_dump($value);
+                $listeEtudiant[] = $value;//J'ajoute chaque id Etudiants a la liste des étudiants dans le groupe
             }
         }
         $idGrp = $this->addGroupe($_GET['idProjet']);
@@ -55,6 +58,7 @@ class ModeleDETAILS extends Connexion{
 
         $sql = $this->queries['addGroupe'];
         
+        //var_dump($_POST['texte']);
         $this->executeQuery($sql, [':nomGroupe' => $_POST['texte']]);
 
         $idGrp = self::$bdd->lastInsertId();
