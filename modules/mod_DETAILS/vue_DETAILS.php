@@ -220,14 +220,14 @@ class VueDETAILS {
 
     public function afficherGroupe($groupeAndEtudiant,$idProjet) {
         if(isset($groupeAndEtudiant)){
-             echo "<h4>Groupe d'étudiant</h4>";
+             echo "<h4>Groupe d'étudiant</h4></br>";
             foreach ($groupeAndEtudiant as $idGroupe => $etudiants) {
                 echo "
                 <div class='mb-4'>
                     
                     <div class='d-flex justify-content-between align-items-center'>
                    
-                        <h4 class='mb-0'>id du grp: $idGroupe</h4>
+                        <h5 class='mb-0'>Identifiant du groupe : $idGroupe</h5>
                         <form action='index.php?module=DETAILS&idProjet=$idProjet&action=deleteGroupe' method='POST'>
                             <input type='hidden' name='idGroupe' value='$idGroupe'>
                             <button type='submit' class='btn btn-danger btn-sm'>Supprimer Groupe</button>
