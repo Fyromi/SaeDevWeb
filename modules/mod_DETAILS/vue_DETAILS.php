@@ -180,7 +180,7 @@ class VueDETAILS {
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <?=
                                         $intervenant['login'] ?>
-                                        <form action="index.php?module=DETAILS&idProjet=<?= $projet['idProjet'] ?>&action=delete" method="POST" class="m-0">
+                                        <form action="index.php?module=DETAILS&idProjet=<?= $projet['idProjet'] ?>&action=deleteIntervenant" method="POST" class="m-0">
                                             <input type="hidden" name="idUtilisateur" value="<?= $intervenant['idUtilisateur'] ?>">
                                             <button type="submit" class="btn btn-danger">Supprimer</button>
                                         </form>
@@ -192,6 +192,9 @@ class VueDETAILS {
                 </div>
             </div>
         </div>
+<!--TODO
+Un gros boutton rouge en bas de page 'Supprimer projet' 
+qui mène vers index.php?module=DETAILS&idProjet=<?= $projet['idProjet'] ?>&action=deleteProjet-->
         <?php
     }
 

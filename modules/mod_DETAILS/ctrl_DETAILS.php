@@ -37,7 +37,7 @@
                 case 'creerDepot' : 
                     $this->modele->creerDepot();
                     break;
-                case 'delete' :
+                case 'deleteIntervenant' :
                     $this->modele->deleteIntervenant();
                     break;
                 case 'deleteGroupe' :
