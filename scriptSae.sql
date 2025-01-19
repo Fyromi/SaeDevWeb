@@ -228,10 +228,13 @@ CREATE TABLE `evaluation` (
 --
 
 CREATE TABLE `groupeetudiant` (
-  `idGroupe` int(11) NOT NULL,
-  `nomGroupe` varchar(50) DEFAULT NULL,
-  `imageTitre` varchar(300) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `idGroupe` INT(11) NOT NULL AUTO_INCREMENT,
+  `nomGroupe` VARCHAR(50) NOT NULL,
+  `imageTitre` VARCHAR(255) DEFAULT NULL,
+  PRIMARY KEY (`idGroupe`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
 
 --
 -- Déchargement des données de la table `groupeetudiant`
@@ -629,14 +632,6 @@ INSERT INTO `utilisateur` (`idUtilisateur`, `login`, `mdp`, `role`, `profilpictu
 ALTER TABLE `appartienta`
   ADD PRIMARY KEY (`idUtilisateur`,`idGroupe`),
   ADD KEY `idGroupe` (`idGroupe`);
-
---
--- Index pour la table `groupeetudiant`
---
-ALTER TABLE `groupeetudiant`
-  ADD PRIMARY KEY (`idGroupe`),
-  ADD UNIQUE KEY `idGroupe` (`idGroupe`);
-
 --
 -- Index pour la table `projet`
 --
