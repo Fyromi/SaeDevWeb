@@ -6,7 +6,7 @@ class VueDETAILS {
         ?>
         <div class="row pb-3">
             <div class="col-sm-10 col-xs-6 col-9">
-                <a class="text-decoration-none text-dark" data-toggle="collapse" href="#collapseUtilisateur" role="button" aria-expanded="false" aria-controls="collapseUtilisateur">
+                <a class="text-decoration-none text-dark" data-toggle="collapse" href="#collapseUtilisateur" role="button" aria-expanded="true" aria-controls="collapseUtilisateur">
                     <h3 class="border-bottom border-secondary pb-3 dropdown-toggle">
                         Gestion des Accès Utilisateur
                     </h3>
@@ -20,7 +20,7 @@ class VueDETAILS {
                     </div>
                 </a>
             </div>
-            <div class="collapse row" id="collapseUtilisateur">
+            <div class="collapse row show" id="collapseUtilisateur">
                 <div class="col-6">
                     <div class="card">
                         <div class="card-body">
@@ -55,8 +55,7 @@ class VueDETAILS {
                             <form action="index.php?module=DETAILS&idProjet=<?= $projet['idProjet'] ?>&action=ajtInter" method="POST">
                                 <label class="form-label">Choisissez les intervenants à ajouter</label>
                                 <div class="mb-3 scrollable-section">
-                                    <?php foreach ($intervenantsLibre as $intervenant) {
-                                        ?>
+                                    <?php foreach ($intervenantsLibre as $intervenant) { ?>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="intervenant_<?= $intervenant['idUtilisateur'] ?>" name="intervenants[]" value="<?= $intervenant['idUtilisateur'] ?>">
                                             <label class="form-check-label" for="intervenant_<?= $intervenant['idUtilisateur'] ?>">
@@ -76,13 +75,13 @@ class VueDETAILS {
 
         <div class="row pb-5">
             <div class="col-sm-10 col-xs-6 col-9">
-                <a class="text-decoration-none text-dark" data-toggle="collapse" href="#collapseDocuments" role="button" aria-expanded="false" aria-controls="collapseUtilisateur">
+                <a class="text-decoration-none text-dark" data-toggle="collapse" href="#collapseDocuments" role="button" aria-expanded="true" aria-controls="collapseDocuments">
                     <h3 class="border-bottom border-secondary pb-3 dropdown-toggle">
                         Gestion des Documents
                     </h3>
                 </a>
             </div>
-            <div class="collapse row" id="collapseDocuments">
+            <div class="collapse row show" id="collapseDocuments">
                 <div class="col-6">
                     <div class="card">
                         <div class="card-body">
@@ -123,58 +122,50 @@ class VueDETAILS {
             </div>
         </div>
 
-        <?php if((count($groupeAndEtudiant) != 0) && (count($intervenantPris) != 0)): ?>
-        <div class="row pb-5">
-            <div class="col-sm-10 col-xs-6 col-9">
-                <a class="text-decoration-none text-dark" data-toggle="collapse" href="#collapseVue" role="button" aria-expanded="false" aria-controls="collapseUtilisateur">
-                    <h3 class="border-bottom border-secondary pb-3 dropdown-toggle">
-                    Vue sur le Projet
-                    </h3>
-                </a>
-            </div>
-
-            <?php if(count($groupeAndEtudiant) != 0): ?>
-            <div class="collapse row" id="collapseVue">
-                <div class="col-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <?php $this->afficherGroupe($groupeAndEtudiant, $projet['idProjet']);?>
+        <?php if((count($groupeAndEtudiant) != 0) || (count($intervenantPris) != 0)): ?>
+            <div class="row pb-5">
+                <div class="col-sm-10 col-xs-6 col-9">
+                    <a class="text-decoration-none text-dark" data-toggle="collapse" href="#collapseVue" role="button" aria-expanded="true" aria-controls="collapseVue">
+                        <h3 class="border-bottom border-secondary pb-3 dropdown-toggle">
+                        Vue sur le Projet
+                        </h3>
+                    </a>
+                </div>
+                <div class="collapse row show" id="collapseVue">
+                    <?php if(count($groupeAndEtudiant) != 0): ?>
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <?php $this->afficherGroupe($groupeAndEtudiant, $projet['idProjet']);?>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <?php if(count($intervenantPris) != 0): ?>
-                <div class="col-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="mb-4">Liste des Intervenants</h4>
-                            <ul class="list-group">
-                                <?php foreach ($intervenantPris as $intervenant) { 
-                                    ?>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <?=
-                                    $intervenant['login'] ?>
-                                    <form action="index.php?module=DETAILS&idProjet=<?= $projet['idProjet'] ?>&action=deleteIntervenant" method="POST" class="m-0">
-                                        <input type="hidden" name="idUtilisateur" value="<?= $intervenant['idUtilisateur'] ?>">
-                                        <button type="submit" class="btn btn-danger">
-                                            <img class='card-img m-0' src='icons/supprimer.png' alt='X'>
-                                        </button>
-                                    </form>
-                                </li>
-                                <?php } ?>
-                            </ul>
+                    <?php endif; ?>
+                    <?php if(count($intervenantPris) != 0): ?>
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="mb-4">Liste des Intervenants</h4>
+                                <ul class="list-group">
+                                    <?php foreach ($intervenantPris as $intervenant) { ?>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <?= $intervenant['login'] ?>
+                                        <form action="index.php?module=DETAILS&idProjet=<?= $projet['idProjet'] ?>&action=deleteIntervenant" method="POST" class="m-0">
+                                            <input type="hidden" name="idUtilisateur" value="<?= $intervenant['idUtilisateur'] ?>">
+                                            <button type="submit" class="btn btn-danger">
+                                                <img class='card-img m-0' src='icons/supprimer.png' alt='X'>
+                                            </button>
+                                        </form>
+                                    </li>
+                                    <?php } ?>
+                                </ul>
+                            </div>
                         </div>
                     </div>
+                    <?php endif; ?>
                 </div>
-                <?php endif; ?>
             </div>
-            <?php endif; ?>
-        </div>
         <?php endif; ?>
-
-<!--TODO
-Un gros boutton rouge en bas de page 'Supprimer projet' 
-qui mène vers index.php?module=DETAILS&idProjet=<?= $projet['idProjet'] ?>&action=deleteProjet-->
         <?php
     }
 
@@ -186,7 +177,7 @@ qui mène vers index.php?module=DETAILS&idProjet=<?= $projet['idProjet'] ?>&acti
                 echo "<li class='list-group-item'>";
                 echo "  <div class='row mb-1'>";
                 echo "      <h6 class='col-10 mb-0'>$idGroupe :</h6>";
-                echo "      <form class='col-2  text-end' action='index.php?module=DETAILS&idProjet=$idProjet&action=deleteGroupe' method='POST'>";
+                echo "      <form class='col-2 text-end' action='index.php?module=DETAILS&idProjet=$idProjet&action=deleteGroupe' method='POST'>";
                 echo "          <input type='hidden' name='idGroupe' value='$idGroupe'>";
                 echo "          <button type='submit' class='btn btn-danger btn-sm'>";
                 echo "              <img class='card-img m-0' src='icons/Supprimer.png' alt='X'>";
@@ -194,18 +185,18 @@ qui mène vers index.php?module=DETAILS&idProjet=<?= $projet['idProjet'] ?>&acti
                 echo "      </form>";
                 echo "  </div>";
                 foreach ($etudiants as $login) {
-                echo "      <ul class='col-12 mb-1'>";
-                echo "          <li class='d-flex justify-content-between'>";
-                echo "              - $login";
-                echo "              <form action='index.php?module=DETAILS&idProjet=$idProjet&action=deleteUserGroupe' method='POST'>";
-                echo "                  <input type='hidden' name='login' value='$login'>";
-                echo "                  <input type='hidden' name='idGroupe' value='$idGroupe'>";
-                echo "                  <button type='submit' class='btn btn-danger btn-sm'>";
-                echo "                      <img class='card-img m-0' src='icons/Supprimer.png' alt='X'>";
-                echo "                  </button>";
-                echo "              </form>";
-                echo "          </li>";
-                echo "      </ul>";
+                    echo "  <ul class='col-12 mb-1'>";
+                    echo "      <li class='d-flex justify-content-between'>";
+                    echo "          - $login";
+                    echo "          <form action='index.php?module=DETAILS&idProjet=$idProjet&action=deleteUserGroupe' method='POST'>";
+                    echo "              <input type='hidden' name='login' value='$login'>";
+                    echo "              <input type='hidden' name='idGroupe' value='$idGroupe'>";
+                    echo "              <button type='submit' class='btn btn-danger btn-sm'>";
+                    echo "                  <img class='card-img m-0' src='icons/Supprimer.png' alt='X'>";
+                    echo "              </button>";
+                    echo "          </form>";
+                    echo "      </li>";
+                    echo "  </ul>";
                 }
                 echo "</li>";
             }
