@@ -186,7 +186,7 @@ qui mène vers index.php?module=DETAILS&idProjet=<?= $projet['idProjet'] ?>&acti
                 echo "<li class='list-group-item'>";
                 echo "  <div class='row mb-1'>";
                 echo "      <h6 class='col-10 mb-0'>$idGroupe :</h6>";
-                echo "      <form class='col-2  text-end' action='index.php?module=DETAILS&idProjet=$idProjet&echo action=deleteGroupe' method='POST'>";
+                echo "      <form class='col-2  text-end' action='index.php?module=DETAILS&idProjet=$idProjet&action=deleteGroupe' method='POST'>";
                 echo "          <input type='hidden' name='idGroupe' value='$idGroupe'>";
                 echo "          <button type='submit' class='btn btn-danger btn-sm'>";
                 echo "              <img class='card-img m-0' src='icons/Supprimer.png' alt='X'>";
