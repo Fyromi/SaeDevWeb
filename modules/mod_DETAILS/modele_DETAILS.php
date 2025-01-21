@@ -195,9 +195,9 @@ class ModeleDETAILS extends Connexion{
                 $sql = $value;
                 $this->executeQuery($sql, [':idProjet' => $idProjet]);
             }
-           connexion::$bdd->commit();
+            connexion::$bdd->commit();
 
-            header("location: index.php?module=Enseignants&action=menu");
+            //header("location: index.php?module=Enseignants&action=menu");
         } catch (Exception $e) {
             connexion::$bdd->rollBack();
             echo "Erreur : " . $e->getMessage();

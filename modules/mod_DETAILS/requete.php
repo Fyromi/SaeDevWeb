@@ -89,24 +89,27 @@ return [ 'getEtudiantSansGrp' => "SELECT DISTINCT u.*
                                     WHERE utilisateur.login = :logi",
 
 
-            'supprimerProjet' => [  'ressourcemiseenavant' => "DELETE FROM ressourcemiseenavant 
+            'supprimerProjet' => [ 'ressourcemiseenavant' => "DELETE FROM ressourcemiseenavant 
                                                                 WHERE idRessource IN (  SELECT idRessource 
                                                                                         FROM projetRessource 
                                                                                         WHERE idProjet = :idProjet 
                                                                                     )",
 
-                                    'deleteRessourceProjet' => "DELETE FROM ressource
-                                                                WHERE idRessource IN (  SELECT idRessource
-                                                                                        FROM projetRessource
-                                                                                        WHERE  idProjet = :idProjet)",
-                                                                        
-                                    'deleteRessourceProjet' => "DELETE FROM ressource
-                                                                WHERE idRessource IN (  SELECT idRessource
-                                                                                        FROM ressourcemiseenavant
-                                                                                        WHERE  idProjet = :idProjet)",
+                                    'deleteRessourceProjet' => " DELETE r
+                                                                FROM ressource r
+                                                                INNER JOIN projetRessource pr ON pr.idRessource = r.idRessource
+                                                                WHERE pr.idProjet = :idProjet;" ,
+
+                                     'deleteRessourceEnAvant' => "DELETE r
+                                                                FROM ressourcemiseenavant r
+                                                                INNER JOIN projetRessource pr ON pr.idRessource = r.idRessource
+                                                                WHERE pr.idProjet = :idProjet;",
 
                                     'deleteprojetRessource' => "DELETE FROM projetRessource 
                                                                 WHERE idProjet = :idProjet;",
+
+                                    'deleteRessourceMiseEnAvant' => "DELETE FROM ressourcemiseenavant 
+                                                                    WHERE idProjet = :idProjet;",
                                     
                                     'deleteChamp'           => "DELETE FROM champ
                                                                 WHERE idChamp IN ( SELECT idChamp
