@@ -18,13 +18,15 @@ class VueENSEIGNANTS {
         $this->creerSAE();
         if ($projetResponsables != null) {
             foreach ($projetResponsables as $projetResponsable) {
+                $titreProjet = htmlspecialchars($projetResponsable['titre']); // Sécurisation du titre
+                $idProjet = htmlspecialchars($projetResponsable['idProjet']); // Sécurisation de l'ID du projet
                 echo '<div class="col-6 mb-2">';
-                echo "  <a href='index.php?module=Details&idProjet=" . $projetResponsable['idProjet'] . "' class='text-decoration-none'>";
+                echo "  <a href='index.php?module=Details&idProjet=" . $idProjet . "' class='text-decoration-none'>";
                 echo '      <div class="card shadow-sm">';
                 echo '          <div class="card-body text-center p-0">'; // Supprime le padding
 
                 // Titre maintenant avec un padding spécifique
-                echo '              <h5 class="card-title fs-3 p-3 mb-0">' . $projetResponsable['titre'] . '</h5>';
+                echo '              <h5 class="card-title fs-3 p-3 mb-0">' . $titreProjet . '</h5>';
 
                 // Image sans marge ni padding
                 echo '              <img src="images/imageGrp.jpg" class="card-img m-0" alt="Projet">'; 
@@ -46,11 +48,13 @@ class VueENSEIGNANTS {
             echo '      <h3 class="border-bottom border-secondary pb-3">Intervention Projet</h3>';
             echo '  </div>';
             foreach ($projetsIntervention as $projetIntervention) {
+                $titreIntervention = htmlspecialchars($projetIntervention['titre']); // Sécurisation du titre
+                $idProjetIntervention = htmlspecialchars($projetIntervention['idProjet']); // Sécurisation de l'ID du projet
                 echo '<div class="col-6 mb-2">';
-                echo "  <a href='index.php?module=Details&idProjet=".$projetIntervention['idProjet'] . "' class='text-decoration-none'>";
+                echo "  <a href='index.php?module=Details&idProjet=" . $idProjetIntervention . "' class='text-decoration-none'>";
                 echo '      <div class="card shadow-sm">';
                 echo '          <div class="card-body text-center py-4">';
-                echo '              <h5 class="card-title fs-3 p-3 mb-0">' . $projetIntervention['titre'] . '</h5>';
+                echo '              <h5 class="card-title fs-3 p-3 mb-0">' . $titreIntervention . '</h5>';
                 echo '          </div>';
                 echo '      </div>';
                 echo '  </a>';
@@ -64,10 +68,11 @@ class VueENSEIGNANTS {
         echo '<div class="col-sm-2 col-xs-2 col-3 text-end">';
         echo '    <a href="index.php?module=Creation" class="btn">';
         echo '        <div class="card shadow-sm text-center">';
-    echo '                <img class="card-img m-0" src="icons/plus.png" alt="Créer un projet">';
-    echo '                <span class="card-title h6">Créer un projet</span>';
+        echo '                <img class="card-img m-0" src="icons/plus.png" alt="Créer un projet">';
+        echo '                <span class="card-title h6">Créer un projet</span>';
         echo '        </div>';
         echo '    </a>';
         echo '</div>';
     }
 }
+?>

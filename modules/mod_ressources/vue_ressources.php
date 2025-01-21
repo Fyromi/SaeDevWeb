@@ -1,7 +1,7 @@
 <?php
 class VueRESSOURCES {
     public function __construct() {}
-   
+
     public function afficherProjet($documents, $consignes, $depots) {
         ?>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -47,10 +47,10 @@ class VueRESSOURCES {
             // Vérification spécifique pour les consignes
             if ($nameKey == 'nomRessource' && $iconPath == 'icons/Consigne.png') {
                 // Lien pour les consignes
-                $link = 'index.php?module=Ressources&action=consignes&id='.$element['idRessource'];
+                $link = 'index.php?module=Ressources&action=consignes&id=' . htmlspecialchars($element['idRessource']);
             } else {
                 // Pour les autres ressources
-                $link = $isDepot ? 'index.php?module=DepotEtudiant' : ($element[$linkKey] ?? '#');
+                $link = $isDepot ? 'index.php?module=DepotEtudiant' : (isset($element[$linkKey]) ? htmlspecialchars($element[$linkKey]) : '#');
             }
 
             // Affichage du lien avec les éléments
@@ -59,10 +59,10 @@ class VueRESSOURCES {
             echo '      <a href="' . $link . '" class="btn btn-light border">';
             echo '        <div class="row">';
             echo '          <div class="col-sm-4 col-lg-2">';
-            echo '              <img src="' . $iconPath . '" class="card-img m-0">';
+            echo '              <img src="' . htmlspecialchars($iconPath) . '" class="card-img m-0">';
             echo '          </div>';
             echo '          <div class="col text-center pt-2">';
-            echo '              <h6 >' . $element[$nameKey] . '</h6>';
+            echo '              <h6 >' . htmlspecialchars($element[$nameKey]) . '</h6>';
             echo '          </div>';
             echo '        </div>';
             echo '      </a>';

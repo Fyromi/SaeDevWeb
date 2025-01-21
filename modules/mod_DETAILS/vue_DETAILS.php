@@ -25,18 +25,18 @@ class VueDETAILS {
                     <div class="card">
                         <div class="card-body">
                             <h4 class="mb-4">Ajouter un Groupe</h4>
-                            <form action="index.php?module=Details&idProjet=<?= $projet['idProjet'] ?>&action=creerGrp" method="POST">
+                            <form action="index.php?module=Details&idProjet=<?= htmlspecialchars($projet['idProjet']) ?>&action=creerGrp" method="POST">
                                 <div class="mb-3">
-                                    <label for="texte" class="form-label">Nom du groupe pour le projet <?= $projet['titre'] ?></label>
+                                    <label for="texte" class="form-label">Nom du groupe pour le projet <?= htmlspecialchars($projet['titre']) ?></label>
                                     <input type="text" id="NomProjet" name="texte" class="form-control" required>
                                 </div>
                                 <label class="form-label">Choisissez les étudiants à ajouter</label>
                                 <div class="mb-3 scrollable-section">
                                     <?php foreach ($etudiants as $etudiant) { ?>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="etudiant_<?= $etudiant['idUtilisateur'] ?>" name="etudiants[]" value="<?= $etudiant['idUtilisateur'] ?>">
-                                            <label class="form-check-label" for="etudiant_<?= $etudiant['idUtilisateur'] ?>">
-                                                <?= $etudiant['login'] ?>
+                                            <input class="form-check-input" type="checkbox" id="etudiant_<?= htmlspecialchars($etudiant['idUtilisateur']) ?>" name="etudiants[]" value="<?= htmlspecialchars($etudiant['idUtilisateur']) ?>">
+                                            <label class="form-check-label" for="etudiant_<?= htmlspecialchars($etudiant['idUtilisateur']) ?>">
+                                                <?= htmlspecialchars($etudiant['login']) ?>
                                             </label>
                                         </div>
                                     <?php } ?>
@@ -52,14 +52,14 @@ class VueDETAILS {
                     <div class="card">
                         <div class="card-body">
                             <h4 class="mb-4">Ajouter des Intervenants</h4>
-                            <form action="index.php?module=Details&idProjet=<?= $projet['idProjet'] ?>&action=ajtInter" method="POST">
+                            <form action="index.php?module=Details&idProjet=<?= htmlspecialchars($projet['idProjet']) ?>&action=ajtInter" method="POST">
                                 <label class="form-label">Choisissez les intervenants à ajouter</label>
                                 <div class="mb-3 scrollable-section">
                                     <?php foreach ($intervenantsLibre as $intervenant) { ?>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="intervenant_<?= $intervenant['idUtilisateur'] ?>" name="intervenants[]" value="<?= $intervenant['idUtilisateur'] ?>">
-                                            <label class="form-check-label" for="intervenant_<?= $intervenant['idUtilisateur'] ?>">
-                                                <?= $intervenant['login'] ?>
+                                            <input class="form-check-input" type="checkbox" id="intervenant_<?= htmlspecialchars($intervenant['idUtilisateur']) ?>" name="intervenants[]" value="<?= htmlspecialchars($intervenant['idUtilisateur']) ?>">
+                                            <label class="form-check-label" for="intervenant_<?= htmlspecialchars($intervenant['idUtilisateur']) ?>">
+                                                <?= htmlspecialchars($intervenant['login']) ?>
                                             </label>
                                         </div>
                                     <?php } ?>
@@ -86,7 +86,7 @@ class VueDETAILS {
                     <div class="card">
                         <div class="card-body">
                             <h4 class="mb-4">Déposer un Document</h4>
-                            <form action="index.php?module=Details&idProjet=<?= $projet['idProjet'] ?>&action=depDocu" method="POST" enctype="multipart/form-data">
+                            <form action="index.php?module=Details&idProjet=<?= htmlspecialchars($projet['idProjet']) ?>&action=depDocu" method="POST" enctype="multipart/form-data">
                                 <div class="mb-3">
                                     <label for="NomRessource" class="form-label">Titre de la Ressource</label>
                                     <input type="text" id="NomRessource" name="texte" class="form-control" required>
@@ -105,7 +105,7 @@ class VueDETAILS {
                     <div class="card">
                         <div class="card-body">
                             <h4 class="mb-4">Créer un Dépôt</h4>
-                            <form action="index.php?module=Details&idProjet=<?=$projet['idProjet']?>&action=creerDepot" method="POST">
+                            <form action="index.php?module=Details&idProjet=<?= htmlspecialchars($projet['idProjet']) ?>&action=creerDepot" method="POST">
                                 <div class="mb-3">
                                     <label for="nomDepot" class="form-label">Nom du Dépôt</label>
                                     <input type="text" id="nomDepot" name="nomDepot" class="form-control" required>
@@ -136,7 +136,7 @@ class VueDETAILS {
                     <div class="col-12 col-sm-6 mb-2">
                         <div class="card">
                             <div class="card-body">
-                                <?php $this->afficherGroupe($groupeAndEtudiant, $projet['idProjet'], $groupeName);?>
+                                <?php $this->afficherGroupe($groupeAndEtudiant, htmlspecialchars($projet['idProjet']), $groupeName); ?>
                             </div>
                         </div>
                     </div>
@@ -149,9 +149,9 @@ class VueDETAILS {
                                 <ul class="list-group scrollable-section">
                                     <?php foreach ($intervenantPris as $intervenant) { ?>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <?= $intervenant['login'] ?>
-                                        <form action="index.php?module=Details&idProjet=<?= $projet['idProjet'] ?>&action=deleteIntervenant" method="POST" class="m-0">
-                                            <input type="hidden" name="idUtilisateur" value="<?= $intervenant['idUtilisateur'] ?>">
+                                        <?= htmlspecialchars($intervenant['login']) ?>
+                                        <form action="index.php?module=Details&idProjet=<?= htmlspecialchars($projet['idProjet']) ?>&action=deleteIntervenant" method="POST" class="m-0">
+                                            <input type="hidden" name="idUtilisateur" value="<?= htmlspecialchars($intervenant['idUtilisateur']) ?>">
                                             <button type="submit" class="btn btn-danger">
                                                 <img class='card-img m-0' src='icons/supprimer.png' alt='X'>
                                             </button>
@@ -176,11 +176,11 @@ class VueDETAILS {
             foreach ($groupeAndEtudiant as $idGroupe => $etudiants) {
                 foreach ($groupeName as $groupeTableau) {
                     if ($groupeTableau['idGroupe'] == $idGroupe) {
-                        $groupe = $groupeTableau['nomGroupe'];
+                        $groupe = htmlspecialchars($groupeTableau['nomGroupe']);
                         echo "<li class='list-group-item'>";
                         echo "  <div class='row mb-1'>";
                         echo "      <h6 class='col mb-0'>$groupe:</h6>";
-                        echo "      <form class='col-4 text-end' action='index.php?module=Details&idProjet=$idProjet&action=deleteGroupe' method='POST'>";
+                        echo "      <form class='col-4 text-end' action='index.php?module=Details&idProjet=" . htmlspecialchars($idProjet) . "&action=deleteGroupe' method='POST'>";
                         echo "          <input type='hidden' name='idGroupe' value='$idGroupe'>";
                         echo "          <button type='submit' class='btn btn-danger btn-sm'>";
                         echo "              <img class='card-img m-0' src='icons/Supprimer.png' alt='X'>";
@@ -190,9 +190,9 @@ class VueDETAILS {
                         foreach ($etudiants as $login) {
                             echo "  <ul class='col-12 mb-1'>";
                             echo "      <li class='d-flex justify-content-between'>";
-                            echo "          - $login";
-                            echo "          <form action='index.php?module=Details&idProjet=$idProjet&action=deleteUserGroupe' method='POST'>";
-                            echo "              <input type='hidden' name='login' value='$login'>";
+                            echo "          - " . htmlspecialchars($login);
+                            echo "          <form action='index.php?module=Details&idProjet=" . htmlspecialchars($idProjet) . "&action=deleteUserGroupe' method='POST'>";
+                            echo "              <input type='hidden' name='login' value='" . htmlspecialchars($login) . "'>";
                             echo "              <input type='hidden' name='idGroupe' value='$idGroupe'>";
                             echo "              <button type='submit' class='btn btn-danger btn-sm'>";
                             echo "                  <img class='card-img m-0' src='icons/Supprimer.png' alt='X'>";
