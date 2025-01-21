@@ -50,7 +50,7 @@ class VueRESSOURCES {
                 $link = 'index.php?module=Ressources&action=consignes&id=' . htmlspecialchars($element['idRessource']);
             } else {
                 // Pour les autres ressources
-                $link = $isDepot ? 'index.php?module=DepotEtudiant' : (isset($element[$linkKey]) ? htmlspecialchars($element[$linkKey]) : '#');
+                $link = $isDepot ? 'index.php?module=Depot' : (isset($element[$linkKey]) ? htmlspecialchars($element[$linkKey]) : '#');
             }
 
             // Affichage du lien avec les éléments

@@ -29,6 +29,9 @@ class Site {
 			case "Details" : 
 				require_once "modules/mod_".$this->module_name."/module_".$this->module_name.".php";
 				break;
+			case 'Depot' :
+				require_once "modules/mod_".$this->module_name."/module_".$this->module_name.".php";
+				break;
 			default :
 				die ("Module inexistant");
 		}
