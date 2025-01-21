@@ -95,22 +95,24 @@ return [ 'getEtudiantSansGrp' => "SELECT DISTINCT u.*
                                                                                         WHERE idProjet = :idProjet 
                                                                                     )",
 
-                                    'deleteRessource' => "DELETE FROM ressource
-                                                            WHERE idRessource IN (  SELECT idRessource
-                                                                                    FROM projetRessource
-                                                                                    WHERE  projetRessource.idProjet = :idProjet
-                                                                            ) OR IN ( SELECT idRessource
-                                                                                    FROM ressourceMiseEnAvanr
-                                                                                    WHERE  projetRessource.idProjet = :idProjet
-                                                                            )",
+                                    'deleteRessourceProjet' => "DELETE FROM ressource
+                                                                WHERE idRessource IN (  SELECT idRessource
+                                                                                        FROM projetRessource
+                                                                                        WHERE  idProjet = :idProjet)",
+                                                                        
+                                    'deleteRessourceProjet' => "DELETE FROM ressource
+                                                                WHERE idRessource IN (  SELECT idRessource
+                                                                                        FROM ressourcemiseenavant
+                                                                                        WHERE  idProjet = :idProjet)",
 
                                     'deleteprojetRessource' => "DELETE FROM projetRessource 
                                                                 WHERE idProjet = :idProjet;",
                                     
                                     'deleteChamp'           => "DELETE FROM champ
                                                                 WHERE idChamp IN ( SELECT idChamp
-                                                                                    FROM possedeChamp
-                                                                                    WHERE idProjet = :idProjet)",
+                                                                                    FROM possedeChamps
+                                                                                    WHERE idProjet = :idProjet
+                                                                                )",
 
                                     'deletepossedeChamps' => "DELETE FROM possedeChamps 
                                                             WHERE idProjet = :idProjet;",
@@ -128,9 +130,7 @@ return [ 'getEtudiantSansGrp' => "SELECT DISTINCT u.*
                                                                                                                                                                                     )
                                                                                                                                                 )
                                                                                                                     )
-                                                                                        )
-                                                                                                                                                            
-                                                                        )",
+                                                                                    )",
 
                                     'evalGroupe' => "DELETE FROM evalgroupe 
                                                     WHERE idEval IN ( SELECT idEval 
@@ -157,8 +157,8 @@ return [ 'getEtudiantSansGrp' => "SELECT DISTINCT u.*
                                                                                                                                                         WHERE idProjet = :idProjet
                                                                                                                                                     )
                                                                                                                 )
-                                                                                    )
-                                                                )",
+                                                                                    )",
+                                                                
 
                                     'deleteSoutenance'      => "DELETE FROM soutenance
                                                                 WHERE idSoutenance IN (SELECT idSoutenance
@@ -177,8 +177,9 @@ return [ 'getEtudiantSansGrp' => "SELECT DISTINCT u.*
                                                                                     FROM rendu 
                                                                                     WHERE rendu.idRendu IN ( SELECT idRendu
                                                                                                             FROM renduProjet
-                                                                                                            WHERE idProjet = :idProjet )
-                                                                                    )",
+                                                                                                            WHERE idProjet = :idProjet
+                                                                                                        )
+                                                                                )",
 
                                     'deleteRendu' => "DELETE FROM rendu 
                                                         WHERE rendu.idRendu IN ( SELECT idRendu
@@ -201,10 +202,10 @@ return [ 'getEtudiantSansGrp' => "SELECT DISTINCT u.*
                                                                 WHERE idGroupe IN ( SELECT idGroupe 
                                                                                     FROM associeaprojet 
                                                                                     WHERE idProjet = :idProjet 
-                                                                                    )",
+                                                                                )",
 
                                     'deleteAssocieAprojet'  => "DELETE FROM associeaprojet
-                                                                where idProjet=:idProjet";
+                                                                where idProjet=:idProjet",
 
                                     'deleteIntervientDans' => "DELETE FROM intervientdans 
                                                                 WHERE idProjet = :idProjet",
