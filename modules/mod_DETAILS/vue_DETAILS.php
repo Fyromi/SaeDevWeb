@@ -167,7 +167,7 @@ class VueDETAILS {
             </div>
         <?php endif; ?>
         
-        <form action="index.php?module=Details&idProjet=<?= $projet['idProjet'] ?>&action=deleteIntervenant" method="POST">
+        <form action="index.php?module=Details&idProjet=<?= $projet['idProjet'] ?>&action=deleteProjet" method="POST">
             <button type='submit' class='btn btn-danger btn-lg w-100 p-4'>
                 <img src='icons/Supprimer.png';>
             </button>

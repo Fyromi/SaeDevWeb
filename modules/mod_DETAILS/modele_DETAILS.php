@@ -187,4 +187,9 @@ class ModeleDETAILS extends Connexion{
         return $request->fetchColumn();
     }
 
+    public function deleteProjet(){
+        $idProjet = $_GET('idProjet');
+        $sql = $this->queries['deleteProjet'];
+        $request = $this->executeQuery($sql, [':idProjet' => $idProjet]);
+    }
 }

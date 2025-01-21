@@ -86,7 +86,73 @@ return [ 'getEtudiantSansGrp' => "SELECT DISTINCT u.*
 
             'getIdUtilisateur'  =>  "SELECT idUtilisateur
                                     FROM utilisateur
-                                    WHERE utilisateur.login = :logi"
+                                    WHERE utilisateur.login = :logi",
+
+                                    
+            'deleteProjet'      => "DELETE FROM projetRessource
+                                    WHERE idProjet = :idProjet;
+
+                                    -- Supprimer les relations entre les champs et le projet
+                                    DELETE FROM possedeChamps
+                                    WHERE idProjet = :idProjet;
+
+                                    -- Supprimer les évaluations liées au projet
+                                    DELETE FROM evalIndividuelle
+                                    WHERE idEval IN (
+                                        SELECT idEval FROM evaluation
+                                        WHERE idProjet = :idProjet
+                                    );
+
+                                    DELETE FROM evalGroupe
+                                    WHERE idEval IN (
+                                        SELECT idEval FROM evaluation
+                                        WHERE idProjet = :idProjet
+                                    );
+
+                                    DELETE FROM evaluation
+                                    WHERE idProjet = :idProjet;
+
+                                    -- Supprimer les rendus liés au projet
+                                    DELETE FROM soutenanceRendu
+                                    WHERE idRendu IN (
+                                        SELECT idRendu FROM rendu
+                                        WHERE idProjet = :idProjet
+                                    );
+
+                                    DELETE FROM rendu
+                                    WHERE idProjet = :idProjet;
+
+                                    -- Supprimer les groupes d'étudiants associés au projet
+                                    DELETE FROM appartientA
+                                    WHERE idGroupe IN (
+                                        SELECT idGroupe FROM groupeEtudiant
+                                        WHERE idProjet = :idProjet
+                                    );
+
+                                    DELETE FROM groupeEtudiant
+                                    WHERE idProjet = :idProjet;
+
+                                    -- Supprimer les intervenants liés au projet
+                                    DELETE FROM intervientDans
+                                    WHERE idProjet = :idProjet;
+
+                                    DELETE FROM estResponsableDe
+                                    WHERE idProjet = :idProjet;
+
+                                    -- Supprimer les ressources mises en avant pour le projet
+                                    DELETE FROM ressourceMiseEnAvant
+                                    WHERE idRessource IN (
+                                        SELECT idRessource FROM projetRessource
+                                        WHERE idProjet = :idProjet
+                                    );
+
+                                    DELETE FROM projetRessource
+                                    WHERE idProjet = :idProjet;
+
+                                    -- Enfin, supprimer le projet lui-même
+                                    DELETE FROM projet
+                                    WHERE idProjet = :idProjet;
+                                    "
                                         
 ];
 
