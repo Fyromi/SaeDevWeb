@@ -11,8 +11,9 @@
         public function __construct($vue, $modele) {
             $this->vue = new VueRESSOURCES();
             $this->modele = new ModeleRESSOURCES();
-            if(isset($_GET['action']))
+            if(isset($_GET['action'])) {
                 $this->action = $_GET['action'];
+            }
         }
 
         public function exec(){

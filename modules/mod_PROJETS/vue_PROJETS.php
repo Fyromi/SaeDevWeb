@@ -9,7 +9,7 @@ class VuePROJETS {
                 <h3 class="border-bottom border-secondary pb-3">Liste de projets</h3>
             </div>
             <div class="col-sm-1 col-xs-1 col-1 text-end">
-                <a href="index.php?module=PROJETS&action=menu" class="btn">
+                <a href="index.php?module=Projets&action=menu" class="btn">
                     <div class="card shadow-sm text-center p-1">
                         <img class="card-img m-0" src="icons/retour.png" alt="Retour">
                         <span class="card-title h6">Retour</span>
@@ -18,7 +18,7 @@ class VuePROJETS {
                 </div>
             <?php foreach ($list as $data) { ?>
                 <div class="col-6 mb-4">
-                    <a href="index.php?module=PROJETS&action=descrProjet&idProj&id=<?= $data['idProjet'] ?>" 
+                    <a href="index.php?module=Projets&action=descrProjet&idProj&id=<?= $data['idProjet'] ?>" 
                         class="text-dark text-decoration-none">
                         <div class="card shadow-sm">
                             <div class="card-body text-center py-4">
@@ -39,7 +39,7 @@ class VuePROJETS {
                 <h3 class="border-bottom border-secondary pb-3"><?= $projet['titre'] ?></h3>
             </div>
             <div class="col-sm-1 col-xs-1 col-1 text-end">
-                <a href="index.php?module=PROJETS" class="btn">
+                <a href="index.php?module=Projets" class="btn">
                     <div class="card shadow-sm text-center p-1">
                         <img class="card-img m-0" src="icons/retour.png" alt="Retour">
                         <span class="card-title h6">Retour</span>
@@ -51,7 +51,7 @@ class VuePROJETS {
             <?php $this->afficherProfs($profs); ?>
             <?php $this->afficherMembreGrp($grp); ?>
             <?php $this->afficherObjectif($projet); ?>
-            <a href="index.php?module=RESSOURCES&action=menue&idProjet=<?=$projet['idProjet']?>" 
+            <a href="index.php?module=Ressources&action=menue&idProjet=<?=$projet['idProjet']?>" 
                 class="btn btn-dark text-white m-3">
                 Accès aux ressources du projet <?= $projet['titre']; ?> >>>
             </a>
@@ -116,7 +116,7 @@ class VuePROJETS {
     public function afficherMenue() {
         ?>
         <div class="col-sm-6">
-            <a href="index.php?module=PROJETS" class="text-decoration-none">
+            <a href="index.php?module=Projets" class="text-decoration-none">
                 <div class="card shadow-sm">
                     <div class="card-body text-center p-0">
                         <h5 class="card-title fs-3 p-3 mb-0">Liste de projets</h5>

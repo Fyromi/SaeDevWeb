@@ -11,8 +11,9 @@
         public function __construct($vue, $modele) {
             $this->vue = new VueDETAILS();
             $this->modele = new ModeleDETAILS();
-            if(isset($_GET['action']))
+            if(isset($_GET['action'])) {
                 $this->action = $_GET['action'];
+            }
         }
 
         public function exec(){
@@ -23,6 +24,7 @@
             $estResponsableDe = $this->modele->estResponsableDe();
             $intervenantPris = $this->modele->getIntervenantPris();
             $groupeAndEtudiant = $this->modele->groupeAndEtudiant();
+            $groupeProjet = $this->modele->getGroupeProjet();
 
             switch ($this->action) {
                 case 'creerGrp':
@@ -49,7 +51,7 @@
                 default:
                     break;
             }
-            $this->vue->vueDetailProjet($etudiantSansGrp,$projet, $intervenantLibre, $estResponsableDe,$intervenantPris, $groupeAndEtudiant);
+            $this->vue->vueDetailProjet($etudiantSansGrp,$projet, $intervenantLibre, $estResponsableDe,$intervenantPris, $groupeAndEtudiant, $groupeProjet);
         }
     }
     

@@ -10,7 +10,6 @@ class ModeleDETAILS extends Connexion{
     }
 
     private function executeQuery($sql, $params) {
-        
         $request = connexion::$bdd->prepare($sql);
         foreach ($params as $key => $value) {
             $request->bindValue($key, $value);
@@ -43,21 +42,17 @@ class ModeleDETAILS extends Connexion{
                 $listeEtudiant= $value;//J'ajoute chaque id Etudiants a la liste des étudiants dans le groupe
             }
         }
-        var_dump($listeEtudiant);
+
         $idGrp = $this->addGroupe($_GET['idProjet']);
         foreach ($listeEtudiant as $etudiant) {
-            var_dump($etudiant);
             $sql = $this->queries['addEtudiantGrp'];
             $this->executeQuery($sql, [':idGroupe' => $idGrp, ':idEtudiant' => $etudiant]);
         }
-        header("location: index.php?module=DETAILS&idProjet=". $_GET['idProjet']);
+        header("location: index.php?module=Details&idProjet=". $_GET['idProjet']);
 
     }
 
     public function addGroupe(){
-
-
-
         //Creer un groupe dans la bd
         $sql = $this->queries['addGroupe'];
         $this->executeQuery($sql, [':nomGroupe' => $_POST['texte']]);
@@ -92,19 +87,20 @@ class ModeleDETAILS extends Connexion{
             $sql = $this->queries['addIntervenantProjet'];
             $this->executeQuery($sql, [':idProjet' => $_GET['idProjet'], ':idIntervenant' => $intervenant]);
         }
-        header("location: index.php?module=DETAILS&idProjet=". $_GET['idProjet']);
+        header("location: index.php?module=Details&idProjet=". $_GET['idProjet']);
         
         print_r($listeIntervenant);
     }
 
     public function importFile() {
         
-        $repertoire =dirname(__DIR__, 2)."/Projet/Projet" . $_GET['idProjet'] . "/ressource";
+        $repertoire = dirname(__DIR__, 2)."/Projet/Projet" . $_GET['idProjet'] . "/ressource";
         $nom = $_POST['texte'];
         $fichierTmp = $_FILES['fichier']['tmp_name'];
-        $nomFichier = basename($_FILES['fichier']['name']);
-        $cheminFinal = $repertoire . "/" . $nomFichier;
-        $cheminForbdd = "Projet/Projet" . $_GET['idProjet'] . "/ressource"."/". $nomFichier;
+        $nomFichierAvecEspace = basename($_FILES['fichier']['name']);
+        $nomFichierSansEspace = preg_replace('/\s+/', '+', $nomFichierAvecEspace);
+        $cheminFinal = $repertoire . "/" . $nomFichierSansEspace;
+        $cheminForbdd = "Projet/Projet" . $_GET['idProjet'] . "/ressource"."/". $nomFichierSansEspace;
         move_uploaded_file($fichierTmp, $cheminFinal);
         $this->insertLinkToBdd($nom,$cheminForbdd, $_GET['idProjet']);
     }
@@ -132,7 +128,7 @@ class ModeleDETAILS extends Connexion{
     public function deleteIntervenant(){
         $sql = $this->queries['deleteIntervenant'];
         $this->executeQuery($sql, [':idUtilisateur' => $_POST['idUtilisateur'], ':idProjet' => $_GET['idProjet']]);
-        header("location: index.php?module=DETAILS&idProjet=". $_GET['idProjet']);
+        header("location: index.php?module=Details&idProjet=". $_GET['idProjet']);
     }
 
     public function getIntervenantPris(){
@@ -141,7 +137,7 @@ class ModeleDETAILS extends Connexion{
         return $request->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    private function getGroupeProjet(){
+    public function getGroupeProjet(){
         $sql = $this->queries['getGroupeProjet'];
         $request = $this->executeQuery($sql, [':idProjet' => $_GET['idProjet']]);
         return $request->fetchAll(PDO::FETCH_ASSOC);
@@ -173,7 +169,7 @@ class ModeleDETAILS extends Connexion{
     public function deleteGroupe(){
         $sql = $this->queries['deleteGroupe'];
         $this->executeQuery($sql, [':idGroupe' => $_POST['idGroupe'], ':idProjet' => $_GET['idProjet']]);
-        header("location: index.php?module=DETAILS&idProjet=". $_GET['idProjet']);
+        header("location: index.php?module=Details&idProjet=". $_GET['idProjet']);
     }
 
     public function deleteUserGroupe(){
@@ -182,7 +178,7 @@ class ModeleDETAILS extends Connexion{
         $idUtilisateur = $this->getIDUtilisateur($_POST['login']);
 
         $this->executeQuery($sql, [':idUtilisateur' => $idUtilisateur, ':idGroupe' => $_POST['idGroupe']]);
-        header("location: index.php?module=DETAILS&idProjet=". $_GET['idProjet']);
+        header("location: index.php?module=Details&idProjet=". $_GET['idProjet']);
     }
 
     private function getIDUtilisateur($login){

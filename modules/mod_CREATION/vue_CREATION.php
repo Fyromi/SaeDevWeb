@@ -8,7 +8,7 @@ Class VueCREATION {
                 <h3 class="border-bottom border-secondary pb-3">Ajouter un Projet</h3>
             </div>
             <div class="col-sm-1 col-xs-1 col-1 text-end">
-                <a href="index.php?module=ENSEIGNANTS&action=menu" class="btn">
+                <a href="index.php?module=Enseignants&action=menu" class="btn">
                     <div class="card shadow-sm text-center p-1">
                         <img class="card-img m-0" src="icons/retour.png" alt="Retour">
                         <span class="card-title h6">Retour</span>
@@ -18,22 +18,22 @@ Class VueCREATION {
             </div>
         </div>
             <div class="ajout_sae">
-                <form  action="index.php?module=CREATION&action=verif_ajout" method="POST">
+                <form  action="index.php?module=Creation&action=verif_ajout" method="POST">
                     <div class="input-group mb-3">
                         <span class="input-group-text col-5 col-sm-3 col-lg-2">Titre de la SAE</span>
-                        <input type="text" name="titre" class="form-control" placeholder="Titre de la SAE">
+                        <input type="text" name="titre" class="form-control" placeholder="Titre de la SAE" required>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text col-5 col-sm-3 col-lg-2">Description</span>
-                        <input type="text" name="desc" class="form-control" placeholder="Description">
+                        <input type="text" name="desc" class="form-control" placeholder="Description" required>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text col-5 col-sm-3 col-lg-2">Année Universitaire</span>
-                        <input type="number" name="annee" class="form-control" placeholder="Année Universitaire">
+                        <input type="number" name="annee" class="form-control" placeholder="Année Universitaire" required>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text col-5 col-sm-3 col-lg-2">Semestre</span>
-                        <input type="number" name="sem" class="form-control" placeholder="Semestre">
+                        <input type="number" name="sem" class="form-control" placeholder="Semestre" required>
                     </div>
                     <button type="submit" class="btn btn-dark" id="bouton_co">Ajouter</button>
                 </form>
@@ -48,7 +48,7 @@ Class VueCREATION {
                 <h3 class="border-bottom border-secondary pb-3">Ajouter un Projet</h3>
             </div>
             <div class="col-sm-1 col-xs-1 col-1 text-end">
-                <a href="index.php?module=ENSEIGNANTS&action=menu" class="btn">
+                <a href="index.php?module=Enseignants&action=menu" class="btn">
                     <div class="card shadow-sm text-center p-1">
                         <img class="card-img m-0" src="icons/retour.png" alt="Retour">
                         <span class="card-title h6">Retour</span>
@@ -71,7 +71,7 @@ Class VueCREATION {
                 <h3 class="border-bottom border-secondary pb-3">Ajouter un Projet</h3>
             </div>
             <div class="col-sm-1 col-xs-1 col-1 text-end">
-                <a href="index.php?module=CREATION" class="btn">
+                <a href="index.php?module=Creation" class="btn">
                     <div class="card shadow-sm text-center p-1">
                         <img class="card-img m-0" src="icons/retour.png" alt="Retour">
                         <span class="card-title h6">Retour</span>

@@ -36,7 +36,7 @@
 
                 default:
                     $projet = $this->modele->getList();
-                    $this->vue->afficherListProjet($projet);                  
+                    $this->vue->afficherListProjet($projet);
                     break;
             }
         }

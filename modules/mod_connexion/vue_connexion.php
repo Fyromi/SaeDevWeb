@@ -6,15 +6,15 @@ class VueCONNEXION extends VueGenerique{
 
     public function form_connexion() {
         ?>
-        <form id="field_login"action="index.php?module=CONNEXION&action=verif_connexion" method="POST">
+        <form id="field_login"action="index.php?module=Connexion&action=verif_connexion" method="POST">
             <div class="input-group mb-3">
                 <span class="input-group-text col-5 col-sm-3 col-lg-2">Indentifiant</span>
-                <input id="text_login" type="text" name="login" class="form-control" placeholder="Indentifiant">
+                <input id="text_login" type="text" name="login" class="form-control" placeholder="Indentifiant" required>
             </div>
 
             <div class="input-group mb-3">
                 <span class="input-group-text col-5 col-sm-3 col-lg-2">Mot de passe</span>
-                <input id="text_mdp" type="password" name="mdp" class="form-control" placeholder="Mot de passe">
+                <input id="text_mdp" type="password" name="mdp" class="form-control" placeholder="Mot de passe" required>
             </div>
             <button type="submit" class="btn btn-dark" id="bouton_co">Se connecter</button>
         </form>
@@ -23,14 +23,14 @@ class VueCONNEXION extends VueGenerique{
         
         public function form_inscription() {
             ?>
-            <form action="index.php?module=CONNEXION&action=inscription" method="POST">
+            <form action="index.php?module=Connexion&action=inscription" method="POST">
                 <div class="input-group mb-3">
                     <span class="input-group-text col-5 col-sm-3 col-lg-2">Indentifiant</span>
-                    <input id="login" type="text" name="login" class="form-control" placeholder="Indentifiant">
+                    <input id="login" type="text" name="login" class="form-control" placeholder="Indentifiant" required>
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text col-5 col-sm-3 col-lg-2">Mot de passe</span>
-                    <input id="mdp" type="password" name="mdp" class="form-control" placeholder="Mot de passe">
+                    <input id="mdp" type="password" name="mdp" class="form-control" placeholder="Mot de passe" required>
                 </div>
                 <div class="input-group mb-3">
                     <select id="choix" name="role" class="form-select">

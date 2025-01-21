@@ -24,8 +24,8 @@ class VueCompHeader extends VueCompGenerique {
         <!-- En-tête fixe contenant tous les éléments -->
         <div class="row pb-3">
             <!-- Bouton menu à gauche -->
-            <div class="col-4" >
-                <nav class="navbar navbar-expand-lg">
+            <div class="col-3" >
+                <nav class="navbar navbar-expand-sm">
                     <div class="container-fluid">
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
@@ -33,11 +33,11 @@ class VueCompHeader extends VueCompGenerique {
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">';
                 if (isset($_SESSION['login'])) {
-                    $this->affichage .= '<li><a class="btn btn-dark" href="index.php?module=CONNEXION&action=deconnexion">Déconnexion</a></li>';
+                    $this->affichage .= '<li><a class="btn btn-dark" href="index.php?module=Connexion&action=deconnexion">Déconnexion</a></li>';
                 } else if (isset($_GET['action']) && ($_GET['action'] == 'form_inscription' || $_GET['action'] == 'inscription')) {
-                    $this->affichage .= '<li><a class="btn btn-dark" href="index.php?module=CONNEXION&action=form_connexion">Connexion</a></li>';
+                    $this->affichage .= '<li><a class="btn btn-dark" href="index.php?module=Connexion&action=form_connexion">Connexion</a></li>';
                 } else {
-                    $this->affichage .= '<li><a class="btn btn-dark" href="index.php?module=CONNEXION&action=form_inscription">Inscription</a></li>';
+                    $this->affichage .= '<li><a class="btn btn-dark" href="index.php?module=Connexion&action=form_inscription">Inscription</a></li>';
                 }
                 $this->affichage .='
                             </ul>
@@ -46,7 +46,7 @@ class VueCompHeader extends VueCompGenerique {
                 </nav>
             </div>
             <!-- Titre centré -->
-            <div class="col-4 text-center">
+            <div class="col-6 text-center">
                 <h1>
                     ' . $titre . '
                 </h1>
@@ -54,9 +54,10 @@ class VueCompHeader extends VueCompGenerique {
         if(isset($image) && !empty($image)) {
             $this->affichage .= '
             <!-- Image de profil à droite -->
-            <div class="col-4 text-end" >
-                <a href="index.php?module=Profile&id=' . htmlspecialchars($_SESSION['login'] ?? '') . '">
-                    <img src="' . $image . '" alt="Profile" style="width: 70px; height: 70px; border-radius: 50%;">
+            <div class="col-3 text-end p-0">
+                <a class="btn p-0" href="index.php?module=Profile&id=' . htmlspecialchars($_SESSION['login'] ?? '') . '">
+                    <img class="card-img m-0" src="' . $image . '" alt="Profile" style="width: 50px">
+                    <p class="card-title h7">' . htmlspecialchars($_SESSION['login'] ?? '') . '</p>
                 </a>
             </div>';
         }

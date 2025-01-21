@@ -2,7 +2,7 @@
 class VueDETAILS {
     public function __construct() {}
 
-    public function vueDetailProjet($etudiants, $projet, $intervenantsLibre, $estResponsableDe, $intervenantPris, $groupeAndEtudiant){
+    public function vueDetailProjet($etudiants, $projet, $intervenantsLibre, $estResponsableDe, $intervenantPris, $groupeAndEtudiant, $groupeName){
         ?>
         <div class="row pb-3">
             <div class="col-sm-10 col-xs-6 col-9">
@@ -13,7 +13,7 @@ class VueDETAILS {
                 </a>
             </div>
             <div class="col-sm-1 col-xs-1 col-1 text-end">
-                <a href="index.php?module=ENSEIGNANTS&action=menu" class="btn">
+                <a href="index.php?module=Enseignants&action=menu" class="btn">
                     <div class="card shadow-sm text-center p-1">
                         <img class="card-img m-0" src="icons/retour.png" alt="Retour">
                         <span class="card-title h6">Retour</span>
@@ -21,11 +21,11 @@ class VueDETAILS {
                 </a>
             </div>
             <div class="collapse row show" id="collapseUtilisateur">
-                <div class="col-6">
+                <div class="col-12 col-sm-6 mb-2">
                     <div class="card">
                         <div class="card-body">
                             <h4 class="mb-4">Ajouter un Groupe</h4>
-                            <form action="index.php?module=DETAILS&idProjet=<?= $projet['idProjet'] ?>&action=creerGrp" method="POST">
+                            <form action="index.php?module=Details&idProjet=<?= $projet['idProjet'] ?>&action=creerGrp" method="POST">
                                 <div class="mb-3">
                                     <label for="texte" class="form-label">Nom du groupe pour le projet <?= $projet['titre'] ?></label>
                                     <input type="text" id="NomProjet" name="texte" class="form-control" required>
@@ -48,11 +48,11 @@ class VueDETAILS {
                 </div>
 
                 <?php if($estResponsableDe == 1): ?>
-                <div class="col-6">
+                <div class="col-12 col-sm-6">
                     <div class="card">
                         <div class="card-body">
                             <h4 class="mb-4">Ajouter des Intervenants</h4>
-                            <form action="index.php?module=DETAILS&idProjet=<?= $projet['idProjet'] ?>&action=ajtInter" method="POST">
+                            <form action="index.php?module=Details&idProjet=<?= $projet['idProjet'] ?>&action=ajtInter" method="POST">
                                 <label class="form-label">Choisissez les intervenants à ajouter</label>
                                 <div class="mb-3 scrollable-section">
                                     <?php foreach ($intervenantsLibre as $intervenant) { ?>
@@ -82,11 +82,11 @@ class VueDETAILS {
                 </a>
             </div>
             <div class="collapse row show" id="collapseDocuments">
-                <div class="col-6">
+                <div class="col-12 col-sm-6 mb-2">
                     <div class="card">
                         <div class="card-body">
                             <h4 class="mb-4">Déposer un Document</h4>
-                            <form action="index.php?module=DETAILS&idProjet=<?= $projet['idProjet'] ?>&action=depDocu" method="POST" enctype="multipart/form-data">
+                            <form action="index.php?module=Details&idProjet=<?= $projet['idProjet'] ?>&action=depDocu" method="POST" enctype="multipart/form-data">
                                 <div class="mb-3">
                                     <label for="NomRessource" class="form-label">Titre de la Ressource</label>
                                     <input type="text" id="NomRessource" name="texte" class="form-control" required>
@@ -101,11 +101,11 @@ class VueDETAILS {
                     </div>
                 </div>
                 
-                <div class="col-6">
+                <div class="col-12 col-sm-6">
                     <div class="card">
                         <div class="card-body">
                             <h4 class="mb-4">Créer un Dépôt</h4>
-                            <form action="index.php?module=DETAILS&idProjet=<?=$projet['idProjet']?>&action=creerDepot" method="POST">
+                            <form action="index.php?module=Details&idProjet=<?=$projet['idProjet']?>&action=creerDepot" method="POST">
                                 <div class="mb-3">
                                     <label for="nomDepot" class="form-label">Nom du Dépôt</label>
                                     <input type="text" id="nomDepot" name="nomDepot" class="form-control" required>
@@ -133,24 +133,24 @@ class VueDETAILS {
                 </div>
                 <div class="collapse row show" id="collapseVue">
                     <?php if(count($groupeAndEtudiant) != 0): ?>
-                    <div class="col-6">
+                    <div class="col-12 col-sm-6 mb-2">
                         <div class="card">
                             <div class="card-body">
-                                <?php $this->afficherGroupe($groupeAndEtudiant, $projet['idProjet']);?>
+                                <?php $this->afficherGroupe($groupeAndEtudiant, $projet['idProjet'], $groupeName);?>
                             </div>
                         </div>
                     </div>
                     <?php endif; ?>
                     <?php if(count($intervenantPris) != 0): ?>
-                    <div class="col-6">
+                    <div class="col-12 col-sm-6">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="mb-4">Liste des Intervenants</h4>
-                                <ul class="list-group">
+                                <ul class="list-group scrollable-section">
                                     <?php foreach ($intervenantPris as $intervenant) { ?>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <?= $intervenant['login'] ?>
-                                        <form action="index.php?module=DETAILS&idProjet=<?= $projet['idProjet'] ?>&action=deleteIntervenant" method="POST" class="m-0">
+                                        <form action="index.php?module=Details&idProjet=<?= $projet['idProjet'] ?>&action=deleteIntervenant" method="POST" class="m-0">
                                             <input type="hidden" name="idUtilisateur" value="<?= $intervenant['idUtilisateur'] ?>">
                                             <button type="submit" class="btn btn-danger">
                                                 <img class='card-img m-0' src='icons/supprimer.png' alt='X'>
@@ -169,36 +169,41 @@ class VueDETAILS {
         <?php
     }
 
-    public function afficherGroupe($groupeAndEtudiant, $idProjet) {
+    public function afficherGroupe($groupeAndEtudiant, $idProjet, $groupeName) {
         if(isset($groupeAndEtudiant)){
-            echo "<h4>Groupe d'étudiant</h4>";
-            echo "<ul class='list-group mt-2'>";
+            echo "<h4 class='mb-4'>Groupe d'étudiant</h4>";
+            echo "<ul class='list-group mt-2 scrollable-section'>";
             foreach ($groupeAndEtudiant as $idGroupe => $etudiants) {
-                echo "<li class='list-group-item'>";
-                echo "  <div class='row mb-1'>";
-                echo "      <h6 class='col-10 mb-0'>$idGroupe :</h6>";
-                echo "      <form class='col-2 text-end' action='index.php?module=DETAILS&idProjet=$idProjet&action=deleteGroupe' method='POST'>";
-                echo "          <input type='hidden' name='idGroupe' value='$idGroupe'>";
-                echo "          <button type='submit' class='btn btn-danger btn-sm'>";
-                echo "              <img class='card-img m-0' src='icons/Supprimer.png' alt='X'>";
-                echo "          </button>";
-                echo "      </form>";
-                echo "  </div>";
-                foreach ($etudiants as $login) {
-                    echo "  <ul class='col-12 mb-1'>";
-                    echo "      <li class='d-flex justify-content-between'>";
-                    echo "          - $login";
-                    echo "          <form action='index.php?module=DETAILS&idProjet=$idProjet&action=deleteUserGroupe' method='POST'>";
-                    echo "              <input type='hidden' name='login' value='$login'>";
-                    echo "              <input type='hidden' name='idGroupe' value='$idGroupe'>";
-                    echo "              <button type='submit' class='btn btn-danger btn-sm'>";
-                    echo "                  <img class='card-img m-0' src='icons/Supprimer.png' alt='X'>";
-                    echo "              </button>";
-                    echo "          </form>";
-                    echo "      </li>";
-                    echo "  </ul>";
+                foreach ($groupeName as $groupeTableau) {
+                    if ($groupeTableau['idGroupe'] == $idGroupe) {
+                        $groupe = $groupeTableau['nomGroupe'];
+                        echo "<li class='list-group-item'>";
+                        echo "  <div class='row mb-1'>";
+                        echo "      <h6 class='col mb-0'>$groupe:</h6>";
+                        echo "      <form class='col-4 text-end' action='index.php?module=Details&idProjet=$idProjet&action=deleteGroupe' method='POST'>";
+                        echo "          <input type='hidden' name='idGroupe' value='$idGroupe'>";
+                        echo "          <button type='submit' class='btn btn-danger btn-sm'>";
+                        echo "              <img class='card-img m-0' src='icons/Supprimer.png' alt='X'>";
+                        echo "          </button>";
+                        echo "      </form>";
+                        echo "  </div>";
+                        foreach ($etudiants as $login) {
+                            echo "  <ul class='col-12 mb-1'>";
+                            echo "      <li class='d-flex justify-content-between'>";
+                            echo "          - $login";
+                            echo "          <form action='index.php?module=Details&idProjet=$idProjet&action=deleteUserGroupe' method='POST'>";
+                            echo "              <input type='hidden' name='login' value='$login'>";
+                            echo "              <input type='hidden' name='idGroupe' value='$idGroupe'>";
+                            echo "              <button type='submit' class='btn btn-danger btn-sm'>";
+                            echo "                  <img class='card-img m-0' src='icons/Supprimer.png' alt='X'>";
+                            echo "              </button>";
+                            echo "          </form>";
+                            echo "      </li>";
+                            echo "  </ul>";
+                        }
+                        echo "</li>";
+                    }
                 }
-                echo "</li>";
             }
             echo "</ul>";
         }

@@ -30,12 +30,11 @@ class ModeleCONNEXION extends Connexion {
 		
 		$this->setRoleSession($login);
 
-		var_dump($_SESSION['role']);
-
-		if($_SESSION['role'] === 'etudiant')
-			header("location: index.php?module=PROJETS&action=menu");
-			
-		elseif($_SESSION['role'] == 'responsable' || $_SESSION['role'] == 'intervenant')
-			header("location: index.php?module=ENSEIGNANTS&action=menu");
+		if($_SESSION['role'] === 'etudiant') {
+			header("location: index.php?module=Projets&action=menu");
+		}
+		else if($_SESSION['role'] == 'responsable' || $_SESSION['role'] == 'intervenant'){
+			header("location: index.php?module=Enseignants&action=menu");
+		}
 	}
 }

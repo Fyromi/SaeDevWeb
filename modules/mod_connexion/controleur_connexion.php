@@ -23,10 +23,12 @@ class ControleurCONNEXION {
 
             case "form_connexion" :
 
-                if(!isset($_SESSION['login']))
+                if(!isset($_SESSION['login'])) {
                     $this->form_connexion();
-                else $this->modele->connecte($_SESSION['login']);
-                 
+                }
+                else {
+                    $this->modele->connecte($_SESSION['login']);
+                }
                 break;
             
             case "inscription" :
@@ -59,37 +61,42 @@ class ControleurCONNEXION {
         if ($util === false) {
             $this->vue->utilisateur_inconnu($login);
         }
-            
-        if (password_verify($mdp, $util["mdp"])){
-            $_SESSION['login'] = $login;
-            $this->modele->connecte($login);
-        }
         else {
-            $this->vue->echec_connexion($login);
-            $_GET['action'] = 'form_connexion';
-
+            if (password_verify($mdp, $util["mdp"])){
+                $_SESSION['login'] = $login;
+                $this->modele->connecte($login);
+            }
+            else {
+                $this->vue->echec_connexion($login);
+                $_GET['action'] = 'form_connexion';
+            }
         }
     }
 
     private function inscription () {
         $isValid = true;
-     
 
-        if (isset ($_POST['login']) && !empty($_POST['login']))
+        if (isset ($_POST['login']) && !empty($_POST['login'])) {
             $login = $_POST['login'];
-        else
+        }
+        else {
             $isValid = false;
-			$login = empty(" ");
+            $login = empty(" ");
+        }
 
-        if (isset ($_POST['mdp']) && !empty($_POST['mdp']))
+        if (isset ($_POST['mdp']) && !empty($_POST['mdp'])) {
             $mdp = $_POST['mdp'];
-        else
-            $isValid = false;  
+        }
+        else{
+            $isValid = false;
+        }
 
-        if (isset ($_POST['role']) && !empty($_POST['role']) && ($_POST['role'] == 'etudiant' || $_POST['role'] == 'intervenant' || $_POST['role'] == 'responsable'))
+        if (isset ($_POST['role']) && !empty($_POST['role']) && ($_POST['role'] == 'etudiant' || $_POST['role'] == 'intervenant' || $_POST['role'] == 'responsable')) {
             $role = $_POST['role'];
-        else
-        	$isValid = false;
+        }
+        else {
+            $isValid = false;
+        }
 
         if($isValid) {
             $mdp_hash = password_hash($mdp, PASSWORD_BCRYPT);

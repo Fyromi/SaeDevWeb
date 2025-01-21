@@ -10,7 +10,7 @@ class VueRESSOURCES {
                 <h3 class="border-bottom border-secondary pb-3">Documents</h3>
             </div>
             <div class="col-sm-1 col-xs-1 col-1 text-end">
-                <a href="index.php?module=PROJETS&action=menu" class="btn">
+                <a href="index.php?module=Projets&action=menu" class="btn">
                     <div class="card shadow-sm text-center p-1">
                         <img class="card-img m-0" src="icons/retour.png" alt="Retour">
                         <span class="card-title h6">Retour</span>
