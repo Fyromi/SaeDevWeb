@@ -187,9 +187,21 @@ class ModeleDETAILS extends Connexion{
         return $request->fetchColumn();
     }
 
-    public function deleteProjet(){
-        $idProjet = $_GET('idProjet');
-        $sql = $this->queries['deleteProjet'];
-        $request = $this->executeQuery($sql, [':idProjet' => $idProjet]);
+    public function deleteProjet() {
+        $idProjet = $_GET['idProjet'];
+        try {
+            connexion::$bdd->beginTransaction();
+            foreach ($this->queries['supprimerProjet'] as $key => $value) {
+                $sql = $value;
+                $this->executeQuery($sql, [':idProjet' => $idProjet]);
+            }
+           connexion::$bdd->commit();
+
+            header("location: index.php?module=Enseignants&action=menu");
+        } catch (Exception $e) {
+            connexion::$bdd->rollBack();
+            echo "Erreur : " . $e->getMessage();
+        }
     }
+    
 }
