@@ -48,7 +48,9 @@
                 case 'deleteUserGroupe' :
                     $this->modele->deleteUserGroupe();
                     break;
-                default:
+                case 'deleteProjet' :
+                    $this->modele->deleteProjet();
+                default:    
                     break;
             }
             $this->vue->vueDetailProjet($etudiantSansGrp,$projet, $intervenantLibre, $estResponsableDe,$intervenantPris, $groupeAndEtudiant, $groupeProjet);

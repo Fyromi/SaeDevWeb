@@ -187,4 +187,45 @@ class ModeleDETAILS extends Connexion{
         return $request->fetchColumn();
     }
 
+    public function deleteProjet() {
+        $idProjet = $_GET['idProjet'];
+        try {
+            connexion::$bdd->beginTransaction();
+            foreach ($this->queries['supprimerProjet'] as $key => $value) {
+                $sql = $value;
+                $this->executeQuery($sql, [':idProjet' => $idProjet]);
+            }
+            connexion::$bdd->commit();
+
+            $idProjet = $_GET['idProjet'];
+            $cheminRepertoire = "Projet/Projet$idProjet";
+            $this->supprimerRepertoire($cheminRepertoire);
+
+            header("location: index.php?module=Enseignants&action=menu");
+        } catch (Exception $e) {
+            connexion::$bdd->rollBack();
+            echo "Erreur : " . $e->getMessage();
+        }
+    }
+
+    public function supprimerRepertoire($repertoire) {
+
+        // recupère les éléments du repertoir dans un tableau
+        $fichiers = array_diff(scandir($repertoire), ['.', '..']);
+    
+        foreach ($fichiers as $fichier) {
+            $chemin = $repertoire . DIRECTORY_SEPARATOR . $fichier;
+    
+            // La je vérifie si c'est un dossier, si oui je recommance
+            if (is_dir($chemin)) {
+                $this->supprimerRepertoire($chemin);
+            } else {
+                // Si non supprime le fichier
+                unlink($chemin);
+            }
+        }
+    
+        // Supprime le répertoire lui-même
+        return rmdir($repertoire);
+    }
 }
