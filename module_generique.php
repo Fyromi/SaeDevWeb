@@ -10,7 +10,7 @@ class ModuleGenerique {
 		$this->affichage = "";
 	}
 	
-	public function exec () {
+	public function exec() {
 		$this->controleur->exec();
 		$this->affichage = ob_get_clean();
 	

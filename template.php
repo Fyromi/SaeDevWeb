@@ -1,9 +1,10 @@
-<html>
+    <html>
 <link rel="stylesheet" href="style.css">
 <head><title>Rajouter ici le titre set par le module</title></head>
 <body>
-<header><?php echo $menu->getAffichage(); ?>
-    <h1><?$module_html_name?></h1>
+<header >
+<h1><?php echo $site->get_module_name()?></h1>
+<?php echo $menu->getAffichage(); ?>
 </header>
 
 <main>
