@@ -36,5 +36,9 @@ class ModeleCONNEXION extends Connexion {
 		else if($_SESSION['role'] == 'responsable' || $_SESSION['role'] == 'intervenant'){
 			header("location: index.php?module=Enseignants&action=menu");
 		}
+		else if($_SESSION['role'] == 'admin'){
+			header("location: index.php?module=Connexion&action=form_inscriptionAdmin");
+		}
+
 	}
 }

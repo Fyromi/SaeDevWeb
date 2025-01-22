@@ -1,7 +1,7 @@
 <?php
 require_once "modules/mod_CONNEXION/vue_CONNEXION.php";
 require_once "modules/mod_CONNEXION/modele_CONNEXION.php";
-require_once "TokenManager.php";  // Inclusion de la classe TokenManager
+require_once "TokenManager.php"; 
 
 class ControleurCONNEXION {
 
@@ -13,12 +13,11 @@ class ControleurCONNEXION {
     public function __construct() {
         $this->modele = new ModeleCONNEXION();
         $this->vue = new VueCONNEXION();
-        $this->tokenManager = new TokenManager(); // Initialisation de la classe TokenManager
+        $this->tokenManager = new TokenManager();
     }
 
     public function exec() {
         $this->action = isset($_GET["action"]) ? $_GET["action"] : "form_connexion";
-
         switch ($this->action) {
             case "verif_connexion":
                 $this->verif_connexion();
@@ -33,17 +32,23 @@ class ControleurCONNEXION {
                 break;
             
             case "inscription":
-                $this->inscription();
+                $this->inscription(false);
+                break;
+
+            case "inscriptionAdmin":
+                $this->inscription(true);
                 break;
             
             case "form_inscription":
-                $this->form_inscription();
+                $this->form_inscription(false);
                 break;
-            
+
             case "deconnexion":
                 $this->deconnexion();
                 break;
-
+            case "form_inscriptionAdmin":
+                $this->form_inscription(true);
+                break;
             default:
                 die("Action inexistante");
         }
@@ -53,8 +58,8 @@ class ControleurCONNEXION {
         $this->vue->form_connexion();
     }
 
-    private function form_inscription() {
-        $this->vue->form_inscription();
+    private function form_inscription($isAdmin) {
+        $this->vue->form_inscription($isAdmin);
     }
 
     private function verif_connexion () {
@@ -75,7 +80,6 @@ class ControleurCONNEXION {
                 if ($tokenManager::validerToken($token)) {
                     $tokenManager::supprimerToken($token);  
                     $this->modele->connecte($login);
-                    $this->vue->confirmation_connexion($login);
                 } else {
                     // Si le token n'est pas valide
                     $this->vue->echec_connexion($login);
@@ -86,10 +90,8 @@ class ControleurCONNEXION {
             }
         }
     }
-    
-    
 
-    private function inscription() {
+    private function inscription($isAdmin) {
         $isValid = true;
 
         if (isset($_POST['login']) && !empty($_POST['login'])) {
@@ -105,12 +107,14 @@ class ControleurCONNEXION {
             $isValid = false;
         }
 
-        if (isset($_POST['role']) && !empty($_POST['role']) && ($_POST['role'] == 'etudiant' || $_POST['role'] == 'intervenant' || $_POST['role'] == 'responsable')) {
-            $role = $_POST['role'];
-        } else {
-            $isValid = false;
-        }
-
+        if($isAdmin){
+            if (isset($_POST['role']) && !empty($_POST['role']) && ($_POST['role'] == 'etudiant' || $_POST['role'] == 'intervenant' || $_POST['role'] == 'responsable')) {
+                $role = $_POST['role'];
+            } else {
+                $isValid = false;
+            }
+        } else $role = 'etudiant';
+        
         if ($isValid) {
             $mdp_hash = password_hash($mdp, PASSWORD_BCRYPT);
             if ($this->modele->verifLogin($login) == false && $this->modele->ajout_utilisateur($login, $mdp_hash, $role)) {

@@ -21,9 +21,15 @@ class VueCONNEXION extends VueGenerique {
         <?php
     }
         
-    public function form_inscription() {
+    public function form_inscription($isAdmin) {
+        if($isAdmin){
+            $action = 'inscriptionAdmin';
+        } else $action = 'inscription';
+        
+        $messageBouton = "S'inscrire";
+
         ?>
-        <form action="index.php?module=Connexion&action=inscription" method="POST">
+        <form action="index.php?module=Connexion&action=<?=$action?>" method="POST">
             <div class="input-group mb-3">
                 <span class="input-group-text col-5 col-sm-3 col-lg-2">Indentifiant</span>
                 <input id="login" type="text" name="login" class="form-control" placeholder="Indentifiant" required>
@@ -32,15 +38,20 @@ class VueCONNEXION extends VueGenerique {
                 <span class="input-group-text col-5 col-sm-3 col-lg-2">Mot de passe</span>
                 <input id="mdp" type="password" name="mdp" class="form-control" placeholder="Mot de passe" required>
             </div>
-            <div class="input-group mb-3">
+            <?php if ($isAdmin) {
+                $messageBouton = "L'inscrire";?>
+                <div class="input-group mb-3">
                 <select id="choix" name="role" class="form-select">
-                    <option selected>Choisissez votre rôle</option>
+                    <option selected>Choisissez le rôle à attribuer a l'utilisateur</option>
                     <option value="etudiant">Étudiant</option>
                     <option value="intervenant">Intervenant</option>
                     <option value="responsable">Responsable</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-dark" id="bouton_co">S'inscrire</button>
+            <?php
+            }?>
+            
+            <button type="submit" class="btn btn-dark" id="bouton_co"><?=$messageBouton?></button>
         </form>
         <?php
     }
@@ -50,7 +61,7 @@ class VueCONNEXION extends VueGenerique {
         ?>
         <div class="alert alert-success d-flex align-items-center" role="alert">
             <div>
-                Inscription de: <b><?= $safeLogin ?> réussie !</b>
+                Inscription de : <b><?= $safeLogin ?> réussie !</b>
             </div>
         </div>
         <?php
@@ -61,18 +72,7 @@ class VueCONNEXION extends VueGenerique {
         ?>
         <div class="alert alert-danger d-flex align-items-center" role="alert">
             <div>
-                Echec de l'inscription de: <b><?= $safeLogin ?></b>
-            </div>
-        </div>
-        <?php
-    }
-
-    public function confirm_connexion($login) {
-        $safeLogin = htmlspecialchars($login, ENT_QUOTES, 'UTF-8');
-        ?>
-        <div class="alert alert-success d-flex align-items-center" role="alert">
-            <div>
-                Connexion en tant que: <b><?= $safeLogin ?> réussie !</b>
+                Echec de l'inscription de : <b><?= $safeLogin ?></b>
             </div>
         </div>
         <?php

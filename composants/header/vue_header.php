@@ -14,7 +14,7 @@ class VueCompHeader extends VueCompGenerique {
             $image = $pPictur['profilpicture'];
         }
         if ($_GET['module'] == 'Connexion')
-            if(isset($_GET['action']) && ($_GET['action'] == 'form_inscription' || $_GET['action'] == 'inscription'))
+            if(isset($_GET['action']) && ($_GET['action'] == 'form_inscription' || $_GET['action'] == 'inscription' || $_GET['action'] == 'form_inscriptionAdmin'))
                 $titre = 'Inscription';
             else
                 $titre = 'Connexion';
@@ -52,12 +52,14 @@ class VueCompHeader extends VueCompGenerique {
                 </h1>
             </div>';
         if(isset($image) && !empty($image)) {
+            if(htmlspecialchars($_SESSION['login'] ?? '') =='tux') $login = 'Administrateur';
+            else $login = htmlspecialchars($_SESSION['login'] ?? '');
             $this->affichage .= '
             <!-- Image de profil à droite -->
             <div class="col-3 text-end p-0">
                 <a class="btn p-0" href="index.php?module=Profile&id=' . htmlspecialchars($_SESSION['login'] ?? '') . '">
                     <img class="card-img m-0" src="' . $image . '" alt="Profile" style="width: 50px">
-                    <p class="card-title h7">' . htmlspecialchars($_SESSION['login'] ?? '') . '</p>
+                    <p class="card-title h7">' . $login . '</p>
                 </a>
             </div>';
         }
