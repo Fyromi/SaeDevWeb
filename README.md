@@ -21,7 +21,9 @@
 
 3. **Intégration de la base de données** :
    - Ouvrez [phpMyAdmin](http://localhost/phpmyadmin/index.php?route=/server/sql).
-   - Importez le fichier `scriptSae.sql` en copiant son contenu dans l'onglet SQL.
+   - Importez le fichier `ScriptAvecDonnées.sql` en copiant son contenu dans l'onglet SQL ou le fichier `ScriptAvecDonnées.sql`.
+   - Faites `Exectuter`.
+   - Vous trouverez aussi un fichier `LogUtilisateur.pdf` qui repertorie tout les log de chaque utilisateur pour le script avec des données. L'utilisateur `admin` est présent dans les 2 versions du script.
 
 4. **Configuration optionnelle** :
    - Si vous avez configuré un compte MySQL avec un mot de passe/login, modifiez la ligne 8 du fichier `connexion.php` :
