@@ -66,14 +66,12 @@ class VuePROJETS {
             <div class="row">
             <?php foreach ($profs as $prof): ?>
                 <div class="col-4">
-                    <a href="index.php?module=PROFIL&id=<?= htmlspecialchars($prof['login']); ?>" class="m-1 text-dark text-decoration-none">
-                        <div class="d-flex flex-column align-items-center">
-                            <?php
-                            echo "<img src=" . htmlspecialchars($prof['image']) . " alt='Image de profil' class='rounded-circle mb-2' width='50' height='50'/>";
-                            echo "<div>" . htmlspecialchars($prof['login']) . "</div>";
-                            ?>
-                        </div>
-                    </a>
+                    <div class="d-flex flex-column align-items-center">
+                        <?php
+                        echo "<img src=" . htmlspecialchars($prof['image']) . " alt='Image de profil' class='rounded-circle mb-2' width='50' height='50'/>";
+                        echo "<div>" . htmlspecialchars($prof['login']) . "</div>";
+                        ?>
+                    </div>
                 </div>
             <?php endforeach; ?>
             </div>
@@ -88,14 +86,12 @@ class VuePROJETS {
             <div class="row">
             <?php foreach ($groupe[1] as $etudiant): ?>
                 <div class="col-4">
-                    <a href="index.php?module=PROFIL&id=<?= htmlspecialchars($etudiant['login']); ?>" class="text-dark text-decoration-none">
-                        <div class="d-flex flex-column align-items-center">
-                            <?php                        
-                            echo "<img src=" . htmlspecialchars($etudiant['image']) . " alt='Image de profil' class='rounded-circle mb-2' width='50' height='50'/>";
-                            echo "<span class='text-center'>" . htmlspecialchars($etudiant['login']) . "</span>"; // Le texte est centré avec la classe text-center
-                            ?>
-                        </div>
-                    </a>
+                    <div class="d-flex flex-column align-items-center">
+                        <?php                        
+                        echo "<img src=" . htmlspecialchars($etudiant['image']) . " alt='Image de profil' class='rounded-circle mb-2' width='50' height='50'/>";
+                        echo "<span class='text-center'>" . htmlspecialchars($etudiant['login']) . "</span>"; // Le texte est centré avec la classe text-center
+                        ?>
+                    </div>
                 </div>
             <?php endforeach; ?>
             </div>

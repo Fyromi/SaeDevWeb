@@ -57,7 +57,7 @@ class VueCompHeader extends VueCompGenerique {
             $this->affichage .= '
             <!-- Image de profil à droite -->
             <div class="col-3 text-end p-0">
-                <a class="btn p-0" href="index.php?module=Profile&id=' . htmlspecialchars($_SESSION['login'] ?? '') . '">
+                <a class="btn p-0" style="pointer-events: none;">
                     <img class="card-img m-0" src="' . $image . '" alt="Profile" style="width: 50px">
                     <p class="card-title h7">' . $login . '</p>
                 </a>
