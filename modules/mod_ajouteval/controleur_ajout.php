@@ -36,15 +36,18 @@ Class ControleurAjoutEvaluation {
     }
 
     public function form_ajoutevaluation(){
-        $this->vue->form_ajoutevaluation();
+        $projets = $this->modele->get_projets();
+
+        $this->vue->form_ajoutevaluation($projets);
     }
 
     public function verif_ajout(){
         $nom = isset($_POST['nom']) ? $_POST['nom'] : die("Nom manquant");
+        $projet = isset($_POST['projet']) ? $_POST['projet'] : die("projet manquant");
         $date = isset($_POST['date']) ? $_POST['date'] : die("Date manquante");
         $coeff = isset($_POST['coeff']) ? $_POST['coeff'] : die("Coefficient manquant");
 
-        if($this->modele->ajout_evaluation($nom, $date, $coeff))
+        if($this->modele->ajout_evaluation($nom,$projet, $date, $coeff))
             $this->vue->confirm_ajout();
         else
             $this->vue->erreur_ajout();

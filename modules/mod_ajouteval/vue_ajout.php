@@ -5,18 +5,27 @@ Class VueAjoutEvaluation {
         ?>
         <div class="accueil_ajoutevaluation">
             <h1>Accueil Ajout Evaluation</h1>
-            <a href="index.php?module=AjoutEval&action=form_ajoutevaluation"><img width="100px" src="images/ajout_croix.png"></a>
+            <li><a class="btn btn-dark" href="index.php?module=AjoutEval&action=form_ajoutevaluation">Ajouter Evaluation</a></li>
         </div>
         <?php
     }
 
-    public function form_ajoutevaluation(){
+    public function form_ajoutevaluation($projets){
+        $projetOptions = "";
+        foreach ($projets as $projet) {
+            $projetOptions .= "<option value='{$projet['idProjet']}'>Projet ID {$projet['idProjet']}</option>";
+        }
         ?>
         <div class="ajout_evaluation">
             <h1>Ajouter une Evaluation</h1>
             <form action="index.php?module=AjoutEval&action=verif_ajout" method="POST">
                 Nom de l'Evaluation
                 <input type="text" name="nom"></input>
+                <br>
+                <label for="projet_id">Projet</label>
+                <select name="projet" id="projet">
+                    <?= $projetOptions; ?>
+                </select>
                 <br>
                 Date
                 <input type="date" name="date"></input>
