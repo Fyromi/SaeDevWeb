@@ -24,7 +24,8 @@
                     $documents = $this->modele->getRessourcesByType($idProjet, 'documents');
                     $consigne = $this->modele->getRessourcesByType($idProjet,'consignes');
                     $depot = $this->modele->getDepot($idProjet);
-                    $this->vue->afficherProjet($documents, $consigne, $depot);
+                    $important = $this->modele->getRessourcesEnAvantByType($idProjet,'important');
+                    $this->vue->afficherProjet($documents, $consigne, $depot, $important);
                     break;
                 default:
                     break;

@@ -94,15 +94,15 @@ class ModeleDETAILS extends Connexion{
 
     public function importFile() {
         
-        $repertoire = dirname(__DIR__, 2)."/Projet/Projet" . $_GET['idProjet'] . "/ressource";
+        $repertoire = "SaeDevWeb/Projet/Projet" . $_GET['idProjet'] . "/ressource";
         $nom = $_POST['texte'];
         $fichierTmp = $_FILES['fichier']['tmp_name'];
         $nomFichierAvecEspace = basename($_FILES['fichier']['name']);
         $nomFichierSansEspace = preg_replace('/\s+/', '+', $nomFichierAvecEspace);
         $cheminFinal = $repertoire . "/" . $nomFichierSansEspace;
         $cheminForbdd = "Projet/Projet" . $_GET['idProjet'] . "/ressource"."/". $nomFichierSansEspace;
-        move_uploaded_file($fichierTmp, $cheminFinanl, $_POST['miseEnAvant']);
-        $this->insertLinkToBdd($nom,$cheminForbdd, $_GET['idProjet']);
+        move_uploaded_file($fichierTmp, $cheminFinal);
+        $this->insertLinkToBdd($nom,$cheminForbdd, $_GET['idProjet'], $_POST['miseEnAvant']);
     }
 
     private function insertLinkToBdd($nom, $lien, $mettreEnAvant){
