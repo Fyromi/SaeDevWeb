@@ -13,13 +13,13 @@ class VueCompHeader extends VueCompGenerique {
            
             $image = $pPictur['profilpicture'];
         }
-        if ($_GET['module'] == 'Connexion')
-            if(isset($_GET['action']) && ($_GET['action'] == 'form_inscription' || $_GET['action'] == 'inscription' || $_GET['action'] == 'form_inscriptionAdmin'))
-                $titre = 'Inscription';
-            else
-                $titre = 'Connexion';
-        else
-            $titre = htmlspecialchars($_GET['module']);
+        if ($_GET['module'] == 'Connexion'){
+            if(isset($_GET['action']) && ($_GET['action'] == 'form_inscription' || $_GET['action'] == 'inscription' || $_GET['action'] == 'form_inscriptionAdmin')){
+                if($_GET['action'] == 'form_inscriptionAdmin') $titre = 'Ajouter un utilisateur';
+                else $titre = 'Inscription etudiant';
+            }else $titre = 'Connexion';       
+        }else $titre = htmlspecialchars($_GET['module']);
+
         $this->affichage = '
         <!-- En-tête fixe contenant tous les éléments -->
         <div class="row pb-3">
