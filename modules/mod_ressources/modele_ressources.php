@@ -55,7 +55,6 @@ class ModeleRESSOURCES extends Connexion{
         foreach ($ressources as $ressource) {
                 $result[] = $ressource;
         }
-        var_dump( $result);
         return $result;
     }
     

@@ -113,7 +113,6 @@ class ModeleDETAILS extends Connexion{
             $sq2 = $this->queries['projetressource'];
         }
         else{
-            var_dump($mettreEnAvant);
             $sq2 = $this->queries['ressourceMiseEnAvant'];
         }
         $this->executeQuery($sq2, [':idProjet' => $_GET['idProjet'], ':idRessource' => self::$bdd->lastInsertId()]);
