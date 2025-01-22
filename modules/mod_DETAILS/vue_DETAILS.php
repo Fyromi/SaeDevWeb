@@ -227,36 +227,69 @@ class VueDETAILS {
     public function afficherRessource($groupeAndEtudiant, $idProjet, $groupeName, $ressources) {
         if (isset($groupeAndEtudiant)) {
             echo "<h4 class='mb-4'>Dépôt d'étudiant</h4>";
-            echo "<ul class='list-group mt-2 scrollable-section'>"; // Ajout de scrollable-section
+            echo "<ul class='list-group mt-2 scrollable-section'>";
             foreach ($groupeAndEtudiant as $idGroupe => $etudiants) {
                 foreach ($groupeName as $groupeTableau) {
-    
                     if ($groupeTableau['idGroupe'] == $idGroupe) {
+                        $groupDirectoryExists = false;
+                        
+                        foreach ($ressources as $item) {
+                            if (strpos($item['lienRessource'], "/groupe" . $idGroupe . "/") !== false) {
+                                $groupDirectoryExists = file_exists($item['lienRessource']);
+                                break;
+                            }
+                        }
+                        
+                        if (!$groupDirectoryExists) {
+                            continue;
+                        }
+                        
                         $groupe = htmlspecialchars($groupeTableau['nomGroupe']);
                         echo "<li class='list-group-item'>";
-                        echo "  <div class='row mb-1'>";
-                        echo "      <h6 class='col mb-0'>$groupe :</h6>";
+                        echo "  <div class='d-flex justify-content-between align-items-center mb-1'>";
+                        echo "      <h6 class='mb-0'>$groupe :</h6>";
+                        
+                        foreach ($ressources as $item) {
+                            if (strpos($item['lienRessource'], "/groupe" . $idGroupe . "/") !== false) {
+                                $positionProjet = strpos($item['lienRessource'], "/SaeDevWeb/");
+                                $cheminRepertoire = substr($item['lienRessource'], $positionProjet, strpos($item['lienRessource'], "/groupe" . $idGroupe . "/") + strlen("/groupe" . $idGroupe . "/") - $positionProjet);
+                                $lienRepertoire = htmlspecialchars($cheminRepertoire);
+                                echo "      <a href='$lienRepertoire' class='btn btn-dark btn-sm' target='_blank'>Dépôt Du Groupe</a>";
+                                break;
+                            }
+                        }
+                        
                         echo "  </div>";
     
                         foreach ($etudiants as $etudiant) {
+                            $studentDirectoryExists = false;
+                            foreach ($ressources as $item) {
+                                if (strpos($item['lienRessource'], "/etudiant" . $etudiant['idUtilisateur'] . "/") !== false) {
+                                    $studentDirectoryExists = file_exists($item['lienRessource']);
+                                    break;
+                                }
+                            }
+                            
+                            if (!$studentDirectoryExists) {
+                                continue;
+                            }
+                            
                             echo "  <ul class='col-12 mb-1'>";
                             echo "      <li class='d-flex flex-column'>";
                             echo "          <span>- " . htmlspecialchars($etudiant['login']) . "</span>";
     
-                            // Affichage des ressources sous forme de boutons
                             echo "          <div class='d-flex flex-wrap mt-1'>";
                             foreach ($ressources as $item) {
                                 if (strpos($item['lienRessource'], "/etudiant" . $etudiant['idUtilisateur'] . "/") !== false) {
                                     $nomRessource = htmlspecialchars($item['nomRessource']);
                                     $lienRessource = htmlspecialchars($item['lienRessource']);
-                                    echo "              <a href='$lienRessource' class='btn btn-danger btn-sm me-2 mb-2'>$nomRessource</a>";
+                                    echo "              <a href='$lienRessource' class='btn btn-dark btn-sm me-2 mb-2'>$nomRessource</a>";
                                 }
                             }
                             echo "          </div>";
                             echo "      </li>";
                             echo "  </ul>";
                         }
-    
                         echo "</li>";
                     }
                 }
@@ -264,8 +297,5 @@ class VueDETAILS {
             echo "</ul>";
         }
     }
-    
-    
-    
 }
 ?>
