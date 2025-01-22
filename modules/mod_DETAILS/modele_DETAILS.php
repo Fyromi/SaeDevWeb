@@ -96,22 +96,24 @@ class ModeleDETAILS extends Connexion{
         
         $repertoire = dirname(__DIR__, 2)."/Projet/Projet" . $_GET['idProjet'] . "/ressource";
         $nom = $_POST['texte'];
+        $mettreEnAvant = isset($_POST['miseEnAvant']) ? 1 : 0;
         $fichierTmp = $_FILES['fichier']['tmp_name'];
         $nomFichierAvecEspace = basename($_FILES['fichier']['name']);
         $nomFichierSansEspace = preg_replace('/\s+/', '+', $nomFichierAvecEspace);
         $cheminFinal = $repertoire . "/" . $nomFichierSansEspace;
         $cheminForbdd = "Projet/Projet" . $_GET['idProjet'] . "/ressource"."/". $nomFichierSansEspace;
         move_uploaded_file($fichierTmp, $cheminFinal);
-        $this->insertLinkToBdd($nom,$cheminForbdd, $_GET['idProjet'], isset($_POST['miseEnAvant']));
+        $this->insertLinkToBdd($nom,$cheminForbdd,$mettreEnAvant);
     }
 
     private function insertLinkToBdd($nom, $lien, $mettreEnAvant){
         $sql = $this->queries['insertLinkBdd'];
         $this->executeQuery($sql, [':nom' => $nom, ':lien' => $lien]);
         if($mettreEnAvant==0){
-            $sq2 = $this->queries['projetRessource'];
+            $sq2 = $this->queries['projetressource'];
         }
         else{
+            var_dump($mettreEnAvant);
             $sq2 = $this->queries['ressourceMiseEnAvant'];
         }
         $this->executeQuery($sq2, [':idProjet' => $_GET['idProjet'], ':idRessource' => self::$bdd->lastInsertId()]);

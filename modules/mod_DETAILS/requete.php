@@ -42,9 +42,9 @@ return [ 'getEtudiantSansGrp' => "SELECT DISTINCT u.*
         'addIntervenantProjet' => "INSERT INTO intervientDans (idUtilisateur, idProjet)
                                     VALUES (:idIntervenant, :idProjet);",
         
-        'insertLinkBdd'            => "INSERT INTO `ressource`(`nomRessource`, `lienRessource`) VALUES (:nom, :lien);",
+        'insertLinkBdd'         => "INSERT INTO `ressource`(`nomRessource`, `lienRessource`) VALUES (:nom, :lien);",
 
-        'projetRessource'       => "INSERT INTO `projetressource`(`idProjet`, `idRessource`) VALUES (:idProjet, :idRessource);",
+        'projetressource'       => "INSERT INTO `projetressource`(`idProjet`, `idRessource`) VALUES (:idProjet, :idRessource);",
 
         'ressourceMiseEnAvant'  => "INSERT INTO `ressourcemiseenavant`(`idProjet`, `idRessource`) VALUES (:idProjet, :idRessource);",
 
