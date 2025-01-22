@@ -229,7 +229,7 @@ CREATE TABLE `evaluation` (
 
 CREATE TABLE `groupeetudiant` (
   `idGroupe` INT(11) NOT NULL AUTO_INCREMENT,
-  `nomGroupe` VARCHAR(50) NOT NULL,
+  `nomGroupe` VARCHAR(50) ,
   `imageTitre` VARCHAR(255) DEFAULT NULL,
   PRIMARY KEY (`idGroupe`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -455,7 +455,7 @@ INSERT INTO `renduprojet` (`idProjet`, `idRendu`) VALUES
 CREATE TABLE `ressource` (
   `idRessource` bigint(20) UNSIGNED NOT NULL,
   `nomRessource` varchar(50) DEFAULT NULL,
-  `lienRessource` varchar(50) DEFAULT NULL,
+  `lienRessource` varchar(150) DEFAULT NULL,
   `type` enum('consignes','documents') NOT NULL DEFAULT 'documents'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

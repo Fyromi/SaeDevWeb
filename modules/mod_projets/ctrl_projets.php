@@ -1,6 +1,6 @@
 <?php
-    include_once 'modele_PROJETS.php';
-    include_once 'vue_PROJETS.php';
+    include_once 'modele_projets.php';
+    include_once 'vue_projets.php';
 
    class CtrlPROJETS{
 

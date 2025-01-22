@@ -1,6 +1,6 @@
 <?php
-    include_once 'modele_DEPOT.php';
-    include_once 'vue_DEPOT.php';
+    include_once 'modele_depot.php';
+    include_once 'vue_depot.php';
 
    class CtrlDEPOT{
 

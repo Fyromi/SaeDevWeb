@@ -6,7 +6,7 @@ class ModeleRESSOURCES extends Connexion{
     private $queries;
 
     public function __construct(){
-        $this->queries = include 'modules/mod_RESSOURCES/requete.php';
+        $this->queries = include 'modules/mod_ressources/requete.php';
     }
 
     private function executeQuery($sql, $params) {

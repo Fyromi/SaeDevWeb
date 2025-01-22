@@ -6,7 +6,7 @@ class ModeleDEPOT extends Connexion{
     private $queries;
 
     public function __construct(){
-        $this->queries = include 'modules/mod_DEPOT/requete.php';
+        $this->queries = include 'modules/mod_depot/requete.php';
     }
 
     private function executeQuery($sql, $params) {

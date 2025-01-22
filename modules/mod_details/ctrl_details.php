@@ -1,6 +1,6 @@
 <?php
-    include_once 'modele_DETAILS.php';
-    include_once 'vue_DETAILS.php';
+    include_once 'modele_details.php';
+    include_once 'vue_details.php';
 
    class CtrlDETAILS{
 

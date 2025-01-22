@@ -6,7 +6,7 @@ class ModeleDETAILS extends Connexion{
     private $queries;
 
     public function __construct(){
-        $this->queries = include 'modules/mod_DETAILS/requete.php';
+        $this->queries = include 'modules/mod_details/requete.php';
     }
 
     private function executeQuery($sql, $params) {

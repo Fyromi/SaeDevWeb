@@ -12,28 +12,28 @@ class Site {
 		$_GET['module'] = $this->module_name;
 		switch ($this->module_name) {
 			case "Connexion" :
-				require_once "modules/mod_".$this->module_name."/module_".$this->module_name.".php";
+				require_once "modules/mod_".strtolower($this->module_name)."/module_".strtolower($this->module_name).".php";
 				break;
 			case "Projets" :
-				require_once "modules/mod_".$this->module_name."/module_".$this->module_name.".php";
+				require_once "modules/mod_".strtolower($this->module_name)."/module_".strtolower($this->module_name).".php";
 				break;
 			case "Ressources" :
-				require_once "modules/mod_".$this->module_name."/module_".$this->module_name.".php";
+				require_once "modules/mod_".strtolower($this->module_name)."/module_".strtolower($this->module_name).".php";
 				break;
 			case "Enseignants" :
-				require_once "modules/mod_".$this->module_name."/module_".$this->module_name.".php";
+				require_once "modules/mod_".strtolower($this->module_name)."/module_".strtolower($this->module_name).".php";
 				break;
 			case "Creation" :
-				require_once "modules/mod_".$this->module_name."/module_".$this->module_name.".php";
+				require_once "modules/mod_".strtolower($this->module_name)."/module_".strtolower($this->module_name).".php";
 				break;
 			case "Details" : 
-				require_once "modules/mod_".$this->module_name."/module_".$this->module_name.".php";
+				require_once "modules/mod_".strtolower($this->module_name)."/module_".strtolower($this->module_name).".php";
 				break;
 			case 'Depot' :
-				require_once "modules/mod_".$this->module_name."/module_".$this->module_name.".php";
+				require_once "modules/mod_".strtolower($this->module_name)."/module_".strtolower($this->module_name).".php";
 				break;
 			default :
-				die ("Module inexistant");
+				die ("Module inexistant : $this->module_name; ");
 		}
 	}
 	

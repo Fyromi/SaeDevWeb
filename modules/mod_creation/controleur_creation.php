@@ -1,6 +1,6 @@
 <?php
-require_once "modules/mod_CREATION/vue_CREATION.php";
-require_once "modules/mod_CREATION/modele_CREATION.php";
+require_once "modules/mod_creation/vue_creation.php";
+require_once "modules/mod_creation/modele_creation.php";
 
 
 Class ControleurCREATION {

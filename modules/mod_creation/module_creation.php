@@ -1,7 +1,7 @@
 <?php
-require_once "modules/mod_CREATION/controleur_CREATION.php";
+require_once "modules/mod_creation/controleur_creation.php";
 
-Class ModCREATION extends ModuleGenerique {
+Class ModCreation extends ModuleGenerique {
     public function __construct () {
 		parent::__construct();
 		$this->controleur = new ControleurCREATION();

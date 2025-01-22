@@ -1,6 +1,6 @@
 <?php
-require_once "modules/mod_CONNEXION/vue_CONNEXION.php";
-require_once "modules/mod_CONNEXION/modele_CONNEXION.php";
+require_once "modules/mod_connexion/vue_connexion.php";
+require_once "modules/mod_connexion/modele_connexion.php";
 require_once "TokenManager.php";  // Inclusion de la classe TokenManager
 
 class ControleurCONNEXION {
@@ -68,7 +68,6 @@ class ControleurCONNEXION {
         } else {
             if (password_verify($mdp, $util["mdp"])) {
                 $_SESSION['login'] = $login;
-    
                 $tokenManager = new TokenManager();
                 $token = $tokenManager->genererToken($login);  
     

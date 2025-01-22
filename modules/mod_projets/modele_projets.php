@@ -6,7 +6,7 @@ class ModelePROJETS extends Connexion{
     private $queries;
 
     public function __construct(){
-        $this->queries = include 'modules/mod_PROJETS/requete.php';
+        $this->queries = include 'modules/mod_projets/requete.php';
     }
 
     private function executeQuery($sql, $params) {

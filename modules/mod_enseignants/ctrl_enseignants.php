@@ -1,6 +1,6 @@
 <?php
-    include_once 'modele_ENSEIGNANTS.php';
-    include_once 'vue_ENSEIGNANTS.php';
+    include_once 'modele_enseignants.php';
+    include_once 'vue_enseignants.php';
 
    class CtrlENSEIGNANTS{
 

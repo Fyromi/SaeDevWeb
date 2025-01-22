@@ -1,6 +1,6 @@
 <?php
-    include_once 'modele_RESSOURCES.php';
-    include_once 'vue_RESSOURCES.php';
+    include_once 'modele_ressources.php';
+    include_once 'vue_ressources.php';
 
    class CtrlRESSOURCES{
 
