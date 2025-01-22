@@ -21,7 +21,6 @@
             switch ($this->action) {
                 case 'menue':
                     $idProjet = $_GET['idProjet'];
-
                     $documents = $this->modele->getRessourcesByType($idProjet, 'documents');
                     $consigne = $this->modele->getRessourcesByType($idProjet,'consignes');
                     $depot = $this->modele->getDepot($idProjet);

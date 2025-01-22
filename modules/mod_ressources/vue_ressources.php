@@ -67,7 +67,7 @@ class VueRESSOURCES {
             echo '        </div>';
             echo '      </a>';
             echo '  </div>';
-            if($isDepot) print_r($element["date_limite"]);
+            if($isDepot) echo $element["date_limite"];
             echo '</div>';
         }
     }
