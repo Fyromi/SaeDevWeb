@@ -1,6 +1,6 @@
 <?php
 return [      
-        'getDepots'         =>      "SELECT * 
+        'getDepots'         =>      "SELECT rendu.nomRendu
                                     FROM rendu 
                                     WHERE rendu.idRendu = :idDepot" ,
                         

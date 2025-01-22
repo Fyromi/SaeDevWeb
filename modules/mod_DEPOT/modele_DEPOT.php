@@ -24,7 +24,8 @@ class ModeleDEPOT extends Connexion{
     }   
 
     public function ajoutDepot(){
-        // Définir le chemin du répertoire
+
+        // Définir le chemin du répertoire, dirname(__DIR__, 2) permet de remonter dans le repertoire parent
         $repertoire = dirname(__DIR__, 2)."/Projet/Projet" . $_GET['idProjet'] . "/depot/depot".$_GET['idDepot']."/groupe".$this->getIdGroupe()."/etudiant".$this->getIdUtilisateur();
         
         // Parcourir chaque segment du chemin et vérifier s'il existe
@@ -32,19 +33,21 @@ class ModeleDEPOT extends Connexion{
         $cheminTemporaire = '';
         
         foreach ($cheminPartiels as $part) {
+
             $cheminTemporaire .= $part . '/';
-            // Si le répertoire n'existe pas, créer ce segment spécifique
+
             if (!is_dir($cheminTemporaire)) {
                 mkdir($cheminTemporaire, 0777);
             }
         }
-        
-        // Autres traitements
         $nom = $this->getNomDepot();
         $fichierTmp = $_FILES['fichier']['tmp_name'];
         $nomFichierAvecEspace = basename($_FILES['fichier']['name']);
         $nomFichierSansEspace = preg_replace('/\s+/', '+', $nomFichierAvecEspace);
         $cheminFinal = $repertoire . "/" . $nomFichierSansEspace;
+    
+        // remplacement des backslashes par des slashes dans le chemin final pour uniformiser pour la bdd 
+        $cheminFinal = str_replace('\\', '/', $cheminFinal);
     
         move_uploaded_file($fichierTmp, $cheminFinal);
         $this->insertLinkToBdd($nom, $cheminFinal, $_GET['idProjet']);
@@ -56,6 +59,7 @@ class ModeleDEPOT extends Connexion{
             </div>
         <?php
     }
+    
     
 
     private function insertLinkToBdd($nom, $lien){
