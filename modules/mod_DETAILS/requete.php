@@ -46,6 +46,8 @@ return [ 'getEtudiantSansGrp' => "SELECT DISTINCT u.*
 
         'projetRessource'       => "INSERT INTO `projetressource`(`idProjet`, `idRessource`) VALUES (:idProjet, :idRessource);",
 
+        'ressourceMiseEnAvant'  => "INSERT INTO `ressourcemiseenavant`(`idProjet`, `idRessource`) VALUES (:idProjet, :idRessource);",
+
         'estResponsableDe'      => "SELECT COUNT(*) > 0 AS estResponsable
                                     FROM estResponsableDe 
                                     WHERE idProjet = :idProjet

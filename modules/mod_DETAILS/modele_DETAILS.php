@@ -101,15 +101,22 @@ class ModeleDETAILS extends Connexion{
         $nomFichierSansEspace = preg_replace('/\s+/', '+', $nomFichierAvecEspace);
         $cheminFinal = $repertoire . "/" . $nomFichierSansEspace;
         $cheminForbdd = "Projet/Projet" . $_GET['idProjet'] . "/ressource"."/". $nomFichierSansEspace;
-        move_uploaded_file($fichierTmp, $cheminFinal);
+        move_uploaded_file($fichierTmp, $cheminFinanl, $_POST['miseEnAvant']);
         $this->insertLinkToBdd($nom,$cheminForbdd, $_GET['idProjet']);
     }
 
-    private function insertLinkToBdd($nom, $lien){
+    private function insertLinkToBdd($nom, $lien, $mettreEnAvant){
         $sql = $this->queries['insertLinkBdd'];
         $this->executeQuery($sql, [':nom' => $nom, ':lien' => $lien]);
-        $sq2 = $this->queries['projetRessource'];
+        if($mettreEnAvant==0){
+            $sq2 = $this->queries['projetRessource'];
+        }
+        else{
+            $sq2 = $this->queries['ressourceMiseEnAvant'];
+        }
         $this->executeQuery($sq2, [':idProjet' => $_GET['idProjet'], ':idRessource' => self::$bdd->lastInsertId()]);
+
+        
     }
 
     public function estResponsableDe(){
