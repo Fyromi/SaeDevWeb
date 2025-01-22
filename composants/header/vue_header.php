@@ -13,7 +13,7 @@ class VueCompHeader extends VueCompGenerique {
            
             $image = $pPictur['profilpicture'];
         }
-        if ($_GET['module'] == 'CONNEXION')
+        if ($_GET['module'] == 'Connexion')
             if(isset($_GET['action']) && ($_GET['action'] == 'form_inscription' || $_GET['action'] == 'inscription'))
                 $titre = 'Inscription';
             else
