@@ -191,7 +191,7 @@ class ModeleDETAILS extends Connexion{
         $idProjet = $_GET['idProjet'];
         try {
             connexion::$bdd->beginTransaction();
-            foreach ($this->queries['supprimerProjet'] as $key => $value) {
+            foreach ($this->queries['supprimerprojet'] as $key => $value) {
                 $sql = $value;
                 $this->executeQuery($sql, [':idProjet' => $idProjet]);
             }

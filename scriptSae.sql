@@ -1,34 +1,4 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Hôte : 127.0.0.1
--- Généré le : jeu. 16 jan. 2025 à 21:39
--- Version du serveur : 10.4.32-MariaDB
--- Version de PHP : 8.2.12
-DROP DATABASE IF EXISTS `sae`;
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de données : `sae`
---
-
-CREATE DATABASE IF NOT EXISTS `sae` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `sae`;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `appartienta`
---
 
 CREATE TABLE `appartienta` (
   `idUtilisateur` int(11) NOT NULL,
@@ -228,7 +198,7 @@ CREATE TABLE `evaluation` (
 --
 
 CREATE TABLE `groupeetudiant` (
-  `idGroupe` INT(11) NOT NULL AUTO_INCREMENT,
+  `idGroupe` serial,
   `nomGroupe` VARCHAR(50) ,
   `imageTitre` VARCHAR(255) DEFAULT NULL,
   PRIMARY KEY (`idGroupe`)
@@ -240,36 +210,36 @@ CREATE TABLE `groupeetudiant` (
 -- Déchargement des données de la table `groupeetudiant`
 --
 
-INSERT INTO `groupeetudiant` (`idGroupe`, `nomGroupe`, `imageTitre`) VALUES
-(0, NULL, NULL),
-(1, 'Groupe A', 'Image A'),
-(2, 'Groupe B', 'Image B'),
-(3, 'Groupe C', 'Image C'),
-(4, 'Groupe D', 'Image D'),
-(5, 'Groupe E', 'Image E'),
-(6, 'Groupe F', 'Image F'),
-(7, 'Groupe G', 'Image G'),
-(8, 'Groupe H', 'Image H'),
-(9, 'Groupe I', 'Image I'),
-(10, 'Groupe J', 'Image J'),
-(11, 'Groupe K', 'Image K'),
-(12, 'Groupe L', 'Image L'),
-(13, 'OK', NULL),
-(14, 'OK', NULL),
-(15, 'Economie', NULL),
-(16, NULL, NULL),
-(17, NULL, NULL),
-(18, NULL, NULL),
-(19, NULL, NULL),
-(20, NULL, NULL),
-(21, NULL, NULL),
-(22, NULL, NULL),
-(23, 'Groupe Z', NULL),
-(24, 'Groupe Y', NULL),
-(25, 'Groupe Y', NULL),
-(26, 'Groupe Y', NULL),
-(27, 'Younes', NULL),
-(36, 'Ultimate', NULL);
+INSERT INTO `groupeetudiant` (`nomGroupe`, `imageTitre`) VALUES
+(NULL, NULL),
+('Groupe A', 'Image A'),
+('Groupe B', 'Image B'),
+('Groupe C', 'Image C'),
+('Groupe D', 'Image D'),
+('Groupe E', 'Image E'),
+( 'Groupe F', 'Image F'),
+( 'Groupe G', 'Image G'),
+('Groupe H', 'Image H'),
+('Groupe I', 'Image I'),
+( 'Groupe J', 'Image J'),
+( 'Groupe K', 'Image K'),
+( 'Groupe L', 'Image L'),
+( 'OK', NULL),
+( 'OK', NULL),
+( 'Economie', NULL),
+( NULL, NULL),
+( NULL, NULL),
+( NULL, NULL),
+( NULL, NULL),
+( NULL, NULL),
+( NULL, NULL),
+( NULL, NULL),
+( 'Groupe Z', NULL),
+( 'Groupe Y', NULL),
+( 'Groupe Y', NULL),
+( 'Groupe Y', NULL),
+( 'Younes', NULL),
+( 'Ultimate', NULL);
 
 -- --------------------------------------------------------
 
@@ -346,7 +316,7 @@ CREATE TABLE `possedechamps` (
 --
 
 CREATE TABLE `projet` (
-  `idProjet` bigint(20) UNSIGNED NOT NULL,
+  `idProjet` serial NOT NULL,
   `titre` varchar(25) DEFAULT NULL,
   `description` varchar(500) DEFAULT NULL,
   `anneeUniversitaire` int(11) DEFAULT NULL,
@@ -407,7 +377,7 @@ INSERT INTO `projetressource` (`idProjet`, `idRessource`) VALUES
 --
 
 CREATE TABLE `rendu` (
-  `idRendu` bigint(20) UNSIGNED NOT NULL,
+  `idRendu` serial ,
   `nomRendu` varchar(50) DEFAULT NULL,
   `date_limite` date DEFAULT NULL,
   `fichierRendu` varchar(500) DEFAULT NULL
@@ -453,7 +423,7 @@ INSERT INTO `renduprojet` (`idProjet`, `idRendu`) VALUES
 --
 
 CREATE TABLE `ressource` (
-  `idRessource` bigint(20) UNSIGNED NOT NULL,
+  `idRessource` serial,
   `nomRessource` varchar(50) DEFAULT NULL,
   `lienRessource` varchar(150) DEFAULT NULL,
   `type` enum('consignes','documents') NOT NULL DEFAULT 'documents'
@@ -526,7 +496,7 @@ CREATE TABLE `soutenancerendu` (
 --
 
 CREATE TABLE `utilisateur` (
-  `idUtilisateur` bigint(20) UNSIGNED NOT NULL,
+  `idUtilisateur` serial,
   `login` varchar(30) DEFAULT NULL,
   `mdp` varchar(255) DEFAULT NULL,
   `role` varchar(25) DEFAULT NULL,
@@ -661,31 +631,7 @@ ALTER TABLE `utilisateur`
 --
 
 --
--- AUTO_INCREMENT pour la table `projet`
---
-ALTER TABLE `projet`
-  MODIFY `idProjet` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
---
--- AUTO_INCREMENT pour la table `rendu`
---
-ALTER TABLE `rendu`
-  MODIFY `idRendu` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT pour la table `ressource`
---
-ALTER TABLE `ressource`
-  MODIFY `idRessource` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
-
---
--- AUTO_INCREMENT pour la table `utilisateur`
---
-ALTER TABLE `utilisateur`
-  MODIFY `idUtilisateur` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
-
---
--- Contraintes pour les tables déchargées
 --
 
 --

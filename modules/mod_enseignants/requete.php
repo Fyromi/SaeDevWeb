@@ -1,15 +1,15 @@
 <?php
-return [ 'getProjetResponsable' =>  "SELECT projet.*
-                                    FROM projet
-                                    JOIN estResponsableDe ON projet.idProjet = estResponsableDe.idProjet
-                                    JOIN utilisateur ON estResponsableDe.idUtilisateur = utilisateur.idUtilisateur
-                                    WHERE utilisateur.login = :login;", 
+return [ 'getProjetResponsable' =>  "select projet.*
+                                    from projet
+                                    join estresponsablede on projet.idprojet = estresponsablede.idprojet
+                                    join utilisateur on estresponsablede.idutilisateur = utilisateur.idutilisateur
+                                    where utilisateur.login = :login;", 
 
-        'getInterventionProjet' =>  "SELECT projet.*
-                                    FROM projet
-                                    JOIN intervientDans ON projet.idProjet = intervientDans.idProjet
-                                    JOIN utilisateur ON intervientDans.idUtilisateur = utilisateur.idUtilisateur
-                                    WHERE utilisateur.login = :login;"           
+        'getInterventionProjet' =>  "select projet.*
+                                    from projet
+                                    join intervientdans on projet.idprojet = intervientdans.idprojet
+                                    join utilisateur on intervientdans.idutilisateur = utilisateur.idutilisateur
+                                    where utilisateur.login = :login;"           
 ];
 
 ?>

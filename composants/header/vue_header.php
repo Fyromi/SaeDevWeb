@@ -66,6 +66,8 @@ class VueCompHeader extends VueCompGenerique {
         </div>
         <!-- Barre noire horizontale positionnée en bas du header -->
         <div style="height: 1px; background-color: black; width: 100%;"></div>
+        <li><a class="btn btn-dark" href="index.php?module=AjoutEval&action=Accueil">Ajouter Evaluation</a></li>
+         <li><a class="btn btn-dark" href="index.php?module=AjoutNote&action=Accueil">Ajouter Note</a></li>
         ';
     }
 }

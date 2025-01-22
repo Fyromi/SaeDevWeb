@@ -32,6 +32,12 @@ class Site {
 			case 'Depot' :
 				require_once "modules/mod_".strtolower($this->module_name)."/module_".strtolower($this->module_name).".php";
 				break;
+			case 'AjoutEval' :
+				require_once "modules/mod_".strtolower($this->module_name)."/module_".strtolower($this->module_name).".php";
+				break;
+			case 'AjoutNote' :
+				require_once "modules/mod_".strtolower($this->module_name)."/module_".strtolower($this->module_name).".php";
+				break;		
 			default :
 				die ("Module inexistant : $this->module_name; ");
 		}

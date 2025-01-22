@@ -1,223 +1,223 @@
 <?php
-return [ 'getEtudiantSansGrp' => "SELECT DISTINCT u.*
-                                    FROM utilisateur u
-                                    WHERE u.role = 'etudiant'
-                                    AND u.idUtilisateur NOT IN (
-                                        SELECT aa.idUtilisateur
-                                        FROM appartientA aa
-                                        JOIN groupeEtudiant ge ON aa.idGroupe = ge.idGroupe
-                                        JOIN associeAProjet ap ON ge.idGroupe = ap.idGroupe
-                                        WHERE ap.idProjet = :idProjet
+return [ 'getetudiantsansgrp' => "select distinct u.*
+                                    from utilisateur u
+                                    where u.role = 'etudiant'
+                                    and u.idutilisateur not in (
+                                        select aa.idutilisateur
+                                        from appartienta aa
+                                        join groupeetudiant ge on aa.idgroupe = ge.idgroupe
+                                        join associeaprojet ap on ge.idgroupe = ap.idgroupe
+                                        where ap.idprojet = :idprojet
                                     );", 
 
 
-        'getProjet'     =>          'SELECT DISTINCT *
-                                    FROM projet
-                                    WHERE idProjet = :id',
+        'getprojet'     =>          'select distinct *
+                                    from projet
+                                    where idprojet = :id',
 
 
-        'addGroupe' =>                  "INSERT INTO `groupeetudiant`(`nomGroupe`, `imageTitre`)
-                                         VALUES (:nomGroupe,NULL);",
+        'addgroupe' =>                  "insert into `groupeetudiant`(`nomgroupe`, `imagetitre`)
+                                         values (:nomgroupe,null);",
 
-        "associeProjet" =>           "INSERT INTO `associeaprojet`(`idGroupe`, `idProjet`)
-                                        VALUES (:idGrp,:idProjet)",
+        "associeprojet" =>           "insert into `associeaprojet`(`idgroupe`, `idprojet`)
+                                        values (:idgrp,:idprojet)",
 
-        'addEtudiantGrp'    =>      "INSERT INTO appartientA (idUtilisateur, idGroupe)
-                                    VALUES (:idEtudiant, :idGroupe);", 
+        'addetudiantgrp'    =>      "insert into appartienta (idutilisateur, idgroupe)
+                                    values (:idetudiant, :idgroupe);", 
 
-        'getIntervenantLibre'   => "SELECT u.*
-                                    FROM utilisateur u
-                                    WHERE u.role IN ('responsable', 'intervenant')
-                                    AND u.idUtilisateur NOT IN (
-                                        SELECT idUtilisateur
-                                        FROM intervientDans
-                                        WHERE idProjet = :idProjet
+        'getintervenantlibre'   => "select u.*
+                                    from utilisateur u
+                                    where u.role in ('responsable', 'intervenant')
+                                    and u.idutilisateur not in (
+                                        select idutilisateur
+                                        from intervientdans
+                                        where idprojet = :idprojet
                                     )
-                                    AND u.idUtilisateur NOT IN (
-                                        SELECT idUtilisateur
-                                        FROM estResponsableDe
-                                        WHERE idProjet = :idProjet
+                                    and u.idutilisateur not in (
+                                        select idutilisateur
+                                        from estresponsablede
+                                        where idprojet = :idprojet
                                     );",
 
-        'addIntervenantProjet' => "INSERT INTO intervientDans (idUtilisateur, idProjet)
-                                    VALUES (:idIntervenant, :idProjet);",
+        'addintervenantprojet' => "insert into intervientdans (idutilisateur, idprojet)
+                                    values (:idintervenant, :idprojet);",
         
-        'insertLinkBdd'            => "INSERT INTO `ressource`(`nomRessource`, `lienRessource`) VALUES (:nom, :lien);",
+        'insertlinkbdd'            => "insert into `ressource`(`nomressource`, `lienressource`) values (:nom, :lien);",
 
-        'projetRessource'       => "INSERT INTO `projetressource`(`idProjet`, `idRessource`) VALUES (:idProjet, :idRessource);",
+        'projetressource'       => "insert into `projetressource`(`idprojet`, `idressource`) values (:idprojet, :idressource);",
 
-        'estResponsableDe'      => "SELECT COUNT(*) > 0 AS estResponsable
-                                    FROM estResponsableDe 
-                                    WHERE idProjet = :idProjet
-                                    AND idUtilisateur = (SELECT idUtilisateur FROM utilisateur WHERE login = :login);",
+        'estresponsablede'      => "select count(*) > 0 as estresponsable
+                                    from estresponsablede 
+                                    where idprojet = :idprojet
+                                    and idutilisateur = (select idutilisateur from utilisateur where login = :login);",
 
-        'CreerRendu'            => "INSERT INTO `rendu`(`nomRendu`, `date_limite`) VALUES (:nomRendu,:date);",
+        'creerrendu'            => "insert into `rendu`(`nomrendu`, `date_limite`) values (:nomrendu,:date);",
 
-        'AssocierRenduProjet'   => "INSERT INTO `renduprojet`(`idProjet`, `idRendu`) VALUES (:idProjet,:idRendu);",
+        'associerrenduprojet'   => "insert into `renduprojet`(`idprojet`, `idrendu`) values (:idprojet,:idrendu);",
 
-        'deleteIntervenant'     => "DELETE FROM intervientDans
-                                    WHERE idUtilisateur = :idUtilisateur AND idProjet = :idProjet;",
+        'deleteintervenant'     => "delete from intervientdans
+                                    where idutilisateur = :idutilisateur and idprojet = :idprojet;",
 
-        'getIntervenantPris'    =>   "SELECT  utilisateur.*
-                                        FROM utilisateur
-                                        JOIN intervientDans ON utilisateur.idUtilisateur = intervientDans.idUtilisateur
-                                        WHERE intervientDans.idProjet = :idProjet;", 
+        'getintervenantpris'    =>   "select  utilisateur.*
+                                        from utilisateur
+                                        join intervientdans on utilisateur.idutilisateur = intervientdans.idutilisateur
+                                        where intervientdans.idprojet = :idprojet;", 
           
-          'getGroupeProjet'   =>      "SELECT groupeetudiant.*
-                                        FROM projet
-                                        INNER JOIN associeaprojet on projet.idProjet = associeAprojet.idProjet
-                                        INNER JOIN groupeetudiant on associeAprojet.idGroupe = groupeetudiant.idGroupe
-                                        WHERE associeAprojet.idProjet = :idProjet;",
+          'getgroupeprojet'   =>      "select groupeetudiant.*
+                                        from projet
+                                        inner join associeaprojet on projet.idprojet = associeaprojet.idprojet
+                                        inner join groupeetudiant on associeaprojet.idgroupe = groupeetudiant.idgroupe
+                                        where associeaprojet.idprojet = :idprojet;",
 
-            'getMembreGroupe'   =>      "SELECT utilisateur.*
-                                        FROM utilisateur
-                                        JOIN appartientA  ON utilisateur.idUtilisateur = appartientA.idUtilisateur
-                                        WHERE appartientA.idGroupe =:idGroupe;",
+            'getmembregroupe'   =>      "select utilisateur.*
+                                        from utilisateur
+                                        join appartienta  on utilisateur.idutilisateur = appartienta.idutilisateur
+                                        where appartienta.idgroupe =:idgroupe;",
 
-            'deleteGroupe'     => "DELETE groupeEtudiant, associeAProjet, appartientA
-                                    FROM groupeEtudiant
-                                    LEFT JOIN associeAProjet ON groupeEtudiant.idGroupe = associeAProjet.idGroupe
-                                    LEFT JOIN appartientA ON groupeEtudiant.idGroupe = appartientA.idGroupe
-                                    WHERE groupeEtudiant.idGroupe = :idGroupe AND associeAProjet.idProjet = :idProjet;",
+            'deletegroupe'     => "delete groupeetudiant, associeaprojet, appartienta
+                                    from groupeetudiant
+                                    left join associeaprojet on groupeetudiant.idgroupe = associeaprojet.idgroupe
+                                    left join appartienta on groupeetudiant.idgroupe = appartienta.idgroupe
+                                    where groupeetudiant.idgroupe = :idgroupe and associeaprojet.idprojet = :idprojet;",
 
-            'deleteUserGroupe'  => "DELETE FROM appartientA
-                                    WHERE idUtilisateur = :idUtilisateur
-                                    AND idGroupe = :idGroupe;", 
+            'deleteusergroupe'  => "delete from appartienta
+                                    where idutilisateur = :idutilisateur
+                                    and idgroupe = :idgroupe;", 
 
-            'getIdUtilisateur'  =>  "SELECT idUtilisateur
-                                    FROM utilisateur
-                                    WHERE utilisateur.login = :logi",
+            'getidutilisateur'  =>  "select idutilisateur
+                                    from utilisateur
+                                    where utilisateur.login = :logi",
 
 
-            'supprimerProjet' => [ 'ressourcemiseenavant' => "DELETE FROM ressourcemiseenavant 
-                                                                WHERE idRessource IN (  SELECT idRessource 
-                                                                                        FROM projetRessource 
-                                                                                        WHERE idProjet = :idProjet 
+            'supprimerprojet' => [ 'ressourcemiseenavant' => "delete from ressourcemiseenavant 
+                                                                where idressource in (  select idressource 
+                                                                                        from projetressource 
+                                                                                        where idprojet = :idprojet 
                                                                                     )",
 
-                                    'deleteRessourceProjet' => " DELETE r
-                                                                FROM ressource r
-                                                                INNER JOIN projetRessource pr ON pr.idRessource = r.idRessource
-                                                                WHERE pr.idProjet = :idProjet;" ,
+                                    'deleteressourceprojet' => " delete r
+                                                                from ressource r
+                                                                inner join projetressource pr on pr.idressource = r.idressource
+                                                                where pr.idprojet = :idprojet;" ,
 
-                                     'deleteRessourceEnAvant' => "DELETE r
-                                                                FROM ressourcemiseenavant r
-                                                                INNER JOIN projetRessource pr ON pr.idRessource = r.idRessource
-                                                                WHERE pr.idProjet = :idProjet;",
+                                     'deleteressourceenavant' => "delete r
+                                                                from ressourcemiseenavant r
+                                                                inner join projetressource pr on pr.idressource = r.idressource
+                                                                where pr.idprojet = :idprojet;",
 
-                                    'deleteprojetRessource' => "DELETE FROM projetRessource 
-                                                                WHERE idProjet = :idProjet;",
+                                    'deleteprojetressource' => "delete from projetressource 
+                                                                where idprojet = :idprojet;",
 
-                                    'deleteRessourceMiseEnAvant' => "DELETE FROM ressourcemiseenavant 
-                                                                    WHERE idProjet = :idProjet;",
+                                    'deleteressourcemiseenavant' => "delete from ressourcemiseenavant 
+                                                                    where idprojet = :idprojet;",
                                     
-                                    'deleteChamp'           => "DELETE FROM champ
-                                                                WHERE idChamp IN ( SELECT idChamp
-                                                                                    FROM possedeChamps
-                                                                                    WHERE idProjet = :idProjet
+                                    'deletechamp'           => "delete from champ
+                                                                where idchamp in ( select idchamp
+                                                                                    from possedechamps
+                                                                                    where idprojet = :idprojet
                                                                                 )",
 
-                                    'deletepossedeChamps' => "DELETE FROM possedeChamps 
-                                                            WHERE idProjet = :idProjet;",
+                                    'deletepossedechamps' => "delete from possedechamps 
+                                                            where idprojet = :idprojet;",
 
-                                    'deleteEvalIndividuelle' => "DELETE FROM evalindividuelle 
-                                                                    WHERE idEval IN ( SELECT idEval 
-                                                                                        FROM evaluation  
-                                                                                        WHERE evaluation.idEval IN ( SELECT idEval
-                                                                                                                    FROM evalgroupe
-                                                                                                                    WHERE evalgroupe.idGroupe IN (  SELECT idGroupe
-                                                                                                                                                    FROM groupeEtudiant
-                                                                                                                                                    WHERE groupeEtudiant.idGroupe IN ( SELECT idGroupe
-                                                                                                                                                                                    FROM associeAProjet
-                                                                                                                                                                                    WHERE idProjet = :idProjet
+                                    'deleteevalindividuelle' => "delete from evalindividuelle 
+                                                                    where ideval in ( select ideval 
+                                                                                        from evaluation  
+                                                                                        where evaluation.ideval in ( select ideval
+                                                                                                                    from evalgroupe
+                                                                                                                    where evalgroupe.idgroupe in (  select idgroupe
+                                                                                                                                                    from groupeetudiant
+                                                                                                                                                    where groupeetudiant.idgroupe in ( select idgroupe
+                                                                                                                                                                                    from associeaprojet
+                                                                                                                                                                                    where idprojet = :idprojet
                                                                                                                                                                                     )
                                                                                                                                                 )
                                                                                                                     )
                                                                                     )",
 
-                                    'evalGroupe' => "DELETE FROM evalgroupe 
-                                                    WHERE idEval IN ( SELECT idEval 
-                                                                    FROM evaluation  
-                                                                    WHERE evaluation.idEval IN (SELECT idEval
-                                                                                                FROM evalgroupe
-                                                                                                WHERE evalgroupe.idGroupe IN (  SELECT idGroupe
-                                                                                                                                FROM groupeEtudiant
-                                                                                                                                WHERE groupeEtudiant.idGroupe IN ( SELECT idGroupe
-                                                                                                                                                                FROM associeAProjet
-                                                                                                                                                                WHERE idProjet = :idProjet
+                                    'evalgroupe' => "delete from evalgroupe 
+                                                    where ideval in ( select ideval 
+                                                                    from evaluation  
+                                                                    where evaluation.ideval in (select ideval
+                                                                                                from evalgroupe
+                                                                                                where evalgroupe.idgroupe in (  select idgroupe
+                                                                                                                                from groupeetudiant
+                                                                                                                                where groupeetudiant.idgroupe in ( select idgroupe
+                                                                                                                                                                from associeaprojet
+                                                                                                                                                                where idprojet = :idprojet
                                                                                                                                                                 )
                                                                                                                             )
                                                                                                 )
                                                                     )",
 
-                                    'deleteEvaluation' => "DELETE FROM evaluation 
-                                                        WHERE evaluation.idEval IN ( SELECT idEval
-                                                                                    FROM evalgroupe
-                                                                                    WHERE evalgroupe.idGroupe IN (  SELECT idGroupe
-                                                                                                                    FROM groupeEtudiant
-                                                                                                                    WHERE groupeEtudiant.idGroupe IN ( SELECT idGroupe
-                                                                                                                                                        FROM associeAProjet
-                                                                                                                                                        WHERE idProjet = :idProjet
+                                    'deleteevaluation' => "delete from evaluation 
+                                                        where evaluation.ideval in ( select ideval
+                                                                                    from evalgroupe
+                                                                                    where evalgroupe.idgroupe in (  select idgroupe
+                                                                                                                    from groupeetudiant
+                                                                                                                    where groupeetudiant.idgroupe in ( select idgroupe
+                                                                                                                                                        from associeaprojet
+                                                                                                                                                        where idprojet = :idprojet
                                                                                                                                                     )
                                                                                                                 )
                                                                                     )",
                                                                 
 
-                                    'deleteSoutenance'      => "DELETE FROM soutenance
-                                                                WHERE idSoutenance IN (SELECT idSoutenance
-                                                                                        FROM soutenanceRendu
-                                                                                        WHERE soutenanceRendu.idRendu IN (  SELECT idRendu
-                                                                                                                            FROM rendu
-                                                                                                                            WHERE rendu.idRendu IN ( SELECT idRendu
-                                                                                                                                                    FROM renduProjet
-                                                                                                                                                    WHERE idProjet = :idProjet
+                                    'deletesoutenance'      => "delete from soutenance
+                                                                where idsoutenance in (select idsoutenance
+                                                                                        from soutenancerendu
+                                                                                        where soutenancerendu.idrendu in (  select idrendu
+                                                                                                                            from rendu
+                                                                                                                            where rendu.idrendu in ( select idrendu
+                                                                                                                                                    from renduprojet
+                                                                                                                                                    where idprojet = :idprojet
                                                                                                                                                     )
                                                                                                                         )
                                                                                         )",
 
-                                    'deleteSoutenanceRendu' => "DELETE FROM soutenanceRendu 
-                                                                WHERE idRendu IN ( SELECT idRendu 
-                                                                                    FROM rendu 
-                                                                                    WHERE rendu.idRendu IN ( SELECT idRendu
-                                                                                                            FROM renduProjet
-                                                                                                            WHERE idProjet = :idProjet
+                                    'deletesoutenancerendu' => "delete from soutenancerendu 
+                                                                where idrendu in ( select idrendu 
+                                                                                    from rendu 
+                                                                                    where rendu.idrendu in ( select idrendu
+                                                                                                            from renduprojet
+                                                                                                            where idprojet = :idprojet
                                                                                                         )
                                                                                 )",
 
-                                    'deleteRendu' => "DELETE FROM rendu 
-                                                        WHERE rendu.idRendu IN ( SELECT idRendu
-                                                                                    FROM renduProjet
-                                                                                    WHERE idProjet = :idProjet
+                                    'deleterendu' => "delete from rendu 
+                                                        where rendu.idrendu in ( select idrendu
+                                                                                    from renduprojet
+                                                                                    where idprojet = :idprojet
                                                                                 )",
 
-                                    'deleteAppartientA' => "DELETE FROM appartienta 
-                                                            WHERE idGroupe IN ( 
-                                                                            SELECT idGroupe 
-                                                                            FROM groupeetudiant 
-                                                                            WHERE idGroupe IN ( 
-                                                                                                SELECT idGroupe 
-                                                                                                FROM associeaprojet 
-                                                                                                WHERE idProjet = :idProjet 
+                                    'deleteappartienta' => "delete from appartienta 
+                                                            where idgroupe in ( 
+                                                                            select idgroupe 
+                                                                            from groupeetudiant 
+                                                                            where idgroupe in ( 
+                                                                                                select idgroupe 
+                                                                                                from associeaprojet 
+                                                                                                where idprojet = :idprojet 
                                                                                             ) 
                                                                             )",
 
-                                    'deleteGroupeEtudiant' => "DELETE FROM groupeetudiant 
-                                                                WHERE idGroupe IN ( SELECT idGroupe 
-                                                                                    FROM associeaprojet 
-                                                                                    WHERE idProjet = :idProjet 
+                                    'deletegroupeetudiant' => "delete from groupeetudiant 
+                                                                where idgroupe in ( select idgroupe 
+                                                                                    from associeaprojet 
+                                                                                    where idprojet = :idprojet 
                                                                                 )",
 
-                                    'deleteAssocieAprojet'  => "DELETE FROM associeaprojet
-                                                                where idProjet=:idProjet",
+                                    'deleteassocieaprojet'  => "delete from associeaprojet
+                                                                where idprojet=:idprojet",
 
-                                    'deleteIntervientDans' => "DELETE FROM intervientdans 
-                                                                WHERE idProjet = :idProjet",
+                                    'deleteintervientdans' => "delete from intervientdans 
+                                                                where idprojet = :idprojet",
 
-                                    'deleteEstResponsableDe' => "DELETE FROM estresponsablede 
-                                                                WHERE idProjet = :idProjet;",
+                                    'deleteestresponsablede' => "delete from estresponsablede 
+                                                                where idprojet = :idprojet;",
 
-                                    'deleteProjet' => "DELETE FROM projet 
-                                                        WHERE idProjet = :idProjet"
+                                    'deleteprojet' => "delete from projet 
+                                                        where idprojet = :idprojet"
                                 ]                                    
                                                                                                 
         ];
