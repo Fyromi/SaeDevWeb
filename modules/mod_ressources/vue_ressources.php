@@ -7,7 +7,7 @@ class VueRESSOURCES {
         <div class="row">
             <div class="col-sm-10 col-xs-6 col-9"></div>
             <div class="col-sm-1 col-xs-1 col-1 text-end">
-                <a href="index.php?module=Projets&action=menu" class="btn">
+                <a href="index.php?module=Projets&action=descrProjet&idProj&id=<?=$_GET['idProjet']?>" class="btn">
                     <div class="card shadow-sm text-center p-1">
                         <img class="card-img m-0" src="icons/retour.png" alt="Retour">
                         <span class="card-title h6">Retour</span>
