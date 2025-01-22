@@ -48,9 +48,11 @@ class VuePROJETS {
             </div>
         </div>
         <div class="card">
-            <?php $this->afficherProfs($profs); ?>
-            <?php $this->afficherMembreGrp($grp); ?>
-            <?php $this->afficherObjectif($projet); ?>
+            <?php 
+                $this->afficherProfs($profs);
+                $this->afficherMembreGrp($grp);
+                $this->afficherObjectif($projet);
+            ?>
             <a href="index.php?module=Ressources&action=menue&idProjet=<?= htmlspecialchars($projet['idProjet']) ?>" 
                 class="btn btn-dark text-white m-3">
                 Accès aux ressources du projet <?= htmlspecialchars($projet['titre']); ?> >>>
