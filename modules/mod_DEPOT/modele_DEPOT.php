@@ -51,17 +51,10 @@ class ModeleDEPOT extends Connexion{
     
         move_uploaded_file($fichierTmp, $cheminFinal);
         $this->insertLinkToBdd($nom, $cheminFinal, $_GET['idProjet']);
-        ?>
-            <div class="alert alert-success d-flex align-items-center" role="alert">
-                <div>
-                    Dépôt effectué !
-                </div>
-            </div>
-        <?php
+
+        header("location: index.php?module=Depot&idProjet=". $_GET['idProjet']."&action=succes&idDepot=".$_GET['idDepot']);
     }
     
-    
-
     private function insertLinkToBdd($nom, $lien){
         $sql = $this->queries['insertLinkBdd'];
         $this->executeQuery($sql, [':nom' => $nom, ':lien' => $lien]);
@@ -79,5 +72,14 @@ class ModeleDEPOT extends Connexion{
         return $this->executeQuery($sql, [':login' => $_SESSION['login']])->fetchColumn();
     }
 
+    public function depotRealise(){
+        ?>
+            <div class="alert alert-success d-flex align-items-center" role="alert">
+                <div>
+                    Dépôt effectué !
+                </div>
+            </div>
+        <?php
+    }
 
 }

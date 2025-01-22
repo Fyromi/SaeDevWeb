@@ -23,6 +23,9 @@
                 case 'ajoutDepot': 
                     $this->modele->ajoutDepot();
                     break;
+                case 'succes':
+                    $this->modele->depotRealise();
+                    break;
                 default:    
                     break;
             }
