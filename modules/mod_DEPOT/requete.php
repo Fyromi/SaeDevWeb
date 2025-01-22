@@ -4,7 +4,7 @@ return [
                                     FROM rendu 
                                     WHERE rendu.idRendu = :idDepot" ,
                         
-        'insertLinkBdd'     =>      "INSERT INTO `ressource`(`nomRessource`, `lienRessource`, `type`) VALUES (:nom, :lien, 'depot');",
+        'insertLinkBdd'     =>      "INSERT INTO `ressource`(`nomRessource`, `lienRessource`, `type`) VALUES (:nom, :lien, 'depots')",
                                                                                                 
         'projetRessource'   =>      "INSERT INTO `projetressource`(`idProjet`, `idRessource`) VALUES (:idProjet, :idRessource);",
 

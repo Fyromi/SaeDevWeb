@@ -48,9 +48,10 @@ class ModeleDEPOT extends Connexion{
     
         // remplacement des backslashes par des slashes dans le chemin final pour uniformiser pour la bdd 
         $cheminFinal = str_replace('\\', '/', $cheminFinal);
-    
+        $position = strpos($cheminFinal, "Projet/");
+        $cheminRelatif = substr($cheminFinal, $position);
         move_uploaded_file($fichierTmp, $cheminFinal);
-        $this->insertLinkToBdd($nom, $cheminFinal, $_GET['idProjet']);
+        $this->insertLinkToBdd($nom, $cheminRelatif, $_GET['idProjet']);
 
         header("location: index.php?module=Depot&idProjet=". $_GET['idProjet']."&action=succes&idDepot=".$_GET['idDepot']);
     }

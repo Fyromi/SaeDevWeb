@@ -157,7 +157,9 @@ class ModeleDETAILS extends Connexion{
     
             foreach ($etudiantsGroupe as $etudiant) {
                 // Ajouter chaque login dans le tableau
-                $listeEtudiant[] = $etudiant['login'];
+                $etudiant['login'] = $etudiant['login'];
+                $etudiant['idUtilisateur'] = $etudiant['idUtilisateur'];
+                $listeEtudiant[] = $etudiant;
             }
     
             // Associer le tableau d'étudiants au groupe
@@ -227,5 +229,12 @@ class ModeleDETAILS extends Connexion{
     
         // Supprime le répertoire lui-même
         return rmdir($repertoire);
+    }
+
+    public function getRessource(){
+            $sql = $this->queries['getRessource'];
+            $request = $this->executeQuery($sql, [':idProjet' => $_GET['idProjet']]);
+            return $request->fetchAll();
+        
     }
 }

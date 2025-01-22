@@ -2,7 +2,7 @@
 class VueDETAILS {
     public function __construct() {}
 
-    public function vueDetailProjet($etudiants, $projet, $intervenantsLibre, $estResponsableDe, $intervenantPris, $groupeAndEtudiant, $groupeName){
+    public function vueDetailProjet($etudiants, $projet, $intervenantsLibre, $estResponsableDe, $intervenantPris, $groupeAndEtudiant, $groupeName, $ressources){
         ?>
         <div class="row pb-3">
             <div class="col-sm-10 col-xs-6 col-9">
@@ -141,7 +141,7 @@ class VueDETAILS {
                         </div>
                     </div>
                     <?php endif; ?>
-                    <?php if(count($intervenantPris) != 0): ?>
+                    <?php if(count($intervenantPris) != 0 && $estResponsableDe == 1): ?>
                     <div class="col-12 col-sm-6">
                         <div class="card">
                             <div class="card-body">
@@ -163,16 +163,25 @@ class VueDETAILS {
                         </div>
                     </div>
                     <?php endif; ?>
+                    <?php if(count($groupeAndEtudiant) != 0): ?>
+                    <div class="col-12 col-sm-6 mb-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <?php $this->afficherRessource($groupeAndEtudiant, htmlspecialchars($projet['idProjet']), $groupeName, $ressources); ?>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endif; ?>
                 </div>
             </div>
         <?php endif; ?>
-        
+        <?php if($estResponsableDe == 1): ?>
         <form action="index.php?module=Details&idProjet=<?= $projet['idProjet'] ?>&action=deleteProjet" method="POST">
             <button type='submit' class='btn btn-danger btn-lg w-100 p-4'>
                 <img src='icons/Supprimer.png';>
             </button>
         </form>
-        <?php
+        <?php endif;
     }
 
     public function afficherGroupe($groupeAndEtudiant, $idProjet, $groupeName) {
@@ -185,7 +194,7 @@ class VueDETAILS {
                         $groupe = htmlspecialchars($groupeTableau['nomGroupe']);
                         echo "<li class='list-group-item'>";
                         echo "  <div class='row mb-1'>";
-                        echo "      <h6 class='col mb-0'>$groupe:</h6>";
+                        echo "      <h6 class='col mb-0'>$groupe :</h6>";
                         echo "      <form class='col-4 text-end' action='index.php?module=Details&idProjet=" . htmlspecialchars($idProjet) . "&action=deleteGroupe' method='POST'>";
                         echo "          <input type='hidden' name='idGroupe' value='$idGroupe'>";
                         echo "          <button type='submit' class='btn btn-danger btn-sm'>";
@@ -193,12 +202,12 @@ class VueDETAILS {
                         echo "          </button>";
                         echo "      </form>";
                         echo "  </div>";
-                        foreach ($etudiants as $login) {
+                        foreach ($etudiants as $etudiant) {
                             echo "  <ul class='col-12 mb-1'>";
                             echo "      <li class='d-flex justify-content-between'>";
-                            echo "          - " . htmlspecialchars($login);
+                            echo "          - " . htmlspecialchars($etudiant['login']);
                             echo "          <form action='index.php?module=Details&idProjet=" . htmlspecialchars($idProjet) . "&action=deleteUserGroupe' method='POST'>";
-                            echo "              <input type='hidden' name='login' value='" . htmlspecialchars($login) . "'>";
+                            echo "              <input type='hidden' name='login' value='" . htmlspecialchars($etudiant['login']) . "'>";
                             echo "              <input type='hidden' name='idGroupe' value='$idGroupe'>";
                             echo "              <button type='submit' class='btn btn-danger btn-sm'>";
                             echo "                  <img class='card-img m-0' src='icons/Supprimer.png' alt='X'>";
@@ -214,5 +223,49 @@ class VueDETAILS {
             echo "</ul>";
         }
     }
+
+    public function afficherRessource($groupeAndEtudiant, $idProjet, $groupeName, $ressources) {
+        if (isset($groupeAndEtudiant)) {
+            echo "<h4 class='mb-4'>Dépôt d'étudiant</h4>";
+            echo "<ul class='list-group mt-2 scrollable-section'>"; // Ajout de scrollable-section
+            foreach ($groupeAndEtudiant as $idGroupe => $etudiants) {
+                foreach ($groupeName as $groupeTableau) {
+    
+                    if ($groupeTableau['idGroupe'] == $idGroupe) {
+                        $groupe = htmlspecialchars($groupeTableau['nomGroupe']);
+                        echo "<li class='list-group-item'>";
+                        echo "  <div class='row mb-1'>";
+                        echo "      <h6 class='col mb-0'>$groupe :</h6>";
+                        echo "  </div>";
+    
+                        foreach ($etudiants as $etudiant) {
+                            echo "  <ul class='col-12 mb-1'>";
+                            echo "      <li class='d-flex flex-column'>";
+                            echo "          <span>- " . htmlspecialchars($etudiant['login']) . "</span>";
+    
+                            // Affichage des ressources sous forme de boutons
+                            echo "          <div class='d-flex flex-wrap mt-1'>";
+                            foreach ($ressources as $item) {
+                                if (strpos($item['lienRessource'], "/etudiant" . $etudiant['idUtilisateur'] . "/") !== false) {
+                                    $nomRessource = htmlspecialchars($item['nomRessource']);
+                                    $lienRessource = htmlspecialchars($item['lienRessource']);
+                                    echo "              <a href='$lienRessource' class='btn btn-danger btn-sm me-2 mb-2'>$nomRessource</a>";
+                                }
+                            }
+                            echo "          </div>";
+                            echo "      </li>";
+                            echo "  </ul>";
+                        }
+    
+                        echo "</li>";
+                    }
+                }
+            }
+            echo "</ul>";
+        }
+    }
+    
+    
+    
 }
 ?>

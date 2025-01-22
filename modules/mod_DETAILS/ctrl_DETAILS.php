@@ -25,6 +25,7 @@
             $intervenantPris = $this->modele->getIntervenantPris();
             $groupeAndEtudiant = $this->modele->groupeAndEtudiant();
             $groupeProjet = $this->modele->getGroupeProjet();
+            $ressource = $this->modele->getRessource();
 
             switch ($this->action) {
                 case 'creerGrp':
@@ -53,7 +54,7 @@
                 default:    
                     break;
             }
-            $this->vue->vueDetailProjet($etudiantSansGrp,$projet, $intervenantLibre, $estResponsableDe,$intervenantPris, $groupeAndEtudiant, $groupeProjet);
+            $this->vue->vueDetailProjet($etudiantSansGrp,$projet, $intervenantLibre, $estResponsableDe,$intervenantPris, $groupeAndEtudiant, $groupeProjet, $ressource);
         }
     }
     
