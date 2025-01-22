@@ -17,9 +17,11 @@
         }
 
         public function exec(){
-
+            
+            $this->vue->afficherDepot();
             switch ($this->action) {
-                case '': 
+                case 'ajoutDepot': 
+                    $this->modele->ajoutDepot();
                     break;
                 default:    
                     break;
