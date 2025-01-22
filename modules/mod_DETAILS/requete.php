@@ -222,20 +222,14 @@ return [ 'getEtudiantSansGrp' => "SELECT DISTINCT u.*
                                                         WHERE idProjet = :idProjet"
                                 ],
 
-            'getRessource'     => "SELECT
-                                        * 
-                                    FROM
-                                        ressource
-                                    WHERE
-                                        idRessource IN(
-                                        SELECT
-                                            idRessource
-                                        FROM
-                                            projetressource
-                                        WHERE
-                                            idprojet = :idProjet AND type = 'depots'
-                                    )"                                   
-                                                                                                
+            'getRessource'      =>  "SELECT *
+                                    FROM ressource
+                                    WHERE idRessource IN(
+                                        SELECT idRessource
+                                        FROM projetressource
+                                        WHERE idprojet = :idProjet AND type = 'depots'
+                                    )"
+
         ];
 
 ?>

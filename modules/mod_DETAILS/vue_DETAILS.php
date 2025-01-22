@@ -182,7 +182,7 @@ class VueDETAILS {
         <?php if($estResponsableDe == 1): ?>
         <form action="index.php?module=Details&idProjet=<?= $projet['idProjet'] ?>&action=deleteProjet" method="POST">
             <button type='submit' class='btn btn-danger btn-lg w-100 p-4'>
-                <img src='icons/Supprimer.png';>
+                Supprimer le projet <img src='icons/Supprimer.png';>
             </button>
         </form>
         <?php endif;
@@ -258,7 +258,9 @@ class VueDETAILS {
                                 $positionProjet = strpos($item['lienRessource'], "/SaeDevWeb/");
                                 $cheminRepertoire = substr($item['lienRessource'], $positionProjet, strpos($item['lienRessource'], "/groupe" . $idGroupe . "/") + strlen("/groupe" . $idGroupe . "/") - $positionProjet);
                                 $lienRepertoire = htmlspecialchars($cheminRepertoire);
-                                echo "      <a href='$lienRepertoire' class='btn btn-dark btn-sm' target='_blank'>Dépôt Du Groupe</a>";
+                                echo "      <a href='$lienRepertoire' class='btn btn-dark btn-sm' target='_blank'>
+                                        <img class='card-img m-0' src='icons/Telecharger.png' alt='Telecharger'>
+                                </a>";
                                 break;
                             }
                         }
@@ -279,18 +281,20 @@ class VueDETAILS {
                             }
                             
                             echo "  <ul class='col-12 mb-1'>";
-                            echo "      <li class='d-flex flex-column'>";
-                            echo "          <span>- " . htmlspecialchars($etudiant['login']) . "</span>";
-    
-                            echo "          <div class='d-flex flex-wrap mt-1'>";
+                            echo "      <li class='row d-flex justify-content-between'>";
+                            echo "          <span class='col-12'>- " . htmlspecialchars($etudiant['login']) . "</span>";
                             foreach ($ressources as $item) {
                                 if (strpos($item['lienRessource'], "/etudiant" . $etudiant['idUtilisateur'] . "/") !== false) {
                                     $nomRessource = htmlspecialchars($item['nomRessource']);
                                     $lienRessource = htmlspecialchars($item['lienRessource']);
-                                    echo "              <a href='$lienRessource' class='btn btn-dark btn-sm me-2 mb-2'>$nomRessource</a>";
+                                    echo "  <a href='$lienRessource' class='col-5 btn btn-dark btn-sm m-1' target='_blank'>
+                                                <div class='shadow-sm text-center p-1'>
+                                                    <img class='m-0' src='icons/Telecharger.png' alt='Telecharger'>
+                                                    <span class='h6'>$nomRessource</span>
+                                                </div>
+                                            </a>";
                                 }
                             }
-                            echo "          </div>";
                             echo "      </li>";
                             echo "  </ul>";
                         }

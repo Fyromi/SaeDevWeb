@@ -4,50 +4,49 @@ class VueRESSOURCES {
 
     public function afficherProjet($documents, $consignes, $depots, $important) {
         ?>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-       
-        <div class="col-sm-1 col-xs-1 col-1 text-end">
-            <a href="index.php?module=Projets&action=menu" class="btn">
-                <div class="card shadow-sm text-center p-1">
-                    <img class="card-img m-0" src="icons/retour.png" alt="Retour">
-                    <span class="card-title h6">Retour</span>
+        <div class="row">
+            <div class="col-sm-10 col-xs-6 col-9"></div>
+            <div class="col-sm-1 col-xs-1 col-1 text-end">
+                <a href="index.php?module=Projets&action=menu" class="btn">
+                    <div class="card shadow-sm text-center p-1">
+                        <img class="card-img m-0" src="icons/retour.png" alt="Retour">
+                        <span class="card-title h6">Retour</span>
+                    </div>
+                </a>
+            </div>
+            <div class="">
+                <h3 class="border-bottom border-secondary pb-3">Important</h3>
+            </div>
+            <div class="row pb-5 scrollable-section">
+                <?php $this->afficherSection($important, "icons/Attention.png", "lienRessource", "nomRessource");?>
+            </div>
+
+            <div class="">
+                <div class="col-sm-10">
+                    <h3 class="border-bottom border-secondary pb-3">Documents</h3>
                 </div>
-            </a>
-        </div>
-        <div class="row">
-        <div class="col-sm-10">
-            <h3 class="border-bottom border-secondary pb-3">Important</h3>
-        </div>
-        </div>
-        <div class="row pb-5 scrollable-section">
-            <?php $this->afficherSection($important, "icons/Attention.png", "lienRessource", "nomRessource");?>
-        </div>
+            </div>
+            <div class="row pb-5 scrollable-section">
+                <?php $this->afficherSection($documents, "icons/Document.png", "lienRessource", "nomRessource");?>
+            </div>
 
-        <div class="row">
-            <div class="col-sm-10">
-                <h3 class="border-bottom border-secondary pb-3">Documents</h3>
+            <div class="">
+                <div class="col-10">
+                    <h3 class="border-bottom border-secondary pb-3">Consignes</h3>
+                </div>
             </div>
-        </div>
-        <div class="row pb-5 scrollable-section">
-            <?php $this->afficherSection($documents, "icons/Document.png", "lienRessource", "nomRessource");?>
-        </div>
-        
-        <div class="row">
-            <div class="col-10">
-                <h3 class="border-bottom border-secondary pb-3">Consignes</h3>
+            <div class="row pb-5 scrollable-section">
+                <?php $this->afficherSection($consignes, "icons/Consigne.png", "lienRessource", "nomRessource");?>
             </div>
-        </div>
-        <div class="row pb-5 scrollable-section">
-            <?php $this->afficherSection($consignes, "icons/Consigne.png", "lienRessource", "nomRessource");?>
-        </div>
 
-        <div class="row">
-            <div class="col-10">
-                <h3 class="border-bottom border-secondary pb-3">Dépôts</h3>
+            <div class="">
+                <div class="col-10">
+                    <h3 class="border-bottom border-secondary pb-3">Dépôts</h3>
+                </div>
             </div>
-        </div>
-        <div class="row pb-5 scrollable-section">
-            <?php $this->afficherSection($depots, "icons/Depot.png", "lienDepot", "nomRendu", true);?>
+            <div class="row pb-5 scrollable-section">
+                <?php $this->afficherSection($depots, "icons/Depot.png", "lienDepot", "nomRendu", true);?>
+            </div>
         </div>
         <?php
     }
