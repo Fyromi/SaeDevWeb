@@ -14,39 +14,48 @@ class VueRESSOURCES {
                     </div>
                 </a>
             </div>
-            <div class="">
-                <h3 class="border-bottom border-secondary pb-3">Important</h3>
-            </div>
-            <div class="row pb-5 scrollable-section">
-                <?php $this->afficherSection($important, "icons/Attention.png", "lienRessource", "nomRessource");?>
-            </div>
 
-            <div class="">
-                <div class="col-sm-10">
-                    <h3 class="border-bottom border-secondary pb-3">Documents</h3>
+            <?php if($important!=null){ ?>
+                <div class="">
+                    <h3 class="border-bottom border-secondary pb-3">Important</h3>
                 </div>
-            </div>
-            <div class="row pb-5 scrollable-section">
-                <?php $this->afficherSection($documents, "icons/Document.png", "lienRessource", "nomRessource");?>
-            </div>
+                <div class="row pb-5 scrollable-section">
+                    <?php $this->afficherSection($important, "icons/Attention.png", "lienRessource", "nomRessource");?>
+                </div>
+            <?php } ?>
 
-            <div class="">
-                <div class="col-10">
-                    <h3 class="border-bottom border-secondary pb-3">Consignes</h3>
+            <?php if($documents!=null){ ?>
+                <div class="">
+                    <div class="col-sm-10">
+                        <h3 class="border-bottom border-secondary pb-3">Documents</h3>
+                    </div>
                 </div>
-            </div>
-            <div class="row pb-5 scrollable-section">
-                <?php $this->afficherSection($consignes, "icons/Consigne.png", "lienRessource", "nomRessource");?>
-            </div>
+                <div class="row pb-5 scrollable-section">
+                    <?php $this->afficherSection($documents, "icons/Document.png", "lienRessource", "nomRessource");?>
+                </div>
+            <?php } ?>
 
-            <div class="">
-                <div class="col-10">
-                    <h3 class="border-bottom border-secondary pb-3">Dépôts</h3>
+            <?php if($consignes!=null){ ?>
+                <div class="">
+                    <div class="col-10">
+                        <h3 class="border-bottom border-secondary pb-3">Consignes</h3>
+                    </div>
                 </div>
-            </div>
-            <div class="row pb-5 scrollable-section">
-                <?php $this->afficherSection($depots, "icons/Depot.png", "lienDepot", "nomRendu", true);?>
-            </div>
+                <div class="row pb-5 scrollable-section">
+                    <?php $this->afficherSection($consignes, "icons/Consigne.png", "lienRessource", "nomRessource");?>
+                </div>
+            <?php } ?>
+            
+            <?php if($depots!=null){ ?>
+                <div class="">
+                    <div class="col-10">
+                        <h3 class="border-bottom border-secondary pb-3">Dépôts</h3>
+                    </div>
+                </div>
+                <div class="row pb-5 scrollable-section">
+                    <?php $this->afficherSection($depots, "icons/Depot.png", "lienDepot", "nomRendu", true);?>
+                </div>
+            <?php } ?>
         </div>
         <?php
     }
