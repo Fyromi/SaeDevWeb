@@ -95,6 +95,10 @@ class VueDETAILS {
                                     <label for="file" class="form-label">Ajouter un Document</label>
                                     <input type="file" name="fichier" id="file" class="form-control" required>
                                 </div>
+                                <label>
+                                    Mettre en avant ?
+                                    <input type="checkbox" name="miseEnAvant" value="1">
+                                </label></br></br>
                                 <button type="submit" class="btn btn-dark">Déposer</button>
                             </form>
                         </div>
