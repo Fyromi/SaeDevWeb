@@ -47,17 +47,14 @@ class ModeleRESSOURCES extends Connexion{
         return $this->executeQuery($sql, [':idProjet' => $idProjet])->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getRessourcesEnAvantByType($idProjet, $type) {
+    public function getRessourcesEnAvantByType($idProjet) {
         $ressources = $this->getRessourcesMiseEnAvant($idProjet);
     
         $result = [];
     
         foreach ($ressources as $ressource) {
-            if ($ressource['type'] == $type) {
                 $result[] = $ressource;
-            }
         }
-    
         return $result;
     }
     
