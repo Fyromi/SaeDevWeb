@@ -5,9 +5,9 @@ return [ 'getRessources'   => "SELECT *
                             WHERE projetressource.idProjet = :idProjet; ",
 
         'getDepots' => "SELECT * 
-                            FROM rendu 
-                            INNER JOIN renduProjet ON rendu.idRendu = renduProjet.idRendu 
-                            WHERE renduProjet.idProjet = :idProjet"
+                        FROM rendu 
+                        INNER JOIN renduProjet ON rendu.idRendu = renduProjet.idRendu 
+                        WHERE renduProjet.idProjet = :idProjet"
 ];
 
 ?>

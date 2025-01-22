@@ -50,8 +50,6 @@ class VueRESSOURCES {
                 $link = 'index.php?module=Ressources&action=consignes&id=' . htmlspecialchars($element['idRessource']);
             } else {
                 // Pour les autres ressources
-                //var_dump($element["idRendu"]);
-                //$titreRessourceSansEspace = preg_replace('/\s+/', '+', $element[$nameKey]);
                 $link = $isDepot ? "index.php?module=Depot&idProjet=".$_GET['idProjet']."&idDepot=".$element["idRendu"] : (isset($element[$linkKey]) ? htmlspecialchars($element[$linkKey]) : '#');
             }
 
@@ -69,6 +67,7 @@ class VueRESSOURCES {
             echo '        </div>';
             echo '      </a>';
             echo '  </div>';
+            if($isDepot) print_r($element["date_limite"]);
             echo '</div>';
         }
     }
